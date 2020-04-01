@@ -1,5 +1,3 @@
-using System;
-
 namespace G09projectenII.Models
 {
     public class ErrorViewModel

@@ -1,4 +1,159 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="G09projectenII.Models.Announcement">
+    <Position X="5.5" Y="10.25" Width="2.75" />
+    <AssociationLine Name="Session" Type="G09projectenII.Models.Session">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.843" Y="0.142" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAUAAgIACAAAIAAIAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Announcement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Author" />
+      <Property Name="Session" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="G09projectenII.Models.Member">
+    <Position X="0.5" Y="5.5" Width="2.5" />
+    <AssociationLine Name="Announcements" Type="G09projectenII.Models.Announcement">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.189" Y="0.108" Height="0.182" Width="1.338" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="SessionAttendees" Type="G09projectenII.Models.SessionAttendees" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.875" Y="5.5" />
+        <Point X="1.875" Y="4.678" />
+        <Point X="2.259" Y="4.678" Type="JumpStart" />
+        <Point X="2.426" Y="4.678" Type="JumpEnd" />
+        <Point X="4.688" Y="4.678" />
+        <Point X="4.688" Y="3.796" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.044" Y="0.522" Height="0.182" Width="1.358" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAABgkAAAAIAgAAIASAAAQAAAAAAAAACAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Member.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Announcements" />
+      <Property Name="SessionAttendees" />
+      <Property Name="SessionRegistrees" />
+      <Property Name="Sessions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="G09projectenII.Models.Session">
+    <Position X="6.75" Y="5" Width="2.5" />
+    <AssociationLine Name="Announcements" Type="G09projectenII.Models.Announcement">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.094" Y="0.139" Height="0.182" Width="1.402" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="SessionAttendees" Type="G09projectenII.Models.SessionAttendees" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.375" Y="5" />
+        <Point X="7.375" Y="3.148" />
+        <Point X="6.75" Y="3.148" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.175" Y="0.044" Height="0.182" Width="1.358" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="SessionRegistrees" Type="G09projectenII.Models.SessionRegistrees" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.955" Y="5" />
+        <Point X="7.955" Y="1.522" />
+        <Point X="2.422" Y="1.522" />
+        <Point X="2.422" Y="2" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.617" Y="0.076" Height="0.182" Width="1.438" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAADAgAAAAAgAEAAAAIAASACIAAMAAQEAwAAEAAAAAA=</HashCode>
+      <FileName>Models\Session.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Calendar" />
+      <Property Name="Member" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Announcements" />
+      <Property Name="SessionAttendees" />
+      <Property Name="SessionRegistrees" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="G09projectenII.Models.SessionAttendees">
+    <Position X="4.25" Y="2.5" Width="2.5" />
+    <AssociationLine Name="Session" Type="G09projectenII.Models.Session" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.625" Y="3.796" />
+        <Point X="5.625" Y="5.712" />
+        <Point X="6.75" Y="5.712" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Member" Type="G09projectenII.Models.Member" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.125" Y="3.796" />
+        <Point X="5.125" Y="5.144" />
+        <Point X="2.81" Y="5.144" />
+        <Point X="2.81" Y="5.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.777" Y="0.012" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAQAAAAAAAQAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SessionAttendees.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Session" />
+      <Property Name="Member" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="G09projectenII.Models.SessionCalendar">
+    <Position X="11.25" Y="6" Width="2.5" />
+    <AssociationLine Name="Sessions" Type="G09projectenII.Models.Session">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="1.09" Y="0.094" Height="0.182" Width="0.888" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAEAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\Sessioncalendar.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sessions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="G09projectenII.Models.SessionRegistrees">
+    <Position X="1.25" Y="2" Width="2.5" />
+    <AssociationLine Name="Session" Type="G09projectenII.Models.Session" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.797" Y="2" />
+        <Point X="1.797" Y="1.243" />
+        <Point X="8.688" Y="1.243" />
+        <Point X="8.688" Y="5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.173" Y="0.123" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAQAAAAAAAQAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SessionRegistrees.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Session" />
+      <Property Name="Member" />
+    </ShowAsAssociation>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
