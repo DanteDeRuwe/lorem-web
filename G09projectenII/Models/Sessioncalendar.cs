@@ -8,9 +8,9 @@ namespace G09projectenII.Models
         public string Enddate { get; set; }
         public string Startdate { get; set; }
 
-        public virtual ICollection<Session> Session { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
 
-        public SessionCalendar() => Session = new HashSet<Session>();
+        public SessionCalendar() => Sessions = new HashSet<Session>();
 
     }
 }
