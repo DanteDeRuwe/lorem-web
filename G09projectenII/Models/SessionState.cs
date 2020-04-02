@@ -26,5 +26,7 @@
                 2 => new ClosedSessionState(),
                 3 => new FinishedSessionState()
             };
+
+        public abstract override string ToString();
     }
 }

@@ -25,5 +25,7 @@ namespace G09projectenII.Models
             SessionAttendees = new HashSet<SessionAttendees>();
             SessionRegistrees = new HashSet<SessionRegistrees>();
         }
+
+        public override string ToString() => string.Join(" | ", MemberId, Username, Firstname, Lastname, Memberstatus, Membertype);
     }
 }

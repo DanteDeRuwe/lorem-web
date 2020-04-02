@@ -2,5 +2,6 @@
 {
     public class OpenSessionState : SessionState
     {
+        public override string ToString() => "Open";
     }
 }

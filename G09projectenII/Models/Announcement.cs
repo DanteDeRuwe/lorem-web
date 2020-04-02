@@ -13,5 +13,11 @@ namespace G09projectenII.Models
 
         public virtual Member Author { get; set; }
         public virtual Session Session { get; set; }
+
+        public override string ToString()
+        {
+            return String.Join(" | ", AnnouncementId, Timestamp.ToShortDateString(),
+                Timestamp.ToShortTimeString(), Title, SessionId, AuthorMemberId, Text);
+        }
     }
 }

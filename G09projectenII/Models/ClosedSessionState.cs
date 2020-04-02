@@ -2,5 +2,6 @@
 {
     public class ClosedSessionState : SessionState
     {
+        public override string ToString() => "Gesloten";
     }
 }

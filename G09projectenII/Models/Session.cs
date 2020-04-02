@@ -33,5 +33,7 @@ namespace G09projectenII.Models
             SessionRegistrees = new HashSet<SessionRegistrees>();
         }
 
+        public override string ToString() => string.Join(" | ", Id, Title, Location, Speakername, Type, Starttime.ToShortDateString(), Starttime.ToShortTimeString()
+            , Endtime.ToShortDateString(), Endtime.ToShortTimeString());
     }
 }

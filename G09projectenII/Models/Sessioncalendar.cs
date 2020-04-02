@@ -12,5 +12,6 @@ namespace G09projectenII.Models
 
         public SessionCalendar() => Sessions = new HashSet<Session>();
 
+        public override string ToString() => string.Join(" | ", Startdate, Enddate);
     }
 }

@@ -2,5 +2,6 @@
 {
     public class CreatedSessionState : SessionState
     {
+        public override string ToString() => "Aangemaakt";
     }
 }

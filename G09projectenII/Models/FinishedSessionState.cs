@@ -2,5 +2,6 @@
 {
     public class FinishedSessionState : SessionState
     {
+        public override string ToString() => "Afgelopen";
     }
 }
