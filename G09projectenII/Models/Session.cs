@@ -24,6 +24,8 @@ namespace G09projectenII.Models
         public virtual ICollection<SessionAttendees> SessionAttendees { get; set; }
         public virtual ICollection<SessionRegistrees> SessionRegistrees { get; set; }
 
+        public SessionState SessionState { get; set; }
+
         public Session()
         {
             Announcements = new HashSet<Announcement>();
