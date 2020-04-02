@@ -12,7 +12,6 @@ namespace G09projectenII.Models
         public DateTime Endtime { get; set; }
         public string Externallink { get; set; }
         public string Location { get; set; }
-        public int? Sessionstatus { get; set; }
         public string Speakername { get; set; }
         public string Title { get; set; }
         public decimal CalendarId { get; set; }
