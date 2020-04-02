@@ -1,7 +1,5 @@
 ﻿using G09projectenII.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
 
 namespace G09projectenII.Models
 {
@@ -16,11 +14,8 @@ namespace G09projectenII.Models
         {
         }
 
-        public virtual DbSet<Announcement> Announcement { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
-        public virtual DbSet<SessionAttendees> SessionAttendees { get; set; }
-        public virtual DbSet<SessionRegistrees> SessionRegistrees { get; set; }
         public virtual DbSet<SessionCalendar> SessionCalendars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

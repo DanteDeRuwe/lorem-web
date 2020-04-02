@@ -16,8 +16,13 @@ namespace G09projectenII.Data.Repositories
             _sessions = dbContext.Sessions;
         }
 
-        public Session GetBy(int id) => _sessions.SingleOrDefault(s => s.Id == id);
-        public ICollection<Session> GetAll() => _sessions.ToList();
+        public ICollection<Session> GetAll() => _sessions
+            .Include(s => s.SessionRegistrees)
+            .Include(s => s.SessionRegistrees)
+            .Include(s => s.Announcements)
+            .ToList();
+
+        public Session GetBy(int id) => GetAll().SingleOrDefault(s => s.Id == id);
         public void Update(Session session) => _context.Update(session);
         public void SaveChanges() => _context.SaveChanges();
     }
