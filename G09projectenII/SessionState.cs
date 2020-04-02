@@ -1,6 +1,4 @@
-﻿using G09projectenII.Models;
-
-namespace G09projectenII
+﻿namespace G09projectenII.Models
 {
     public abstract class SessionState
     {
