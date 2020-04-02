@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using G09projectenII.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 
 namespace G09projectenII.Models
 {
@@ -54,6 +57,7 @@ namespace G09projectenII.Models
                 entity.Property(e => e.Timestamp)
                     .HasColumnName("TIMESTAMP")
                     .HasMaxLength(255)
+                    .HasConversion(Util.DateConverter())
                     .IsUnicode(false);
 
                 entity.Property(e => e.Title)
@@ -134,6 +138,7 @@ namespace G09projectenII.Models
                 entity.Property(e => e.Endtime)
                     .HasColumnName("ENDTIME")
                     .HasMaxLength(255)
+                    .HasConversion(Util.DateConverter())
                     .IsUnicode(false);
 
                 entity.Property(e => e.Externallink)
@@ -160,6 +165,7 @@ namespace G09projectenII.Models
                 entity.Property(e => e.Starttime)
                     .HasColumnName("STARTTIME")
                     .HasMaxLength(255)
+                    .HasConversion(Util.DateConverter())
                     .IsUnicode(false);
 
                 entity.Property(e => e.Title)

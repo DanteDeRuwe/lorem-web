@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace G09projectenII.Models
 {
@@ -7,12 +8,12 @@ namespace G09projectenII.Models
         public decimal Id { get; set; }
         public int? Capacity { get; set; }
         public string Description { get; set; }
-        public string Endtime { get; set; }
+        public DateTime Starttime { get; set; }
+        public DateTime Endtime { get; set; }
         public string Externallink { get; set; }
         public string Location { get; set; }
         public int? Sessionstatus { get; set; }
         public string Speakername { get; set; }
-        public string Starttime { get; set; }
         public string Title { get; set; }
         public decimal CalendarId { get; set; }
         public decimal MemberId { get; set; }
