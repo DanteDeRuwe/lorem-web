@@ -17,12 +17,13 @@ namespace G09projectenII.Data.Repositories
         }
 
         public ICollection<Session> GetAll() => _sessions
-            .Include(s => s.SessionRegistrees)
-            .Include(s => s.SessionRegistrees)
-            .Include(s => s.Announcements)
+            .Include(s => s.SessionRegistrees).ThenInclude(s => s.Member)
+            .Include(s => s.SessionRegistrees).ThenInclude(s => s.Member)
+            .Include(s => s.Announcements).ThenInclude(a => a.Author)
             .ToList();
 
         public Session GetBy(int id) => GetAll().SingleOrDefault(s => s.Id == id);
+        public ICollection<Session> GetBy(SessionCalendar calendar) => GetAll().Where(s => s.CalendarId == calendar.CalendarId).ToList();
         public void Update(Session session) => _context.Update(session);
         public void SaveChanges() => _context.SaveChanges();
     }

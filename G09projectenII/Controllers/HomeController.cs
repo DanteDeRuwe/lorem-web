@@ -9,9 +9,16 @@ namespace G09projectenII.Controllers
     {
 
         private readonly ISessionRepository _sessionRepository;
-        public HomeController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
+        private readonly ISessionCalendarRepository _sessionCalendarRepository;
 
-        public IActionResult Index() => Content(string.Join("\n", _sessionRepository.GetAll().Select(s => s.Title)));//View();
+
+        public HomeController(ISessionRepository sessionRepository, ISessionCalendarRepository sessionCalendarRepository)
+        {
+            _sessionRepository = sessionRepository;
+            _sessionCalendarRepository = sessionCalendarRepository;
+        }
+
+        public IActionResult Index() => Content(string.Join("\n\n---\n\n", _sessionRepository.GetBy(_sessionCalendarRepository.GetAll().First()).Select(s => s.Title)));
 
         public IActionResult Privacy() => View();
 

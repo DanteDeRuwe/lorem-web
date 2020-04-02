@@ -31,6 +31,7 @@ namespace G09projectenII
 
             //Repos
             services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<ISessionCalendarRepository, SessionCalendarRepository>();
 
 
             services.AddControllersWithViews();

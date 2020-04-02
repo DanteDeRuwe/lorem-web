@@ -6,6 +6,7 @@ namespace G09projectenII.Models
     {
         Session GetBy(int id);
         ICollection<Session> GetAll();
+        ICollection<Session> GetBy(SessionCalendar calendar);
         void Update(Session session);
         void SaveChanges();
     }
