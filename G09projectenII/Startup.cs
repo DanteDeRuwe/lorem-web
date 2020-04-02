@@ -1,3 +1,4 @@
+using G09projectenII.Data.Repositories;
 using G09projectenII.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,12 +19,20 @@ namespace G09projectenII
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Database
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("G09db")));
+
+            //Identity
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            //Repos
             services.AddScoped<ISessionRepository, SessionRepository>();
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
