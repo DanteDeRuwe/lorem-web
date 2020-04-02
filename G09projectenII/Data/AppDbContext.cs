@@ -155,7 +155,12 @@ namespace G09projectenII.Models
                     .HasColumnName("member_id")
                     .HasColumnType("numeric(19, 0)");
 
-                entity.Property(e => e.Sessionstatus).HasColumnName("SESSIONSTATUS");
+                entity.Property(e => e.SessionState)
+                    .HasColumnName("SESSIONSTATUS")
+                    .HasConversion(
+                        state => state.toInt(),
+                        storedInt => SessionState.fromInt(storedInt)
+                    );
 
                 entity.Property(e => e.Speakername)
                     .HasColumnName("SPEAKERNAME")
@@ -193,7 +198,11 @@ namespace G09projectenII.Models
 
             modelBuilder.Entity<SessionAttendees>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.MemberId })
+                entity.HasKey(e => new
+                {
+                    e.Id,
+                    e.MemberId
+                })
                     .HasName("PK__SESSION___693A506C9E0B59CA");
 
                 entity.ToTable("SESSION_ATTENDEES");
@@ -203,20 +212,20 @@ namespace G09projectenII.Models
                     .HasColumnType("numeric(19, 0)");
 
                 entity.Property(e => e.MemberId)
-                    .HasColumnName("member_id")
-                    .HasColumnType("numeric(19, 0)");
+                                .HasColumnName("member_id")
+                                .HasColumnType("numeric(19, 0)");
 
                 entity.HasOne(d => d.Session)
-                    .WithMany(p => p.SessionAttendees)
-                    .HasForeignKey(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("SESSION_ATTENDEES_id");
+                                .WithMany(p => p.SessionAttendees)
+                                .HasForeignKey(d => d.Id)
+                                .OnDelete(DeleteBehavior.ClientSetNull)
+                                .HasConstraintName("SESSION_ATTENDEES_id");
 
                 entity.HasOne(d => d.Member)
-                    .WithMany(p => p.SessionAttendees)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("SSSIONATTENDEESmmberid");
+                                .WithMany(p => p.SessionAttendees)
+                                .HasForeignKey(d => d.MemberId)
+                                .OnDelete(DeleteBehavior.ClientSetNull)
+                                .HasConstraintName("SSSIONATTENDEESmmberid");
             });
 
             modelBuilder.Entity<SessionRegistrees>(entity =>
@@ -231,20 +240,20 @@ namespace G09projectenII.Models
                     .HasColumnType("numeric(19, 0)");
 
                 entity.Property(e => e.MemberId)
-                    .HasColumnName("member_id")
-                    .HasColumnType("numeric(19, 0)");
+                                    .HasColumnName("member_id")
+                                    .HasColumnType("numeric(19, 0)");
 
                 entity.HasOne(d => d.Session)
-                    .WithMany(p => p.SessionRegistrees)
-                    .HasForeignKey(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("SESSION_REGISTREES_id");
+                                    .WithMany(p => p.SessionRegistrees)
+                                    .HasForeignKey(d => d.Id)
+                                    .OnDelete(DeleteBehavior.ClientSetNull)
+                                    .HasConstraintName("SESSION_REGISTREES_id");
 
                 entity.HasOne(d => d.Member)
-                    .WithMany(p => p.SessionRegistrees)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("SSSONREGISTREESmmberid");
+                                    .WithMany(p => p.SessionRegistrees)
+                                    .HasForeignKey(d => d.MemberId)
+                                    .OnDelete(DeleteBehavior.ClientSetNull)
+                                    .HasConstraintName("SSSONREGISTREESmmberid");
             });
 
             modelBuilder.Entity<SessionCalendar>(entity =>
@@ -260,14 +269,14 @@ namespace G09projectenII.Models
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Enddate)
-                    .HasColumnName("ENDDATE")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                                    .HasColumnName("ENDDATE")
+                                    .HasMaxLength(255)
+                                    .IsUnicode(false);
 
                 entity.Property(e => e.Startdate)
-                    .HasColumnName("STARTDATE")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                                    .HasColumnName("STARTDATE")
+                                    .HasMaxLength(255)
+                                    .IsUnicode(false);
             });
 
         }
