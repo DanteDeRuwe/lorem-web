@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# appsettings with secret db string
+G09projectenII/appsettings.json

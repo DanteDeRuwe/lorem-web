@@ -23,14 +23,6 @@ namespace G09projectenII.Models
         public virtual DbSet<SessionRegistrees> SessionRegistrees { get; set; }
         public virtual DbSet<SessionCalendar> SessionCalendars { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=tcp:51.136.45.16,1433;Initial Catalog=G09db;Persist Security Info=False;User ID=dante.deruwe;Password=A63cB50aEe4_;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Announcement>(entity =>
