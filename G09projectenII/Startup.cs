@@ -23,6 +23,7 @@ namespace G09projectenII
                     Configuration.GetConnectionString("G09db")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
