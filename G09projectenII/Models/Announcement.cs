@@ -1,9 +1,11 @@
-﻿namespace G09projectenII.Models
+﻿using System;
+
+namespace G09projectenII.Models
 {
     public class Announcement
     {
         public decimal AnnouncementId { get; set; }
-        public string Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
         public string Title { get; set; }
         public decimal SessionId { get; set; }
         public decimal? AuthorMemberId { get; set; }
