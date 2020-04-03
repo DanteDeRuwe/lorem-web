@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using G09projectenII.Models;
+using Microsoft.AspNetCore.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace G09projectenII.Controllers
 {
     public class CalendarController : Controller
     {
-        public IActionResult Index()
+
+        private readonly ISessionRepository _sessionRepository;
+        private readonly ISessionCalendarRepository _sessionCalendarRepository;
+
+        public CalendarController(ISessionRepository sessionRepository, ISessionCalendarRepository sessionCalendarRepository)
         {
-            return View();
+            _sessionRepository = sessionRepository;
+            _sessionCalendarRepository = sessionCalendarRepository;
         }
+
+        public IActionResult Index() => View();
+
     }
 }
