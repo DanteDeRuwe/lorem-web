@@ -1,0 +1,63 @@
+﻿@page
+@model G09projectenII.Views.testing.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <title>hello</title>
+
+    <meta charset="utf-8" />
+
+    <link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
+
+    <script src="~/lib/fullcalendar/core/main.js"></script>
+    <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid']
+            });
+
+            @foreach (var s in Model.Sessions)
+            {
+                <text>
+                var starttime = new Date(@s.Starttime.Year,
+                @s.Starttime.Month,
+                @s.Starttime.Day.ToString(),
+                @s.Starttime.Hour,
+                @s.Starttime.Minute);
+
+                var endtime = new Date(@s.Endtime.Year,
+                    @s.Endtime.Month,
+                    @s.Endtime.Day.ToString(),
+                    @s.Endtime.Hour,
+                    @s.Endtime.Minute);
+
+
+
+                calendar.addEvent({
+                title: '@s.Title',
+                start: starttime,
+                end: endtime,
+                allDay: false
+                });
+            </text>
+            }
+
+
+
+            calendar.render();
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="calendar"></div>
+
+</body>
