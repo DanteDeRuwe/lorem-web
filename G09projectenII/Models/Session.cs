@@ -18,11 +18,11 @@ namespace G09projectenII.Models
         public decimal MemberId { get; set; }
         public string Type { get; set; }
 
-        public virtual SessionCalendar Calendar { get; set; }
-        public virtual Member Member { get; set; }
-        public virtual ICollection<Announcement> Announcements { get; set; }
-        public virtual ICollection<SessionAttendees> SessionAttendees { get; set; }
-        public virtual ICollection<SessionRegistrees> SessionRegistrees { get; set; }
+        public SessionCalendar Calendar { get; set; }
+        public Member Member { get; set; }
+        public ICollection<Announcement> Announcements { get; set; }
+        public ICollection<SessionAttendees> SessionAttendees { get; set; }
+        public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
 
         public SessionState SessionState { get; set; }
 

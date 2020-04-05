@@ -13,10 +13,10 @@ namespace G09projectenII.Models
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public virtual ICollection<Announcement> Announcements { get; set; }
-        public virtual ICollection<Session> Sessions { get; set; }
-        public virtual ICollection<SessionAttendees> SessionAttendees { get; set; }
-        public virtual ICollection<SessionRegistrees> SessionRegistrees { get; set; }
+        public ICollection<Announcement> Announcements { get; set; }
+        public ICollection<Session> Sessions { get; set; }
+        public ICollection<SessionAttendees> SessionAttendees { get; set; }
+        public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
 
         public Member()
         {

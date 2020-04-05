@@ -5,7 +5,7 @@
         public decimal Id { get; set; }
         public decimal MemberId { get; set; }
 
-        public virtual Session Session { get; set; }
-        public virtual Member Member { get; set; }
+        public Session Session { get; set; }
+        public Member Member { get; set; }
     }
 }
