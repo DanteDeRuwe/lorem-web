@@ -18,7 +18,7 @@ namespace G09projectenII.Data.Repositories
 
         public ICollection<Session> GetAll() => _sessions
             .Include(s => s.SessionRegistrees).ThenInclude(s => s.Member)
-            .Include(s => s.SessionRegistrees).ThenInclude(s => s.Member)
+            .Include(s => s.SessionAttendees).ThenInclude(s => s.Member)
             .Include(s => s.Announcements).ThenInclude(a => a.Author)
             .ToList();
 
