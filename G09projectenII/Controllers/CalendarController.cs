@@ -16,7 +16,6 @@ namespace G09projectenII.Controllers
             _sessionCalendarRepository = sessionCalendarRepository;
         }
 
-        public IActionResult Index() => View();
-
+        public IActionResult Index() => View(_sessionCalendarRepository.GetBy(3));
     }
 }
