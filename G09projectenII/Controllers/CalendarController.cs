@@ -8,14 +8,9 @@ namespace G09projectenII.Controllers
     {
 
         private readonly ISessionRepository _sessionRepository;
-        private readonly ISessionCalendarRepository _sessionCalendarRepository;
 
-        public CalendarController(ISessionRepository sessionRepository, ISessionCalendarRepository sessionCalendarRepository)
-        {
-            _sessionRepository = sessionRepository;
-            _sessionCalendarRepository = sessionCalendarRepository;
-        }
+        public CalendarController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
 
-        public IActionResult Index() => View(_sessionCalendarRepository.GetBy(3));
+        public IActionResult Index() => View(_sessionRepository.GetAll());
     }
 }

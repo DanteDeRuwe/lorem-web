@@ -1,4 +1,4 @@
-﻿@model G09projectenII.Models.SessionCalendar
+﻿@model ICollection<Session>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +15,7 @@
                 plugins: ['dayGrid']
             });
 
-            @foreach (var s in Model.Sessions)
+            @foreach (var s in Model)
             {
                 <text>
                     var starttime = new Date(@s.Starttime.Year,
@@ -30,8 +30,6 @@
                         @s.Endtime.Hour,
                         @s.Endtime.Minute);
 
-
-
                     calendar.addEvent({
                         title: '@s.Title',
                         start: starttime,
@@ -40,10 +38,8 @@
                     });
                 </text>
             }
-
-
-
             calendar.render();
         });
     </script>
+
 <div id="calendar"></div>
