@@ -18,7 +18,7 @@ namespace G09projectenII.Data.Repositories
 
         public ICollection<SessionCalendar> GetAll() => _sessioncalendars.ToList();
 
-        public SessionCalendar GetBy(int id) => GetAll().SingleOrDefault(s => s.CalendarId == id);
+        public SessionCalendar GetBy(int id) => _sessioncalendars.Include(s => s.Sessions).SingleOrDefault(s => s.CalendarId == id);
         public void Update(SessionCalendar calendar) => _context.Update(calendar);
         public void SaveChanges() => _context.SaveChanges();
     }
