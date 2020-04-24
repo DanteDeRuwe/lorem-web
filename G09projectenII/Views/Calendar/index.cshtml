@@ -2,17 +2,24 @@
 
 @{
     ViewBag.Title = "Index";
+    Session selectedSession = null;
 }
 
-    <script src="~/lib/fullcalendar/core/main.js"></script>
-    <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+<script src="~/lib/fullcalendar/core/main.js"></script>
+<script src="~/lib/fullcalendar/daygrid/main.js"></script>
 
-    <script>
+
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid']
+                plugins: ['dayGrid'],
+                eventClick(info) {
+                    $("#sessionId").text(info.event.title);
+                    console.log(info)
+                    $("#sessionModal").modal();
+                }
             });
 
             @foreach (var s in Model.Sessions)
@@ -36,14 +43,35 @@
                         title: '@s.Title',
                         start: starttime,
                         end: endtime,
-                        allDay: false
+                        allDay: false,
+                        id: '@s.Id',
                     });
+                    
+                    
+
                 </text>
             }
-
-
-
             calendar.render();
         });
     </script>
+
+<!-- Modal -->
+<div class="modal fade" id="sessionModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="sessionId"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>session info</p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="calendar"></div>

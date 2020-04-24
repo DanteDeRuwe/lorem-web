@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace G09projectenII.Models
 {
@@ -11,6 +12,11 @@ namespace G09projectenII.Models
         public ICollection<Session> Sessions { get; set; }
 
         public SessionCalendar() => Sessions = new HashSet<Session>();
+
+        public Session getSessionBy(int Id)
+        {
+            return Sessions.FirstOrDefault(s => s.Id == Id);
+        }
 
         public override string ToString() => string.Join(" | ", Startdate, Enddate);
     }
