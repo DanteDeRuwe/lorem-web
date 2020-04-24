@@ -2,7 +2,6 @@ using G09projectenII.Data.Repositories;
 using G09projectenII.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +24,13 @@ namespace G09projectenII
                 options.UseSqlServer(
                     Configuration.GetConnectionString("G09db")));
 
-            //Identity
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AppDbContext>();
+            // Cookie authentication
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie";
+                     config.LoginPath = "/Login/UserLogin";
+                 });
 
             //Repos
             services.AddScoped<ISessionRepository, SessionRepository>();
@@ -63,7 +66,6 @@ namespace G09projectenII
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Calendar}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }
