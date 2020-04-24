@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+@model G09projectenII.Models.ViewModels.LoginViewModel
+
+@using (Html.BeginForm()) {
+    <table>
+        <tr>
+            <td><b>Gebruikersnaam:  </b></td>
+            <td>
+                @Html.TextBoxFor(m => m.Username, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </td>
+        </tr>
+        <tr>
+            <td><b>Paswoord:</b></td>
+            <td>
+                @Html.TextBoxFor(m => m.Password, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Inloggen" class="submit" />
+}
