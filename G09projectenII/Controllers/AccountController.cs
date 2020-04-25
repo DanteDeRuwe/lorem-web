@@ -1,4 +1,5 @@
-﻿using G09projectenII.Models;
+﻿using BCr = BCrypt.Net.BCrypt;
+using G09projectenII.Models;
 using G09projectenII.Models.Repository_Models;
 using G09projectenII.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -27,7 +28,9 @@ namespace G09projectenII.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            if (ModelState.IsValid && _memberRepository.GetAll().Any(m => m.Username == login.Username)) //TODO: password hash/check
+            if (ModelState.IsValid
+                && _memberRepository.GetAll().Any(m => m.Username == login.Username
+                && BCr.Verify(login.Password, m.Password)))
             {
                 ClaimsIdentity identity = new ClaimsIdentity("User Identity");
                 identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
