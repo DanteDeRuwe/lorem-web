@@ -1,28 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 
 namespace G09projectenII.Models
 {
     public class Session
     {
+
+        //Properties
         public decimal Id { get; set; }
         public int? Capacity { get; set; }
-        public string Description { get; set; }
-        public DateTime Starttime { get; set; }
-        public DateTime Endtime { get; set; }
-        public string Externallink { get; set; }
-        public string Location { get; set; }
-        public string Speakername { get; set; }
-        public string Title { get; set; }
-        public decimal CalendarId { get; set; }
-        public decimal MemberId { get; set; }
-        public string Type { get; set; }
+        public string? Description { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+        public string? Externallink { get; set; }
+        public string? Location { get; set; }
+        public string? Speakername { get; set; }
+        public string? Title { get; set; }
+        public decimal? CalendarId { get; set; }
+        public decimal? MemberId { get; set; }
+        public string? Type { get; set; }
 
+        // Nav Properties
         public SessionCalendar Calendar { get; set; }
         public Member Member { get; set; }
         public ICollection<Announcement> Announcements { get; set; }
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
         public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
+
+        // Calculated Properties
+        public string DateString {
+            get {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-BE");
+                return StartDateTime.Date == EndDateTime.Date
+                    ? StartDateTime.ToString("M")
+                    : string.Join(" - ", StartDateTime.ToString("M"),
+                        EndDateTime.ToString("M"));
+            }
+        }
+
+        public int AvailableRegistrationSpots => (Capacity == null) ? 0 : (int)(Capacity - SessionRegistrees.Count);
+        public Announcement MostRecentAnnouncement => Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
 
         public SessionState SessionState { get; set; }
 
@@ -33,7 +53,7 @@ namespace G09projectenII.Models
             SessionRegistrees = new HashSet<SessionRegistrees>();
         }
 
-        public override string ToString() => string.Join(" | ", Id, Title, Location, Speakername, Type, Starttime.ToShortDateString(), Starttime.ToShortTimeString()
-            , Endtime.ToShortDateString(), Endtime.ToShortTimeString());
+        public override string ToString() => string.Join(" | ", Id, Title, Location, Speakername, Type, StartDateTime.ToShortDateString(), StartDateTime.ToShortTimeString()
+            , EndDateTime.ToShortDateString(), EndDateTime.ToShortTimeString());
     }
 }
