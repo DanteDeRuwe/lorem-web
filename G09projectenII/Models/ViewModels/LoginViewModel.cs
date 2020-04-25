@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace G09projectenII.Models.ViewModels
 {
@@ -10,6 +11,7 @@ namespace G09projectenII.Models.ViewModels
 
         [Display(Name = "Paswoord")]
         [Required(ErrorMessage = "Paswoord is verplicht in te vullen!")]
+        [HiddenInput]
         public string Password { get; set; }
     }
 }
