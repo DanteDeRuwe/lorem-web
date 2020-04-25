@@ -28,18 +28,20 @@ namespace G09projectenII.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            if (ModelState.IsValid
-                && _memberRepository.GetAll().Any(m => m.Username == login.Username
-                && BCr.Verify(login.Password, m.Password)))
+            if (ModelState.IsValid)
             {
-                ClaimsIdentity identity = new ClaimsIdentity("User Identity");
-                identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
+                if (_memberRepository.GetAll().Any(m => m.Username == login.Username
+                && BCr.Verify(login.Password, m.Password)))
+                {
+                    ClaimsIdentity identity = new ClaimsIdentity("User Identity");
+                    identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
 
-                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
-                HttpContext.SignInAsync(principal);
-                return RedirectToAction("Index", "Calendar");
+                    ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                    HttpContext.SignInAsync(principal);
+                    return RedirectToAction("Index", "Calendar");
+                }
+                ModelState.AddModelError("failed-login", "Gebruikersnaam of wachtwoord onjuist");
             }
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View("index");
         }
 
