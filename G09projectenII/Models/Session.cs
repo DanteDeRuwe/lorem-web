@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 
 namespace G09projectenII.Models
 {
@@ -29,17 +27,6 @@ namespace G09projectenII.Models
         public ICollection<Announcement> Announcements { get; set; }
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
         public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
-
-        // Calculated Properties
-        public string DateString {
-            get {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-BE");
-                return StartDateTime.Date == EndDateTime.Date
-                    ? StartDateTime.ToString("M")
-                    : string.Join(" - ", StartDateTime.ToString("M"),
-                        EndDateTime.ToString("M"));
-            }
-        }
 
         public int AvailableRegistrationSpots => (Capacity == null) ? 0 : (int)(Capacity - SessionRegistrees.Count);
         public Announcement MostRecentAnnouncement => Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
