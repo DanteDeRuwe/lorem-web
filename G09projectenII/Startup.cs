@@ -30,7 +30,7 @@ namespace G09projectenII
                  .AddCookie("CookieAuthentication", config =>
                  {
                      config.Cookie.Name = "UserLoginCookie";
-                     config.LoginPath = "/Login/UserLogin";
+                     config.LoginPath = "/Account/Login";
                  });
 
             //Repos

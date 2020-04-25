@@ -10,11 +10,11 @@ using System.Security.Claims;
 
 namespace G09projectenII.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private readonly IMemberRepository _memberRepository;
 
-        public LoginController(IMemberRepository memberRepository)
+        public AccountController(IMemberRepository memberRepository)
         {
             _memberRepository = memberRepository;
         }
@@ -37,7 +37,13 @@ namespace G09projectenII.Controllers
                 return RedirectToAction("Index", "Calendar");
             }
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(login);
+            return View("index");
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Calendar");
         }
     }
 }
