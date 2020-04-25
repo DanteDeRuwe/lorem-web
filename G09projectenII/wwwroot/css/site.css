@@ -1,4 +1,22 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿
+
+* {
+    /*-primary-blue: #0081C5;*/
+    --primary-blue: #4049a9;
+    --darker-blue: #2d3376;
+    --secondary-yellow: #FFEA00;
+    --light-blue: #898fd2;
+    --lighter-blue: #ebebfa;
+    --text-gray: #3C4043;
+    --dark-gray: #212121;
+    --light-gray: #DADCE0;
+    --nearly-white: #F1F3F4;
+    --header-font: "Raleway", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --text-font: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: var(--text-font);
+}
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -69,3 +87,27 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+
+/*
+    OWN STYLES
+*/
+
+
+.nav-facebook-button {
+    background-color: transparent;
+    border: 1px solid var(--light-gray);
+    color: var(--text-gray);
+    padding: 5px;
+    font-family: var(--text-font);
+    font-size: .7rem;
+    margin: .5rem .5rem 0 0;
+
+}
+    .nav-facebook-button:hover {
+        background-color: var(--nearly-white);
+        border: 1px solid var(--light-gray);
+        color: var(--text-gray);
+    }
+

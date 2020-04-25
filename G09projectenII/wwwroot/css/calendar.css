@@ -1,22 +1,4 @@
 ﻿
-
-
-* {
-    /*-primary-blue: #0081C5;*/
-    --primary-blue: #4049a9;
-    --darker-blue: #2d3376;
-    --secondary-yellow: #FFEA00;
-    --light-blue: #898fd2;
-    --lighter-blue: #ebebfa;
-    --text-gray: #3C4043;
-    --dark-gray: #212121;
-    --light-gray: #DADCE0;
-    --nearly-white: #F1F3F4;
-    --header-font: "Raleway", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --text-font: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-family: var(--text-font);
-}
-
 .fc-head-container {
     border-bottom: 1px solid transparent !important;
 }
@@ -54,21 +36,6 @@
 .fc-day-grid-event:hover .fc-content {
     cursor: pointer;
 }
-/*
-.fc-button-primary {
-    background-color: var(--primary-blue);
-    border: 1px solid var(--primary-blue);
-}
-
-.fc-button-primary[disabled] {
-    background-color: var(--light-blue);
-    border: 1px solid var(--light-blue);
-}
-
-.fc-button-primary:hover:enabled {
-    background-color: var(--darker-blue);
-}
-*/
 
 .fc-next-button, .fc-prev-button {
     background-color: transparent;
