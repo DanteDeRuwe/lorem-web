@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Inloggen";
 }
 @model G09projectenII.Models.ViewModels.LoginViewModel
 
 <h1>Inloggen</h1>
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post)) {
+@using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
     @Html.ValidationSummary(true)
     <div class="form-group">
         @Html.LabelFor(m => m.Username)
