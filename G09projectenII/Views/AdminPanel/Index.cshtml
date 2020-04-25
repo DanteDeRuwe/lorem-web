@@ -2,40 +2,20 @@
 
 @{
     ViewBag.Title = "Sessies Beheren";
-    Session session = null;
 }
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let adminP = document.getElementById("adminPanel");
-        let divElem, divText, sessionInfo, sessionButton;
-        @foreach(var s in Model)
-        {
-            <text>
-                divElem = document.createElement("div");
-                divElem.setAttribute("id", "session");
-
-                sessionInfo = {
-                    day: "@s.StartDateTime.Day @s.StartDateTime.ToString("MMM") @s.StartDateTime.ToString("ddd")",
-                    time: "@s.StartDateTime.Hour:@s.StartDateTime.Minute-@s.EndDateTime.Hour:@s.EndDateTime.Minute",
-                    title: "@Html.Raw(s.Title)",
-                    location: "@Html.Raw(s.Location)",
-                    state: "@Html.Raw(s.SessionState)",
-                };
-                for (key in sessionInfo) {
-                    divText = document.createTextNode(sessionInfo[key] + " ");
-                    divElem.appendChild(divText);
-                }
-                sessionButton = document.createElement("button");
-                sessionButton.setAttribute("type", "button");
-                sessionButton.appendChild(document.createTextNode("Openzetten"));
-                divElem.appendChild(sessionButton);
-                adminP.appendChild(divElem);
-            </text>
-        }
-    });
-</script>
-
 <div id="adminPanel">
-    Lijst met Sessies
+    <table>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.StartDateTime.Day @s.StartDateTime.ToString("MMM") @s.StartDateTime.ToString("ddd")</td>
+                <td>@s.StartDateTime.Hour:@s.StartDateTime.ToString("mm")-@s.EndDateTime.Hour:@s.EndDateTime.ToString("mm")</td>
+                <td>@Html.Raw(s.Title)</td>
+                <td>@Html.Raw(s.Location)</td>
+                <td>@Html.Raw(s.SessionState)</td>
+                <td><button type="button">Openzetten</button></td>
+            </tr>
+        }
+    </table>
 </div>
