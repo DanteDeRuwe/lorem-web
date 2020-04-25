@@ -1,5 +1,6 @@
 using G09projectenII.Data.Repositories;
 using G09projectenII.Models;
+using G09projectenII.Models.Repository_Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ namespace G09projectenII
             //Repos
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<ISessionCalendarRepository, SessionCalendarRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
 
             services.AddControllersWithViews();
         }
