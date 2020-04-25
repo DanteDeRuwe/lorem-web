@@ -3,22 +3,21 @@
 }
 @model G09projectenII.Models.ViewModels.LoginViewModel
 
-@using (Html.BeginForm()) {
-    <table>
-        <tr>
-            <td><b>Gebruikersnaam:  </b></td>
-            <td>
-                @Html.TextBoxFor(m => m.Username, new { maxlength = "50", size = "50" })
-                @Html.ValidationMessageFor(m => m.Username)
-            </td>
-        </tr>
-        <tr>
-            <td><b>Paswoord:</b></td>
-            <td>
-                @Html.TextBoxFor(m => m.Password, new { maxlength = "50", size = "50" })
-                @Html.ValidationMessageFor(m => m.Password)
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Inloggen" class="submit" />
+<h1>Inloggen</h1>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post)) {
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username)
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 }
