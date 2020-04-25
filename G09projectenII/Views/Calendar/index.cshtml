@@ -12,9 +12,9 @@
 <script src="~/lib/moment/moment-with-locales.min.js"></script>
 
 
-<link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
-<link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
-<link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
+<link href="~/lib/fullcalendar/core/main.css" rel="stylesheet"/>
+<link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet"/>
+<link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet"/>
 <link href="~/css/calendar.css" rel="stylesheet">
 
 
@@ -88,8 +88,17 @@
             
             // practical info
             moment.locale('nl-be');
-            let date = moment(session['startDateTime']);
-            $("div.modal-date").text(date.format('D MMMM'));
+            let startDateTime = moment(session['startDateTime']);
+            let endDateTime = moment(session['endDateTime']);
+            
+            $("div.modal-date")
+            .append(startDateTime.format('D MMMM'));
+            
+            $("div.modal-time")
+            .append(`${startDateTime.format('h:mm')} - ${endDateTime.format('h:mm')}`);
+            
+            $("div.modal-location")
+            .append(session['location']);
             
             // description
             $("div.modal-description").text(session.description);
@@ -98,6 +107,7 @@
             $("#sessionModal").modal();
         }
 </script>
+
 
 <!-- Modal -->
 <div class="modal fade" id="sessionModal" role="dialog">
@@ -109,9 +119,15 @@
             </div>
             <div class="modal-body">
                 <div class="modal-practical-info">
-                    <div class="modal-date"></div>
-                    <div class="modal-time"></div>
-                    <div class="modal-location"></div>
+                    <div class="modal-date">
+                        <i class="fa fa-calendar-alt"></i>
+                    </div>
+                    <div class="modal-time">
+                        <i class="fa fa-clock"></i>
+                    </div>
+                    <div class="modal-location">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
                 </div>
                 <div class="modal-description"></div>
             </div>

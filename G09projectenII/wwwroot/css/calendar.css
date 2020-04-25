@@ -94,3 +94,8 @@
         border: 1px solid lightgray;
         color: lightgray;
     }
+
+.modal-practical-info {
+    display:flex;
+    justify-content: space-evenly;
+}
