@@ -22,12 +22,12 @@
 
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: ['dayGrid'],
-                fixedWeekCount: false
+                fixedWeekCount: false,
                 eventClick(info) {
                     $("#sessionId").text(info.event.title);
                     console.log(info)
                     $("#sessionModal").modal();
-                }
+                },
                 locale: "nl"
             });
 
@@ -50,7 +50,7 @@
 
 
                     calendar.addEvent({
-                        title: '@s.Title',
+                        title: "@Html.Raw(s.Title)",
                         start: starttime,
                         end: endtime,
                         allDay: false,
