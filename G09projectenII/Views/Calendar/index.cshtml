@@ -9,12 +9,8 @@
 <script src="~/lib/fullcalendar/daygrid/main.js"></script>
 <script src="~/lib/fullcalendar/core/locales/nl.js"></script>
 
-<style>
+<link href="~/css/calendar.css" rel="stylesheet">
 
-    .fc-day-grid-event .fc-content {
-        white-space: normal;
-    }
-</style>
 
 <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -34,7 +30,8 @@
                         error: function() { alert('A error'); }
                     });
                 },
-                locale: "nl"
+                locale: "nl",
+                eventColor: "#4049a9"
             });
 
             let starttime, endtime;
