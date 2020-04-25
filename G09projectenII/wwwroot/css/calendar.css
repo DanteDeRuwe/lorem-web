@@ -95,7 +95,36 @@
         color: lightgray;
     }
 
+
+@media (min-width: 992px) {
+    /*for larger devices, we can go wider*/
+    .modal-dialog{
+        max-width: 60vw;
+    }
+}
+
+.modal-content {
+    padding: 15px;
+}
+
+.modal-header, .modal-footer {
+    border: 0;
+}
+
+.modal-header {
+    font-family: var(--header-font);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 .modal-practical-info {
     display:flex;
     justify-content: space-evenly;
+    margin: 1rem 0 1.5rem 0;
+}
+
+.modal-practical-info  .icon {
+    display: inline-block;
+    margin-right: 10px;
+
 }

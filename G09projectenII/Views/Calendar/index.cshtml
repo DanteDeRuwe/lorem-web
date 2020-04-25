@@ -90,14 +90,14 @@
             let startDateTime = moment(session['startDateTime']);
             let endDateTime = moment(session['endDateTime']);
             
-            $("div.modal-date")
-            .append(startDateTime.format('D MMMM'));
+            $("div.modal-date>.info")
+            .text(startDateTime.format('D MMMM'));
             
-            $("div.modal-time")
-            .append(`${startDateTime.format('h:mm')} - ${endDateTime.format('h:mm')}`);
+            $("div.modal-time>.info")
+            .text(`${startDateTime.format('h:mm')} - ${endDateTime.format('h:mm')}`);
             
-            $("div.modal-location")
-            .append(session['location']);
+            $("div.modal-location>.info")
+            .text(session['location']);
             
             // description
             $("div.modal-description").text(session.description);
@@ -116,19 +116,23 @@
         <div class="modal-content">
             <div class="modal-header">
             </div>
+            
             <div class="modal-body">
                 <div class="modal-practical-info">
-                    <div class="modal-date">
-                        <i class="far fa-calendar-alt"></i>
+                    <div class="modal-date row">
+                        <span class="icon"><i class="far fa-calendar-alt"></i></span>
+                        <span class="info"></span>
                     </div>
-                    <div class="modal-time">
-                        <i class="far fa-clock"></i>
+                    <div class="modal-time row">
+                        <span class="icon"><i class="far fa-clock"></i></span>
+                        <span class="info"></span>
                     </div>
-                    <div class="modal-location">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <div class="modal-location row">
+                        <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <span class="info"></span>
                     </div>
                 </div>
-                <div class="modal-description"></div>
+                <div class="modal-description"><p></p></div>
             </div>
             <div class="modal-footer">
             </div>
