@@ -1,4 +1,4 @@
-﻿@model ICollection<Session>
+@model ICollection<Session>
 
 @{
     ViewBag.Title = "Index";
@@ -22,29 +22,30 @@
 
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: ['dayGrid'],
-                locale: "nl"
+                fixedWeekCount: false
                 eventClick(info) {
                     $("#sessionId").text(info.event.title);
                     console.log(info)
                     $("#sessionModal").modal();
                 }
+                locale: "nl"
             });
 
             let starttime, endtime;
             @foreach (var s in Model)
             {
                 <text>
-                    starttime = new Date(@s.Starttime.Year,
-                        @s.Starttime.Month,
-                        @s.Starttime.Day.ToString(),
-                        @s.Starttime.Hour,
-                        @s.Starttime.Minute);
+                    starttime = new Date(@s.StartDateTime.Year,
+                        @s.StartDateTime.Month-1, //stupid js months -_-
+                        @s.StartDateTime.Day.ToString(),
+                        @s.StartDateTime.Hour,
+                        @s.StartDateTime.Minute);
 
-                    endtime = new Date(@s.Endtime.Year,
-                        @s.Endtime.Month,
-                        @s.Endtime.Day.ToString(),
-                        @s.Endtime.Hour,
-                        @s.Endtime.Minute);
+                    endtime = new Date(@s.EndDateTime.Year,
+                        @s.EndDateTime.Month-1, //stupid js months -_-
+                        @s.EndDateTime.Day.ToString(),
+                        @s.EndDateTime.Hour,
+                        @s.EndDateTime.Minute);
 
 
 

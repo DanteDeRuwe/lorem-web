@@ -26,7 +26,7 @@ namespace G09projectenII.Data.Mapping
                 .HasColumnName("DESCRIPTION")
                 .HasColumnType("text");
 
-            builder.Property(e => e.Endtime)
+            builder.Property(e => e.EndDateTime)
                 .HasColumnName("ENDTIME")
                 .HasMaxLength(255)
                 .HasConversion(Util.DateConverter())
@@ -58,7 +58,7 @@ namespace G09projectenII.Data.Mapping
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Starttime)
+            builder.Property(e => e.StartDateTime)
                 .HasColumnName("STARTTIME")
                 .HasMaxLength(255)
                 .HasConversion(Util.DateConverter())
