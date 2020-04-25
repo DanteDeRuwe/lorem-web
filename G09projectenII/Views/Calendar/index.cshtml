@@ -22,10 +22,16 @@
 
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: ['dayGrid'],
-                locale: "nl"
+                locale: "nl",
                 eventClick(info) {
-                    $("#sessionId").text(info.event.title);
-                    console.log(info)
+                    $.ajax({
+                        type: "GET",
+                        url: "/Calendar/Test?id=" + info.event.id,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(recData) { alert(recData); },
+                        error: function() { alert('A error'); }
+                    });
                     $("#sessionModal").modal();
                 }
             });

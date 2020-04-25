@@ -10,6 +10,15 @@ namespace G09projectenII.Controllers
 
         public CalendarController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
 
-        public IActionResult Index() => View(_sessionRepository.GetBy(3));
+        public IActionResult Index() => View(_sessionRepository.GetAll());
+
+        [HttpPost]
+        public JsonResult GetSessionBy(int id) => Json(this._sessionRepository.GetBy(id));
+
+        [HttpGet]
+        public JsonResult Test(int id)
+        {
+            return Json(id);
+        }
     }
 }
