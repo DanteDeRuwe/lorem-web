@@ -1,4 +1,5 @@
-﻿using G09projectenII.Models;
+﻿using BCr = BCrypt.Net.BCrypt;
+using G09projectenII.Models;
 using G09projectenII.Models.Repository_Models;
 using G09projectenII.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -10,11 +11,11 @@ using System.Security.Claims;
 
 namespace G09projectenII.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private readonly IMemberRepository _memberRepository;
 
-        public LoginController(IMemberRepository memberRepository)
+        public AccountController(IMemberRepository memberRepository)
         {
             _memberRepository = memberRepository;
         }
@@ -27,7 +28,9 @@ namespace G09projectenII.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            if (ModelState.IsValid && _memberRepository.GetAll().Any(m => m.Username == login.Username)) //TODO: password hash/check
+            if (ModelState.IsValid
+                && _memberRepository.GetAll().Any(m => m.Username == login.Username
+                && BCr.Verify(login.Password, m.Password)))
             {
                 ClaimsIdentity identity = new ClaimsIdentity("User Identity");
                 identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
@@ -37,6 +40,12 @@ namespace G09projectenII.Controllers
                 return RedirectToAction("Index", "Calendar");
             }
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            return View("index");
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Calendar");
         }
     }
