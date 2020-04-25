@@ -6,13 +6,10 @@ namespace G09projectenII.Controllers
 {
     public class CalendarController : Controller
     {
-
         private readonly ISessionRepository _sessionRepository;
 
         public CalendarController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
 
-        public IActionResult Index() => View(_sessionCalendarRepository.GetBy(3));
-        
-        
+        public IActionResult Index() => View(_sessionRepository.GetBy(3));
     }
 }
