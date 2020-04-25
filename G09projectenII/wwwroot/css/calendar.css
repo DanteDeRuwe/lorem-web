@@ -83,10 +83,10 @@
     font-size: 1rem;
 }
 
-    .fc-today-button:hover:enabled {
-        background-color: var(--nearly-white);
-        border: 1px solid var(--light-gray);
-        color: var(--text-gray);
+    .fc-today-button:hover:enabled, .fc-today-button:active {
+        background-color: var(--nearly-white) !important;
+        border: 1px solid var(--light-gray) !important;
+        color: var(--text-gray) !important;
     }
 
     .fc-today-button:disabled {
