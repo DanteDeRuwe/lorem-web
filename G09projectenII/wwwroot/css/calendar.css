@@ -40,9 +40,16 @@
     white-space: normal;
 }
 
-.fc-day-grid-event:hover .fc-content {
-    cursor: pointer;
+.fc-event {
+    background-color: var(--primary-blue) !important;
+    border-color: var(--primary-blue) !important;
 }
+
+    .fc-event:hover {
+        background-color: var(--darker-blue) !important;
+        border-color: var(--darker-blue) !important;
+        cursor: pointer;
+    }
 
 .fc-next-button, .fc-prev-button {
     background-color: transparent;
