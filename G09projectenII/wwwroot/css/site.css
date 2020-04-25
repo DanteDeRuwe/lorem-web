@@ -120,3 +120,15 @@ body {
         color: var(--text-gray);
     }
 
+.nav-logo {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-bottom: 5px;
+    margin-right: 5px; 
+}
+
+.brand-text {
+    color: var(--primary-blue);
+    font-family: "Comfortaa", var(--text-font);
+    font-weight: 700;
+}
