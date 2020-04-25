@@ -11,6 +11,8 @@ namespace G09projectenII.Controllers
 
         public CalendarController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
 
-        public IActionResult Index() => View(_sessionRepository.GetAll());
+        public IActionResult Index() => View(_sessionCalendarRepository.GetBy(3));
+        
+        
     }
 }

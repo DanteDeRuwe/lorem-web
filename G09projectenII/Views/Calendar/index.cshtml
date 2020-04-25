@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Session selectedSession = null;
 }
 
 <script src="~/lib/fullcalendar/core/main.js"></script>
@@ -22,6 +23,11 @@
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: ['dayGrid'],
                 locale: "nl"
+                eventClick(info) {
+                    $("#sessionId").text(info.event.title);
+                    console.log(info)
+                    $("#sessionModal").modal();
+                }
             });
 
             let starttime, endtime;
@@ -40,17 +46,41 @@
                         @s.Endtime.Hour,
                         @s.Endtime.Minute);
 
-            calendar.addEvent({
-                title: "@Html.Raw(s.Title)",
-                start: starttime,
-                end: endtime,
-                allDay: false
-            });
+
+
+                    calendar.addEvent({
+                        title: '@s.Title',
+                        start: starttime,
+                        end: endtime,
+                        allDay: false,
+                        id: '@s.Id',
+                    });
+                    
+                    
+
                 </text>
             }
-
             calendar.render();
         });
-</script>
+    </script>
+
+<!-- Modal -->
+<div class="modal fade" id="sessionModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="sessionId"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>session info</p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="calendar"></div>
