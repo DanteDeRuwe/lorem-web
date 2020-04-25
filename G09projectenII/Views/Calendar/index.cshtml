@@ -30,10 +30,9 @@
                         url: "/Calendar/Test?id=" + info.event.id,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function(recData) { alert(recData); },
+                        success: showSessionModal,
                         error: function() { alert('A error'); }
                     });
-                    $("#sessionModal").modal();
                 },
                 locale: "nl"
             });
@@ -70,6 +69,17 @@
             }
             calendar.render();
         });
+        
+        function showSessionModal(session) {
+            $("div.modal-header").text(session.title)
+            // add close button to modal
+            .append("<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>");
+            
+            $("div.modal-body").text(session.description);
+            
+            // show modal
+            $("#sessionModal").modal();
+        }
     </script>
 
 <!-- Modal -->
@@ -79,11 +89,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 id="sessionId"></h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>session info</p>
             </div>
             <div class="modal-footer">
             </div>

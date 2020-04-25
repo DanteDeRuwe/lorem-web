@@ -18,7 +18,7 @@ namespace G09projectenII.Controllers
         [HttpGet]
         public JsonResult Test(int id)
         {
-            return Json(id);
+            return Json(this._sessionRepository.GetBy(id));
         }
     }
 }
