@@ -79,12 +79,21 @@
         });
 
         function showSessionModal(session) {
+            console.log(session);
+            // title
             $("div.modal-header").text(session.title)
-            // add close button to modal
+            
+            // x button to close
             .append("<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>");
-
-            $("div.modal-body").text(session.description);
-
+            
+            // practical info
+            moment.locale('nl-be');
+            let date = moment(session['startDateTime']);
+            $("div.modal-date").text(date.format('D MMMM'));
+            
+            // description
+            $("div.modal-description").text(session.description);
+            
             // show modal
             $("#sessionModal").modal();
         }
@@ -99,6 +108,12 @@
             <div class="modal-header">
             </div>
             <div class="modal-body">
+                <div class="modal-practical-info">
+                    <div class="modal-date"></div>
+                    <div class="modal-time"></div>
+                    <div class="modal-location"></div>
+                </div>
+                <div class="modal-description"></div>
             </div>
             <div class="modal-footer">
             </div>
