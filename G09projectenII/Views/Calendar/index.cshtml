@@ -30,7 +30,12 @@
                         error: function() { alert('A error'); }
                     });
                 },
-                locale: "nl",
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                },
+                defaultView: 'dayGridMonth'
             });
 
             let starttime, endtime;
