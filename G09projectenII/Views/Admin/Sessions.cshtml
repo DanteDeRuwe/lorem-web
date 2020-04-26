@@ -32,17 +32,15 @@
                     </a>
 
                     <div class="right">
-                        @switch (s.SessionState.ToInt())
-                        {
-                            case 0:<button class="session-state-change btn btn-outline-success">Openen</button>
-                                break;
-                            case 1: <button class="session-state-change btn btn-outline-warning">Sluiten</button>
-                                break;
-                            case 2: <button class="session-state-change btn btn-outline-danger">Afsluiten</button>
-                                break;
-                            default:
-                                break;
-                        }
+                        <form asp-action="ChangeSessionState" asp-route-id="@s.Id" method="post">
+                            @{
+                                string color = s.SessionState.ToInt() switch { 0 => "success", 1 => "warning", 2 => "danger", _ => "primary" };
+                                string text = s.SessionState.ToInt() switch { 0 => "Openen", 1 => "Sluiten", 2 => "Afsluiten", _ => "" };
+                            }
+
+                            <button type="submit" class="session-state-change btn btn-outline-@color">@text</button>
+                            
+                        </form>
 
                         <a class="collapse-arrow collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
                             <i class="fas fa-chevron-right"></i>

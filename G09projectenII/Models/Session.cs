@@ -42,5 +42,12 @@ namespace G09projectenII.Models
 
         public override string ToString() => string.Join(" | ", Id, Title, Location, Speakername, Type, StartDateTime.ToShortDateString(), StartDateTime.ToShortTimeString()
             , EndDateTime.ToShortDateString(), EndDateTime.ToShortTimeString());
+
+
+        public void NextState()
+        {
+            int nextStateIndex = SessionState.ToInt() + 1;
+            SessionState = SessionState.FromInt(nextStateIndex <= 3 ? nextStateIndex : 3);
+        }
     }
 }

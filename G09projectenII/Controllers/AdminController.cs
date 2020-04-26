@@ -25,5 +25,19 @@ namespace G09projectenII.Controllers
         }
 
         public IActionResult Attendances() => View();
+
+
+        [HttpPost]
+        public IActionResult ChangeSessionState(int id)
+        {
+            var session = _sessionRepository.GetBy(id);
+            session.NextState();
+            _sessionRepository.Update(session);
+            _sessionRepository.SaveChanges();
+
+            return RedirectToAction("Sessions");
+        }
+
+
     }
 }

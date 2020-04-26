@@ -11,7 +11,7 @@
     background: none;
 }
 
-.panel-heading a {
+.panel-heading a:not(.btn) {
     color: var(--text-gray);
     font-size: 1rem;
     text-decoration: none;
@@ -58,7 +58,7 @@
 }
 
  
-.panel-heading button.session-state-change {
+.panel-heading .session-state-change {
     margin-right: 4rem;
     padding: .2rem .4rem;
 }
