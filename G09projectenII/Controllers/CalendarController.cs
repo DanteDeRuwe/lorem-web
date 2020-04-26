@@ -1,4 +1,5 @@
 ﻿using G09projectenII.Models;
+using G09projectenII.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
@@ -20,7 +21,8 @@ namespace G09projectenII.Controllers
         [HttpGet]
         public JsonResult Test(int id)
         {
-            return Json(this._sessionRepository.GetBy(id));
+            Session session = this._sessionRepository.GetBy(id);
+            return session != null ? Json(new SessionDTO(session)) : null;
         }
     }
 }
