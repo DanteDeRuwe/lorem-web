@@ -84,6 +84,12 @@ button.accept-policy {
     line-height: inherit;
 }
 
+.alert {
+    background-color: var(--nearly-white);
+    color: var(--text-gray);
+    border-color: var(--light-gray);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

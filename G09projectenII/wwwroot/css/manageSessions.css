@@ -1,0 +1,122 @@
+﻿
+.panel {
+    border-bottom: 1px solid var(--light-gray);
+    padding: .7rem 0;
+}
+
+.panel-heading {
+    display: flex;
+    flex-direction: row;
+    border: 0;
+    background: none;
+}
+
+.panel-heading a {
+    color: var(--text-gray);
+    font-size: 1rem;
+    text-decoration: none;
+    width: 100%;
+}
+
+.panel-heading .session-date {
+    order: 0;
+    margin-top: .3rem;
+    font-size: .7rem;
+    color: var(--text-lighter-gray);
+    text-transform: uppercase;
+    float: left;
+    width: 6rem;
+}
+
+.panel-heading .session-time {
+    order: 1;
+    font-size: .7rem;
+    color: var(--text-lighter-gray);
+    margin-left: .5rem;
+    width: 6rem;
+}
+
+.panel-heading .session-title {
+    order: 2;
+    margin-left: 3rem;
+    width: 100%;
+}
+
+.panel-heading .session-state {
+
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    margin-left: .5rem;
+}
+
+.panel-heading .right  {
+    order: 3;
+    display: flex;
+    flex-direction: row;
+    float: right; /*TODO This makes the body jitter tho...*/
+}
+
+ 
+.panel-heading button.session-state-change {
+    margin-right: 4rem;
+    padding: .2rem .4rem;
+}
+
+.panel-heading i {
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.panel-heading.active i {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.session-state {
+    color: white;
+    font-weight: 400;
+}
+
+.session-state.state0 {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.session-state.state1 {
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.session-state.state2 {
+    color: var(--warning);
+    border: 1px solid var(--warning);
+}
+
+.session-state.state3 {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+
+.panel-body {
+    padding-left: 13.8rem;
+    padding-right: 4.5rem;
+}
+
+.panel-body .session-description {
+    margin-top: 1rem;
+    font-size: .8rem;
+}
+
+.panel-body .session-description b{
+    font-weight: 600;
+}
+
+.panel-body .session-location {
+    color: var(--text-lighter-gray);
+}
+
+.panel-body .session-location i {
+    margin-right: 5px;
+}

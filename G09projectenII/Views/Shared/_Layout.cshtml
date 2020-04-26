@@ -12,8 +12,7 @@
     <!-- calendar stuff -->
     <link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
     <link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
-
-    @Html.Partial("_Favicons")
+    <partial name="_Favicons.cshtml" />
 </head>
 <body>
     <header>
@@ -31,7 +30,10 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Kalender</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel" asp-action="Index">Sessie beheren</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Sessions">Sessies beheren</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Attendances">Aanwezigheden</a>
                             </li>
 
                         </ul>
@@ -50,11 +52,13 @@
         </nav>
     </header>
     <div class="container">
+        <partial name="_CookieConsentPartial" />
+    </div>
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer">
         <p class="text-center text-muted>">Made with ♥ by the Code Commanders</p>
     </footer>

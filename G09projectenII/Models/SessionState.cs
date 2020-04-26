@@ -6,7 +6,7 @@
         /// <summary>
         /// For storing in the database
         /// </summary>
-        public int toInt() =>
+        public int ToInt() =>
             this switch
             {
                 CreatedSessionState s => 0,
@@ -18,7 +18,7 @@
         /// <summary>
         /// For instantiating the correct state from the database
         /// </summary>
-        public static SessionState fromInt(int v) =>
+        public static SessionState FromInt(int v) =>
             v switch
             {
                 0 => new CreatedSessionState(),
