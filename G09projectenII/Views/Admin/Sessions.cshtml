@@ -59,11 +59,19 @@
                                 <p>@Html.Raw(s.Description)</p>
                             </div>
                         }
-
-                        @if (!string.IsNullOrEmpty(s.Location))
-                        {
-                            <div class="session-location"><i class="fas fa-map-marker-alt"></i>@Html.Raw(s.Location)</div>
-                        }
+                        <div class="session-practical-info">
+                            @if (!string.IsNullOrEmpty(s.Location))
+                            {
+                                <span class="session-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    @Html.Raw(s.Location)
+                                </span>
+                            }
+                            <span>
+                                <i class="fas fa-user"></i>
+                                @Html.Raw(@s.Member.Firstname) @Html.Raw(@s.Member.Lastname)
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

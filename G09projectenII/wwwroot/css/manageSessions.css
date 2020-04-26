@@ -113,10 +113,14 @@
     font-weight: 600;
 }
 
-.panel-body .session-location {
+.panel-body .session-practical-info {
     color: var(--text-lighter-gray);
 }
 
-.panel-body .session-location i {
+.panel-body .session-practical-info i {
     margin-right: 5px;
+}
+
+.panel-body .session-location {
+    margin-right: 1rem;
 }
