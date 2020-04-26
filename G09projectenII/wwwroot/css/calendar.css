@@ -1,4 +1,5 @@
-﻿
+﻿/* calendar */
+
 #calendar {
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
@@ -94,7 +95,8 @@
         border: 1px solid lightgray;
         color: lightgray;
     }
-
+    
+/* session modal */
 
 @media (min-width: 992px) {
     /*for larger devices, we can go wider*/
@@ -126,5 +128,8 @@
 .modal-practical-info  .icon {
     display: inline-block;
     margin-right: 10px;
+}
 
+.modal-description .empty-description {
+    color: var(--text-lighter-gray);
 }

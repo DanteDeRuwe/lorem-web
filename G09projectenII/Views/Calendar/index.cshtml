@@ -97,7 +97,14 @@
             .text(session['location']);
             
             // description
-            $("div.modal-description").text(session.description);
+            if(session.description) {
+                $("div.modal-description>.description").text(session.description);
+                $("div.modal-description>.empty-description").empty();
+            } else {
+                $("div.modal-description>.empty-description").text("Geen beschrijving beschikbaar.");
+                $("div.modal-description>.description").empty();
+            }
+            
             
             // show modal
             $("#sessionModal").modal();
@@ -133,7 +140,11 @@
                         <span class="info"></span>
                     </div>
                 </div>
-                <div class="modal-description"><p></p></div>
+                <div class="modal-description">
+                    <span class="description"></span>
+                    <span class="empty-description"></span>
+                </div>
+                <div class="modal-announcement"></div>
             </div>
             <div class="modal-footer">
             </div>
