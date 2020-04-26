@@ -9,71 +9,64 @@
 
 <link href="~/css/manageSessions.css" rel="stylesheet">
 
-
-
 <section>
     <div class="panel-group sessions-panel" id="accordion" role="tablist" aria-multiselectable="true">
 
         @foreach (var s in Model)
         {
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="@("heading" + s.Id)">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
-                        <span class="session-date">
-                            @s.StartDateTime.ToString("ddd d MMM")
-                        </span>
-                        <span class="session-time">@s.StartDateTime.ToString("hh:mm") - @s.EndDateTime.ToString("hh:mm")</span>
-                        <span class="session-title">
-                            @s.Title
-                        </span>
-                        <span class="badge badge-pill session-state @("state"+s.SessionState.ToInt())">
-                            @s.SessionState.ToString()
-                        </span>
-                    </a>
+        <div class="panel panel-default">
 
-                    <div class="right">
-                        <form asp-action="ChangeSessionState" asp-route-id="@s.Id" method="post">
-                            @{
-                                string color = s.SessionState.ToInt() switch { 0 => "success", 1 => "warning", 2 => "danger", _ => "primary" };
-                                string text = s.SessionState.ToInt() switch { 0 => "Openen", 1 => "Sluiten", 2 => "Afsluiten", _ => "" };
-                            }
+            <!--Panel Heading-->
+            <div class="panel-heading" role="tab" id="@("heading" + s.Id)">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
+                    <!--Date-->
+                    <span class="session-date">@s.StartDateTime.ToString("ddd d MMM")</span>
+                    <!--Time-->
+                    <span class="session-time">@s.StartDateTime.ToString("hh:mm") - @s.EndDateTime.ToString("hh:mm")</span>
+                    <!--Title-->
+                    <span class="session-title">@s.Title</span>
+                    <!--State-->
+                    <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
+                </a>
 
-                            <button type="submit" class="session-state-change btn btn-outline-@color">@text</button>
-                            
-                        </form>
-
-                        <a class="collapse-arrow collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div id="@("collapse" + s.Id)" class="panel-collapse collapse" role="tabpanel" aria-labelledby="@("heading" + s.Id)">
-                    <div class="panel-body">
-                        @if (!string.IsNullOrEmpty(s.Description)) 
-                        { 
-                            <div class="session-description">
-                                <b>Beschrijving:</b>
-                                <p>@Html.Raw(s.Description)</p>
-                            </div>
+                <div class="right">
+                    <form asp-action="ChangeSessionState" asp-route-id="@s.Id" method="post">
+                        @{
+                            string color = s.SessionState.ToInt() switch { 0 => "success", 1 => "warning", 2 => "danger", _ => "primary" };
+                            string text = s.SessionState.ToInt() switch { 0 => "Openen", 1 => "Sluiten", 2 => "Afsluiten", _ => "" };
                         }
-                        <div class="session-practical-info">
-                            @if (!string.IsNullOrEmpty(s.Location))
-                            {
-                                <span class="session-location">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    @Html.Raw(s.Location)
-                                </span>
-                            }
-                            <span>
-                                <i class="fas fa-user"></i>
-                                @Html.Raw(@s.Member.Firstname) @Html.Raw(@s.Member.Lastname)
-                            </span>
-                        </div>
+                        <!--State Change Button-->
+                        <button type="submit" class="session-state-change btn btn-outline-@color">@text</button>
+                    </form>
+
+                    <!--Chevron-->
+                    <a class="collapse-arrow collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <!--Panel Body-->
+            <div id="@("collapse" + s.Id)" class="panel-collapse collapse" role="tabpanel" aria-labelledby="@("heading" + s.Id)">
+                <div class="panel-body">
+                    @if (!string.IsNullOrEmpty(s.Description))
+                    {
+                        <!--Description-->
+                        <div class="session-description"><b>Beschrijving:</b><p>@Html.Raw(s.Description)</p></div>
+                    }
+                    <div class="session-practical-info">
+                        @if (!string.IsNullOrEmpty(s.Location))
+                        {
+                            <!--Location-->
+                            <span class="session-location"><i class="fas fa-map-marker-alt"></i>@Html.Raw(s.Location)</span>
+                        }
+                        <!--Organizer-->
+                        <span><i class="fas fa-user"></i>@Html.Raw(@s.Member.Firstname) @Html.Raw(@s.Member.Lastname)</span>
                     </div>
                 </div>
             </div>
-           
+        </div>
         }
     </div>
 </section>
