@@ -13,7 +13,7 @@ namespace G09projectenII.Models.DTOs
         public string? Location { get; set; }
         public string? Speakername { get; set; }
         public string? Title { get; set; }
-        public string? OrganiserName { get; set; }
+        public MemberDTO Organiser { get; set; }
         public AnnouncementDTO MostRecentAnnouncement { get; set; }
         public int AvailableRegistrationSpots { get; set; }
 
@@ -27,7 +27,7 @@ namespace G09projectenII.Models.DTOs
             Title = session.Title;
             Speakername = session.Speakername;
             Externallink = session.Externallink;
-            OrganiserName = $"{session.Member.Firstname} {session.Member.Lastname}";
+            Organiser = new MemberDTO(session.Member);
             Announcement lastAnnouncement = session.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
             AvailableRegistrationSpots = (session.Capacity == null) ? 0 : (int)(session.Capacity - session.SessionRegistrees.Count);

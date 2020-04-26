@@ -106,7 +106,14 @@
             }
             
             // announcement
-            $("img.profile-picture").attr("src","https://cdn.britannica.com/s:800x450,c:crop/43/172743-138-545C299D/overview-Barack-Obama.jpg");
+            let announcement = session['mostRecentAnnouncement'];
+            if (announcement) {
+                let author = announcement['author'];
+                $("img.profile-picture").attr("src", author['profilepicpath']);
+                $("div.organiser").text(author['name']);
+                let announcementDate = moment(announcement['timestamp']);
+                $("div.announcement-date").text(announcementDate.format('DD/MM/YY'));
+            }
             
             // show modal
             $("#sessionModal").modal();
