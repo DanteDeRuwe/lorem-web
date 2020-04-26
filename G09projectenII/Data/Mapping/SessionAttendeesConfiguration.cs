@@ -8,12 +8,7 @@ namespace G09projectenII.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<SessionAttendees> builder)
         {
-            builder.HasKey(e => new
-            {
-                e.Id,
-                e.MemberId
-            })
-                .HasName("PK__SESSION___693A506C9E0B59CA");
+            builder.HasKey(e => new {e.Id, e.MemberId});
 
             builder.ToTable("SESSION_ATTENDEES");
 
@@ -27,15 +22,11 @@ namespace G09projectenII.Data.Mapping
 
             builder.HasOne(d => d.Session)
                 .WithMany(p => p.SessionAttendees)
-                .HasForeignKey(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("SESSION_ATTENDEES_id");
+                .HasForeignKey(d => d.Id);
 
             builder.HasOne(d => d.Member)
                 .WithMany(p => p.SessionAttendees)
-                .HasForeignKey(d => d.MemberId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("SSSIONATTENDEESmmberid");
+                .HasForeignKey(d => d.MemberId);
         }
     }
 }

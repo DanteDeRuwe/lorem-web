@@ -12,8 +12,7 @@ namespace G09projectenII.Data.Mapping
 
             builder.Property(e => e.MemberId)
                 .HasColumnName("MEMBER_ID")
-                .HasColumnType("numeric(19, 0)")
-                .ValueGeneratedOnAdd();
+                .HasColumnType("numeric(19, 0)");
 
             builder.Property(e => e.Firstname)
                 .HasColumnName("FIRSTNAME")

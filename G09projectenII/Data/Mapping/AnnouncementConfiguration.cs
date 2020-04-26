@@ -13,8 +13,7 @@ namespace G09projectenII.Data.Mapping
 
             builder.Property(e => e.AnnouncementId)
                 .HasColumnName("ANNOUNCEMENT_ID")
-                .HasColumnType("numeric(19, 0)")
-                .ValueGeneratedOnAdd();
+                .HasColumnType("numeric(19, 0)");
 
             builder.Property(e => e.AuthorMemberId)
                 .HasColumnName("AUTHOR_MEMBER_ID")
@@ -41,14 +40,11 @@ namespace G09projectenII.Data.Mapping
 
             builder.HasOne(d => d.Author)
                 .WithMany(p => p.Announcements)
-                .HasForeignKey(d => d.AuthorMemberId)
-                .HasConstraintName("NNUNCEMENTTHORMEMBERID");
+                .HasForeignKey(d => d.AuthorMemberId);
 
             builder.HasOne(d => d.Session)
                 .WithMany(p => p.Announcements)
-                .HasForeignKey(d => d.SessionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ANNOUNCEMENTsession_id");
+                .HasForeignKey(d => d.SessionId);
         }
     }
 }

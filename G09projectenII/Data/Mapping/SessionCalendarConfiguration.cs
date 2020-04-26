@@ -8,15 +8,13 @@ namespace G09projectenII.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<SessionCalendar> builder)
         {
-            builder.HasKey(e => e.CalendarId)
-                .HasName("PK__SESSIONC__EB730BD478604F52");
+            builder.HasKey(e => e.CalendarId);
 
             builder.ToTable("SESSIONCALENDAR");
 
             builder.Property(e => e.CalendarId)
                 .HasColumnName("CALENDAR_ID")
-                .HasColumnType("numeric(19, 0)")
-                .ValueGeneratedOnAdd();
+                .HasColumnType("numeric(19, 0)");
 
             builder.Property(e => e.Enddate)
                 .HasColumnName("ENDDATE")

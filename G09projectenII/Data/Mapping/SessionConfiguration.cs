@@ -13,8 +13,7 @@ namespace G09projectenII.Data.Mapping
 
             builder.Property(e => e.Id)
                 .HasColumnName("ID")
-                .HasColumnType("numeric(19, 0)")
-                .ValueGeneratedOnAdd();
+                .HasColumnType("numeric(19, 0)");
 
             builder.Property(e => e.CalendarId)
                 .HasColumnName("calendar_id")
@@ -76,15 +75,11 @@ namespace G09projectenII.Data.Mapping
 
             builder.HasOne(d => d.Calendar)
                 .WithMany(p => p.Sessions)
-                .HasForeignKey(d => d.CalendarId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_SESSION_calendar_id");
+                .HasForeignKey(d => d.CalendarId);
 
             builder.HasOne(d => d.Member)
                 .WithMany(p => p.Sessions)
-                .HasForeignKey(d => d.MemberId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_SESSION_member_id");
+                .HasForeignKey(d => d.MemberId);
         }
     }
 }
