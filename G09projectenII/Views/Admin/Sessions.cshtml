@@ -26,13 +26,13 @@
                         <span class="session-title">
                             @s.Title
                         </span>
-                        <span class="badge badge-pill session-state @("state"+s.SessionState.toInt())">
+                        <span class="badge badge-pill session-state @("state"+s.SessionState.ToInt())">
                             @s.SessionState.ToString()
                         </span>
                     </a>
 
                     <div class="right">
-                        @switch (s.SessionState.toInt())
+                        @switch (s.SessionState.ToInt())
                         {
                             case 0:<button class="session-state-change btn btn-outline-success">Openen</button>
                                 break;

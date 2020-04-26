@@ -49,8 +49,8 @@ namespace G09projectenII.Data.Mapping
             builder.Property(e => e.SessionState)
                 .HasColumnName("SESSIONSTATUS")
                 .HasConversion(
-                    state => state.toInt(),
-                    storedInt => SessionState.fromInt(storedInt)
+                    state => state.ToInt(),
+                    storedInt => SessionState.FromInt(storedInt)
                 );
 
             builder.Property(e => e.Speakername)

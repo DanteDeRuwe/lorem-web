@@ -17,7 +17,7 @@ namespace G09projectenII.Controllers
         {
             List<Session> nonFinishedSessions =
                 _sessionRepository.GetAll()
-                    .Where(s => s.SessionState.toInt() != 3)
+                    .Where(s => s.SessionState.ToInt() != 3)
                     .OrderBy(s => s.StartDateTime)
                     .ToList();
 
