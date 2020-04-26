@@ -19,38 +19,33 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand brand" asp-area="" asp-controller="Calendar" asp-action="Index"><img src="img/Logo.svg" class="nav-logo"/><span class="brand-text">Lorem</span></a>
+                <a class="navbar-brand brand" asp-area="" asp-controller="Calendar" asp-action="Index"><img src="img/Logo.svg" class="nav-logo" /><span class="brand-text">Lorem</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Kalender</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel" asp-action="Index">Sessie beheren</a>
-                        </li>
-                        
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark btn btn-outline-dark nav-facebook-button" target="_blank" href="https://www.facebook.com/IT-Lab-Hogeschool-Gent-2040310702935554/"><i class="fab fa-facebook-f"></i> IT Lab HoGent</a>
-                        </li>
+                @if (User.Identity.IsAuthenticated) {
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Kalender</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel" asp-action="Index">Sessie beheren</a>
+                            </li>
 
-                        <li class="nav-item flex-grow-1">
-                            @if (!User.Identity.IsAuthenticated)
-                            {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Inloggen</a>
-                            }
-                            @if (User.Identity.IsAuthenticated)
-                            {
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark btn btn-outline-dark nav-facebook-button" target="_blank" href="https://www.facebook.com/IT-Lab-Hogeschool-Gent-2040310702935554/"><i class="fab fa-facebook-f"></i> IT Lab HoGent</a>
+                            </li>
+
+                            <li class="nav-item flex-grow-1">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Uitloggen</a>
-                            }
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
+                }
             </div>
         </nav>
     </header>

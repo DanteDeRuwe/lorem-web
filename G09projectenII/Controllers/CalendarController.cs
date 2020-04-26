@@ -1,4 +1,5 @@
 ﻿using G09projectenII.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
@@ -10,6 +11,7 @@ namespace G09projectenII.Controllers
 
         public CalendarController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
 
+        [Authorize]
         public IActionResult Index() => View(_sessionRepository.GetAll());
 
         [HttpPost]
