@@ -1,5 +1,4 @@
 ﻿using G09projectenII.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace G09projectenII.Controllers
         public IActionResult Index()
         {
             List<Session> nonFinishedSessions =
-                _sessionRepository.GetAll().Where(s => s.SessionState.toInt() != 3).ToList();
+                _sessionRepository.GetAll().Where(s => s.SessionState.toInt() != 3).OrderBy(s => s.StartDateTime).ToList();
             return View(nonFinishedSessions);
         }
     }
