@@ -142,3 +142,8 @@ h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
+
+hr.solid {
+    border-top: 0.1rem solid;
+    color:var(--light-gray);
+}

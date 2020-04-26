@@ -46,11 +46,11 @@
     border-color: var(--primary-blue) !important;
 }
 
-    .fc-event:hover {
-        background-color: var(--darker-blue) !important;
-        border-color: var(--darker-blue) !important;
-        cursor: pointer;
-    }
+.fc-event:hover {
+    background-color: var(--darker-blue) !important;
+    border-color: var(--darker-blue) !important;
+    cursor: pointer;
+}
 
 .fc-next-button, .fc-prev-button {
     background-color: transparent;
@@ -64,16 +64,16 @@
     justify-content: center;
 }
 
-    .fc-next-button:hover, .fc-prev-button:hover {
-        background-color: var(--nearly-white);
-        color: var(--text-gray);
-    }
+.fc-next-button:hover, .fc-prev-button:hover {
+    background-color: var(--nearly-white);
+    color: var(--text-gray);
+}
 
-    .fc-next-button:active, .fc-prev-button:active {
-        background-color: var(--nearly-white) !important;
-        color: var(--text-gray) !important;
-        border: 0;
-    }
+.fc-next-button:active, .fc-prev-button:active {
+    background-color: var(--nearly-white) !important;
+    color: var(--text-gray) !important;
+    border: 0;
+}
 
 .fc-today-button {
     background-color: transparent;
@@ -84,23 +84,23 @@
     font-size: 1rem;
 }
 
-    .fc-today-button:hover:enabled, .fc-today-button:active {
-        background-color: var(--nearly-white) !important;
-        border: 1px solid var(--light-gray) !important;
-        color: var(--text-gray) !important;
-    }
+.fc-today-button:hover:enabled, .fc-today-button:active {
+    background-color: var(--nearly-white) !important;
+    border: 1px solid var(--light-gray) !important;
+    color: var(--text-gray) !important;
+}
 
-    .fc-today-button:disabled {
-        background-color: transparent;
-        border: 1px solid lightgray;
-        color: lightgray;
-    }
-    
+.fc-today-button:disabled {
+    background-color: transparent;
+    border: 1px solid lightgray;
+    color: lightgray;
+}
+
 /* session modal */
 
 @media (min-width: 992px) {
     /*for larger devices, we can go wider*/
-    .modal-dialog{
+    .modal-dialog {
         max-width: 60vw;
     }
 }
@@ -116,20 +116,63 @@
 .modal-header {
     font-family: var(--header-font);
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .modal-practical-info {
-    display:flex;
+    display: flex;
     justify-content: space-evenly;
     margin: 1rem 0 1.5rem 0;
 }
 
-.modal-practical-info  .icon {
+.modal-practical-info .icon {
     display: inline-block;
     margin-right: 10px;
 }
 
 .modal-description .empty-description {
+    color: var(--text-lighter-gray);
+}
+
+.modal-announcement h1 {
+    font-family: var(--header-font);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 2rem 0 1.5rem 0;
+}
+
+.modal-announcement img.profile-picture {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    margin-right: 0.8rem;
+}
+
+.modal-announcement .media-body {
+    border-radius: 0px 30px 30px 30px;
+    background: var(--nearly-white);
+    padding: 1.2rem;
+    display: flex;
+}
+
+.modal-announcement .organiser {
+    color: black;
+    margin-bottom: -0.3rem;
+}
+
+.modal-announcement .organiser-subtitle {
+    color: var(--text-lighter-gray);
+    margin-bottom: 0.5rem;
+    size: 0.8rem;
+    font-weight: 300;
+}
+
+.announcement-text {
+    color: var(--text-gray)
+}
+
+.announcement-date {
+    margin-left: 2rem;
     color: var(--text-lighter-gray);
 }

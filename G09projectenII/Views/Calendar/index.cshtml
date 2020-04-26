@@ -105,6 +105,8 @@
                 $("div.modal-description>.description").empty();
             }
             
+            // announcement
+            $("img.profile-picture").attr("src","https://cdn.britannica.com/s:800x450,c:crop/43/172743-138-545C299D/overview-Barack-Obama.jpg");
             
             // show modal
             $("#sessionModal").modal();
@@ -144,7 +146,25 @@
                     <span class="description"></span>
                     <span class="empty-description"></span>
                 </div>
-                <div class="modal-announcement"></div>
+                <hr class="solid">
+                <div class="modal-announcement">
+                    <h1>Meest recente aankondiging</h1>
+                    <div class="media">
+                      <img src="" class="profile-picture" alt="">
+                      <div class="media-body">
+                          <div class="body-left">
+                              <div class="organiser">Sam Brysbaert</div>
+                              <div class="organiser-subtitle">organizator</div>
+                              <div class="announcement-text">
+                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                              </div>
+                          </div>
+                          <div class="body-right">
+                              <div class="announcement-date">01/01/01</div>
+                          </div> 
+                      </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
             </div>
