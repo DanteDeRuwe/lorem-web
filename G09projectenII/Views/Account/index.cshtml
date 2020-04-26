@@ -18,6 +18,10 @@
         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
     </div>
+    <label>
+        @Html.CheckBoxFor(m => m.RememberMe)
+        @Html.LabelFor(m => m.RememberMe)
+    </label>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Inloggen</button>
         @Html.ValidationMessage("failed-login", null, new { @class = "text-danger" })

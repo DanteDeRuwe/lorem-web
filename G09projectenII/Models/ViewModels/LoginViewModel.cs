@@ -13,5 +13,8 @@ namespace G09projectenII.Models.ViewModels
         [Required(ErrorMessage = "Paswoord is verplicht in te vullen!")]
         [HiddenInput]
         public string Password { get; set; }
+
+        [Display(Name = "Herinner mij")]
+        public bool RememberMe { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using BCr = BCrypt.Net.BCrypt;
-using G09projectenII.Models;
-using G09projectenII.Models.Repository_Models;
+﻿using G09projectenII.Models.Repository_Models;
 using G09projectenII.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Linq;
 using System.Security.Claims;
+using BCr = BCrypt.Net.BCrypt;
 
 namespace G09projectenII.Controllers
 {
@@ -37,7 +36,11 @@ namespace G09projectenII.Controllers
                     identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
 
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
-                    HttpContext.SignInAsync(principal);
+                    HttpContext.SignInAsync(principal, new AuthenticationProperties
+                    {
+                        IsPersistent = true,
+                        ExpiresUtc = login.RememberMe ? DateTime.UtcNow.AddYears(1) : DateTime.UtcNow.AddHours(1)
+                    });
                     return RedirectToAction("Index", "Calendar");
                 }
                 ModelState.AddModelError("failed-login", "Gebruikersnaam of wachtwoord onjuist");
