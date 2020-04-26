@@ -20,6 +20,8 @@ namespace G09projectenII.Data.Repositories
             .Include(s => s.SessionRegistrees).ThenInclude(s => s.Member)
             .Include(s => s.SessionAttendees).ThenInclude(s => s.Member)
             .Include(s => s.Announcements).ThenInclude(a => a.Author)
+            .Include(s => s.Member)
+            .Include(s => s.Calendar)
             .ToList();
 
         public Session GetBy(int id) => GetAll().SingleOrDefault(s => s.Id == id);
