@@ -1,4 +1,4 @@
-﻿
+
 
 * {
     /*-primary-blue: #0081C5;*/
@@ -16,6 +16,15 @@
     --text-font: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-family: var(--text-font);
 }
+
+/*
+    making sure the scrollbar doesnt affect content by adding left margin when necessary
+    (vw includes the scrollbar and % doesn't)
+    https://aykevl.nl/2014/09/fix-jumping-scrollbar
+
+*/
+html { margin-left: calc(100vw - 100%); }
+
 
 nav {
     -webkit-user-select: none; /* Safari */
