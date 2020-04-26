@@ -95,12 +95,17 @@
         border: 1px solid lightgray;
         color: lightgray;
     }
-    
+
+.fc-day-grid-container.fc-scroller {
+    height: auto !important;
+    overflow-y: auto;
+}
+
 /* session modal */
 
 @media (min-width: 992px) {
     /*for larger devices, we can go wider*/
-    .modal-dialog{
+    .modal-dialog {
         max-width: 60vw;
     }
 }
@@ -120,15 +125,15 @@
 }
 
 .modal-practical-info {
-    display:flex;
+    display: flex;
     justify-content: space-evenly;
     margin: 1rem 0 1.5rem 0;
 }
 
-.modal-practical-info  .icon {
-    display: inline-block;
-    margin-right: 10px;
-}
+    .modal-practical-info .icon {
+        display: inline-block;
+        margin-right: 10px;
+    }
 
 .modal-description .empty-description {
     color: var(--text-lighter-gray);
