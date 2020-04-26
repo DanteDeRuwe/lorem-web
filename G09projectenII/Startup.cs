@@ -20,7 +20,7 @@ namespace G09projectenII
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             // NewtonsoftJson is a library which can handle reference loops (e.g. parent knows child & child knows parent)
             services.AddControllers().AddNewtonsoftJson(options =>
             {
@@ -37,7 +37,7 @@ namespace G09projectenII
                  .AddCookie("CookieAuthentication", config =>
                  {
                      config.Cookie.Name = "UserLoginCookie";
-                     config.LoginPath = "/Account/Login";
+                     config.LoginPath = "/Account";
                  });
 
             //Repos

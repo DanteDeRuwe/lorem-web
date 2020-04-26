@@ -1,6 +1,8 @@
 ﻿using G09projectenII.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace G09projectenII.Controllers
 {
@@ -10,6 +12,11 @@ namespace G09projectenII.Controllers
 
         public AdminPanelController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
 
-        public IActionResult Index() => View(_sessionRepository.GetAll());
+        public IActionResult Index()
+        {
+            List<Session> nonFinishedSessions =
+                _sessionRepository.GetAll().Where(s => s.SessionState.toInt() != 3).ToList();
+            return View(nonFinishedSessions);
+        }
     }
 }

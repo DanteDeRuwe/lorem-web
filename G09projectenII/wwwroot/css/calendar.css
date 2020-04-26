@@ -96,6 +96,17 @@
     color: lightgray;
 }
 
+    .fc-today-button:disabled {
+        background-color: transparent;
+        border: 1px solid lightgray;
+        color: lightgray;
+    }
+
+.fc-day-grid-container.fc-scroller {
+    height: auto !important;
+    overflow-y: auto;
+}
+
 /* session modal */
 
 @media (min-width: 992px) {
