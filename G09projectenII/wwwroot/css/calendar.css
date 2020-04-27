@@ -197,3 +197,21 @@
 .modal-extra-info div {
     margin-right: 1rem;
 }
+
+.modal-footer {
+    justify-content: space-between;
+    display: flex;
+}
+
+.session-free-spaces {
+    border-radius: 10px;
+    background: var(--nearly-white);
+    padding: 0.6rem;
+    color: var(--gray)
+}
+
+.btn-light {
+    background: white;
+    border-color: var(--gray);
+    color: var(--gray);
+}

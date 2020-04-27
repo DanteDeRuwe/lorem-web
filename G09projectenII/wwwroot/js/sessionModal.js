@@ -51,6 +51,9 @@ function showSessionModal(session) {
   } else {
     $("div.modal-announcement").css("display", "none");
   }
+  
+  // available spots
+  $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
 
   // show modal
   $("#sessionModal").modal();
