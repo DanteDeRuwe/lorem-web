@@ -1,4 +1,4 @@
-﻿
+
 .panel {
     border-bottom: 1px solid var(--light-gray);
     padding: .7rem 0;
@@ -27,7 +27,7 @@
     color: var(--text-lighter-gray);
     text-transform: uppercase;
     float: left;
-    width: 6rem;
+    width: 5rem;
 }
 
 .panel-heading .session-time {
@@ -35,17 +35,39 @@
     -webkit-order: 1;
     order: 1;
     font-size: .7rem;
-    color: var(--text-lighter-gray);
     margin-left: .5rem;
-    width: 6rem;
+    color: var(--text-lighter-gray);
+    width: 4rem;
 }
 
 .panel-heading .session-title {
+    display: inline-block;
     -o-order: 2;
     -webkit-order: 2;
     order: 2;
-    margin-left: 3rem;
-    width: 100%;
+    margin-left: 2rem;
+}
+
+@media(max-width: 992px) {
+    .panel-heading .session-title {
+        width: fit-content;
+        max-width: 35vw;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media(max-width: 768px) {
+    .panel-heading .session-title {
+        max-width: 27vw;
+    }
+}
+
+@media(max-width: 576px) {
+    .panel-heading .session-title {
+        max-width: fit-content;
+    }
 }
 
 .panel-heading .session-state {
@@ -67,8 +89,20 @@
 
  
 .panel-heading .session-state-change {
-    margin-right: 4rem;
+    margin-right: 1rem;
     padding: .2rem .4rem;
+}
+
+@media(max-width: 768px) {
+    .panel-heading .session-state {
+        transform: scale(.7);
+        margin-right: .5rem;
+    }
+
+    .panel-heading .session-state-change {
+        transform: scale(.7);
+        margin-right: .5rem;
+    }
 }
 
 .panel-heading i {
@@ -111,8 +145,8 @@
 
 
 .panel-body {
-    padding-left: 13.8rem;
-    padding-right: 4.5rem;
+    padding-left: 9.5rem;
+    padding-right: 4.7rem;
 }
 
 .panel-body .session-description {
