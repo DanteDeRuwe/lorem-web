@@ -59,8 +59,9 @@ namespace G09projectenII
 
             services.AddControllersWithViews();
 
-            services.AddAuthorization(options => {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole("HeadAmin", "Admin"));
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("HeadAdmin", "Admin"));
             });
         }
 
