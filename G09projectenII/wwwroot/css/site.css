@@ -141,6 +141,9 @@ body {
     transition: filter ease .5s;
 }
 
+#navbarDropdownMenuLink[aria-expanded="true"] img {
+    filter: brightness(80%);
+}
 
 .nav-facebook-button {
     background-color: transparent;
