@@ -26,15 +26,30 @@ function showSessionModal(session) {
     );
     $("div.modal-description>.description").empty();
   }
-
+  
+  // organiser and speaker
+  $("div.modal-organiser>.info").text(session['organiser']['name']);
+  if (session['speakername']) {
+    $("div.modal-speaker>").css("display", "inline-block");
+    $("div.modal-speaker>.info").text(session['speakername']);
+  } else {
+    $("div.modal-speaker>").css("display", "none");
+  }
+  
   // announcement
   let announcement = session["mostRecentAnnouncement"];
   if (announcement) {
+    $("div.modal-announcement").css("display", "block");
+    
     let author = announcement["author"];
+    let announcementDate = moment(announcement["timestamp"]);
+    
     $("img.profile-picture").attr("src", author["profilepicpath"]);
     $("div.organiser").text(author["name"]);
-    let announcementDate = moment(announcement["timestamp"]);
     $("div.announcement-date").text(announcementDate.format("DD/MM/YY"));
+    $("div.announcement-text").text(announcement['text']);
+  } else {
+    $("div.modal-announcement").css("display", "none");
   }
 
   // show modal

@@ -187,3 +187,13 @@
     margin-left: 2rem;
     color: var(--text-lighter-gray);
 }
+
+.modal-extra-info {
+    display: flex;
+    margin-top: 1rem;
+    color: var(--text-lighter-gray);
+}
+
+.modal-extra-info div {
+    margin-right: 1rem;
+}
