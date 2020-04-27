@@ -45,9 +45,7 @@
 
                             <!--Profile image with dropdown-->
                             <li class="nav-item dropdown d-none d-sm-inline">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="https://i.pinimg.com/originals/9c/32/4a/9c324a3b2df4cf20f7194b990acff491.jpg" width="30" height="30" class="rounded-circle">
-                                </a>
+                                @await Component.InvokeAsync("ProfilePic")
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Uitloggen</a>
                                 </div>

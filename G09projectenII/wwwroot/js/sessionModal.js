@@ -30,10 +30,17 @@ function showSessionModal(session) {
   // organiser and speaker
   $("div.modal-organiser>.info").text(session['organiser']['name']);
   if (session['speakername']) {
-    $("div.modal-speaker>").css("display", "inline-block");
-    $("div.modal-speaker>.info").text(session['speakername']);
+      $("div.modal-speaker").css("display", "inline-block");
+      $("div.modal-speaker>.info").text(session['speakername']);
+
+      $("div.modal-practical-info > div").removeClass("col-12 col-sm-4");
+      $("div.modal-practical-info > div").addClass("col-12 col-sm-6 col-lg-3");
+
   } else {
-    $("div.modal-speaker>").css("display", "none");
+      $("div.modal-speaker").css("display", "none");
+
+      $("div.modal-practical-info > div").removeClass("col-12 col-sm-6 col-lg-3");
+      $("div.modal-practical-info > div").addClass("col-12 col-sm-4");
   }
   
   // announcement
