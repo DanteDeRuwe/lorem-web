@@ -137,11 +137,18 @@ body {
 }
 
 #navbarDropdownMenuLink img:hover {
+    -moz-filter: brightness(80%);
+    -webkit-filter: brightness(80%);
     filter: brightness(80%);
+    -ms-transition: filter ease .5s;
+    -o-transition: filter ease .5s;
+    -webkit-transition: filter ease .5s;
     transition: filter ease .5s;
 }
 
 #navbarDropdownMenuLink[aria-expanded="true"] img {
+    -moz-filter: brightness(80%);
+    -webkit-filter: brightness(80%);
     filter: brightness(80%);
 }
 

@@ -19,6 +19,8 @@
 }
 
 .panel-heading .session-date {
+    -o-order: 0;
+    -webkit-order: 0;
     order: 0;
     margin-top: .3rem;
     font-size: .7rem;
@@ -29,6 +31,8 @@
 }
 
 .panel-heading .session-time {
+    -o-order: 1;
+    -webkit-order: 1;
     order: 1;
     font-size: .7rem;
     color: var(--text-lighter-gray);
@@ -37,6 +41,8 @@
 }
 
 .panel-heading .session-title {
+    -o-order: 2;
+    -webkit-order: 2;
     order: 2;
     margin-left: 3rem;
     width: 100%;
@@ -50,7 +56,9 @@
     margin-left: .5rem;
 }
 
-.panel-heading .right  {
+.panel-heading .right {
+    -o-order: 3;
+    -webkit-order: 3;
     order: 3;
     display: flex;
     flex-direction: row;
@@ -65,11 +73,14 @@
 
 .panel-heading i {
     -webkit-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
     transition: all 0.5s;
 }
 
 .panel-heading.active i {
     -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 

@@ -60,7 +60,10 @@
     height: 2rem;
     padding: 0;
     margin: 0 .5rem;
+    -ms-border-radius: 50% !important;
     border-radius: 50% !important;
+    -o-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
 
@@ -153,7 +156,9 @@
 }
 
 .modal-announcement img.profile-picture {
+    -webkit-object-fit: cover;
     object-fit: cover;
+    -ms-border-radius: 50%;
     border-radius: 50%;
     width: 5rem;
     height: 5rem;
@@ -161,6 +166,7 @@
 }
 
 .modal-announcement .media-body {
+    -ms-border-radius: 0px 30px 30px 30px;
     border-radius: 0px 30px 30px 30px;
     background: var(--nearly-white);
     padding: 1.2rem;
@@ -199,11 +205,14 @@
 }
 
 .modal-footer {
+    -o-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     display: flex;
 }
 
 .session-free-spaces {
+    -ms-border-radius: 10px;
     border-radius: 10px;
     background: var(--nearly-white);
     padding: 0.6rem;
