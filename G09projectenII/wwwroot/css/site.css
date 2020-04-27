@@ -2,6 +2,7 @@
 
 * {
     /*-primary-blue: #0081C5;*/
+    --primary: #4049a9; /*bootstrap override*/
     --primary-blue: #4049a9;
     --darker-blue: #2d3376;
     --secondary-yellow: #FFEA00;
