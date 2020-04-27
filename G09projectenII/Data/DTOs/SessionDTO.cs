@@ -16,6 +16,8 @@ namespace G09projectenII.Models.DTOs
         public MemberDTO Organiser { get; set; }
         public AnnouncementDTO MostRecentAnnouncement { get; set; }
         public int AvailableRegistrationSpots { get; set; }
+        public int numberOfAttendances { get; set; }
+        public bool hasStarted { get; set; }
 
         public SessionDTO(Session session)
         {
@@ -31,6 +33,8 @@ namespace G09projectenII.Models.DTOs
             Announcement lastAnnouncement = session.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
             AvailableRegistrationSpots = (session.Capacity == null) ? 0 : (int)(session.Capacity - session.SessionRegistrees.Count);
+            numberOfAttendances = session.SessionAttendees.Count;
+            hasStarted = session.SessionState.ToInt() != 0;
         }
     }
 }

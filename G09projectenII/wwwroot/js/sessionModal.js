@@ -11,7 +11,7 @@ function showSessionModal(session) {
   $("div.modal-date>.info").text(startDateTime.format("D MMMM"));
 
   $("div.modal-time>.info").text(
-    `${startDateTime.format("h:mm")} - ${endDateTime.format("h:mm")}`
+    `${startDateTime.format("H:mm")} - ${endDateTime.format("H:mm")}`
   );
 
   $("div.modal-location>.info").text(session["location"]);
@@ -64,13 +64,36 @@ function showSessionModal(session) {
     url: "/Calendar/GetRegistrationStatus?sessionId=" + session['id'],
     contentType: "application/json; charset=utf-8",
     dataType: "json",
-    success: console.log,
+    success: fillFooter,
     error: function() { alert('Server Error'); }
   });
   
-  // available spots
-  $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
+  function fillFooter(info) {
+    if (session['hasStarted']) {
+      $("div.register").css("display", "none");
+      $("div.attendance").css("display", "flex");
+      console.log('hello');
+      if (info['HasAttended']) {
+        $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig");
+      } else {
+        $("span.has-user-attended").html("<i class=\"fas fa-times\"></i> Niet Aanwezig");
+      }
+      $("span.session-attendances").text(`Aantal personen aanwezig: ${session['numberOfAttendances']}`);
 
+    } else {
+      $("div.attendance").css("display", "none");
+      $("div.register").css("display", "flex");
+      if(info['isRegistered']) {
+        $("div.register button").text("Uitschrijven");
+        // set the click behaviour to unregister here
+      } else {
+        $("div.register button").text("Inschrijven");
+        // set the click behaviour to register here
+      }
+      
+      $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
+    }
+  }
   // show modal
   $("#sessionModal").modal();
 }
