@@ -210,17 +210,21 @@
     justify-content: space-between;
     display: flex;
 }
-
-.session-free-spaces {
-    -ms-border-radius: 10px;
-    border-radius: 10px;
-    background: var(--nearly-white);
-    padding: 0.6rem;
-    color: var(--gray)
+.register {
+    display: flex;
+    flex-direction: row;
 }
 
-.btn-light {
-    background: white;
-    border-color: var(--gray);
-    color: var(--gray);
+.register button {
+    z-index: 99;
+}
+
+.session-free-spaces {
+    margin-left: -5px;
+    display: block;
+    border-radius: 0 5px 5px 0;
+    background: var(--nearly-white);
+    padding: 0.5rem;
+    padding-left: 1rem;
+    color: var(--gray)
 }
