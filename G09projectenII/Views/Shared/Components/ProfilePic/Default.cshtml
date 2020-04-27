@@ -1,5 +1,5 @@
 ﻿@model G09projectenII.Models.ViewModels.ProfilePicViewModel
-
-<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <img src="@Model.ProfilePicPath" width="30" height="30" class="rounded-circle">
-</a>
+<img src="@Model.ProfilePicPath"
+     width=@Model.Width
+     height=@Model.Height
+     class="@(Model.Rounded ? "rounded-circle" : "")">
