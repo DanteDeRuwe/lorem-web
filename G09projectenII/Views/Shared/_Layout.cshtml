@@ -31,7 +31,7 @@
                             </li>
                             @if (User.IsInRole("HeadAdmin") || User.IsInRole("Admin")) {
                                 <li class="nav-item nav-seperator">
-                                    <a class="navbar-text">|</a>
+                                    <span class="d-xs-block" />
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Sessions">Sessies Beheren</a>
