@@ -60,7 +60,7 @@ namespace G09projectenII
             services.AddControllersWithViews();
 
             services.AddAuthorization(options => {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("HeadAmin", "Admin"));
             });
         }
 
