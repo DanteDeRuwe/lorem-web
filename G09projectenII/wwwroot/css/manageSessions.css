@@ -27,7 +27,7 @@
     color: var(--text-lighter-gray);
     text-transform: uppercase;
     float: left;
-    width: 6rem;
+    width: 5rem;
 }
 
 .panel-heading .session-time {
@@ -35,16 +35,16 @@
     -webkit-order: 1;
     order: 1;
     font-size: .7rem;
-    color: var(--text-lighter-gray);
     margin-left: .5rem;
-    width: 6rem;
+    color: var(--text-lighter-gray);
+    width: 4rem;
 }
 
 .panel-heading .session-title {
     -o-order: 2;
     -webkit-order: 2;
     order: 2;
-    margin-left: 3rem;
+    margin-left: 2rem;
     width: 100%;
 }
 
@@ -111,8 +111,8 @@
 
 
 .panel-body {
-    padding-left: 13.8rem;
-    padding-right: 4.5rem;
+    padding-left: 9.5rem;
+    padding-right: 4.7rem;
 }
 
 .panel-body .session-description {
