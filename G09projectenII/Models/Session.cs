@@ -27,10 +27,6 @@ namespace G09projectenII.Models
         public ICollection<Announcement> Announcements { get; set; }
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
         public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
-
-        public int AvailableRegistrationSpots => (Capacity == null) ? 0 : (int)(Capacity - SessionRegistrees.Count);
-        public Announcement MostRecentAnnouncement => Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
-
         public SessionState SessionState { get; set; }
 
         public Session()
