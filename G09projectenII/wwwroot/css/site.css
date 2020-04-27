@@ -128,6 +128,15 @@ body {
     OWN STYLES
 */
 
+#navbarDropdownMenuLink::after {
+    display: none;
+}
+
+#navbarDropdownMenuLink img:hover {
+    filter: brightness(80%);
+    transition: filter ease .5s;
+}
+
 
 .nav-facebook-button {
     background-color: transparent;
