@@ -83,7 +83,14 @@ function showSessionModal(session) {
     } else {
       $("div.attendance").css("display", "none");
       $("div.register").css("display", "flex");
-      // available spots
+      if(info['isRegistered']) {
+        $("div.register button").text("Uitschrijven");
+        // set the click behaviour to unregister here
+      } else {
+        $("div.register button").text("Inschrijven");
+        // set the click behaviour to register here
+      }
+      
       $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
     }
   }
