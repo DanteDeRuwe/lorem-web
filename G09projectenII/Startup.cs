@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace G09projectenII
 {
@@ -57,6 +58,10 @@ namespace G09projectenII
             services.AddScoped<IMemberRepository, MemberRepository>();
 
             services.AddControllersWithViews();
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

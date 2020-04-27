@@ -1,10 +1,12 @@
 ﻿using G09projectenII.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace G09projectenII.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {
         private readonly ISessionRepository _sessionRepository;

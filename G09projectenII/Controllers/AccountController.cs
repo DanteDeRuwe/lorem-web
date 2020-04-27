@@ -1,4 +1,5 @@
-﻿using G09projectenII.Models.Repository_Models;
+﻿using G09projectenII.Models;
+using G09projectenII.Models.Repository_Models;
 using G09projectenII.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +33,34 @@ namespace G09projectenII.Controllers
                 if (_memberRepository.GetAll().Any(m => m.Username == login.Username
                 && BCr.Verify(login.Password, m.Password)))
                 {
-                    ClaimsIdentity identity = new ClaimsIdentity("User Identity");
+                    Member user = _memberRepository.GetAll().FirstOrDefault(m => m.Username == login.Username);
+                    ClaimsIdentity identity;
+                    string role;
+                    switch(user.Membertype)
+                    {
+                        case 0:
+                            identity = new ClaimsIdentity("User Identity");
+                            role = "User";
+                            break;
+
+                        case 1:
+                            identity = new ClaimsIdentity("Admin Identity");
+                            role = "Admin";
+                            break;
+
+                        case 2:
+                            identity = new ClaimsIdentity("HeadAmin Identity");
+                            role = "HeadAmin";
+                            break;
+
+                        default:
+                            identity = new ClaimsIdentity("User Identity");
+                            role = "User";
+                            break;
+                    }
+                    
                     identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role));
 
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                     HttpContext.SignInAsync(principal, new AuthenticationProperties
