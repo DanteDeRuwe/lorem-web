@@ -96,6 +96,8 @@ function showSessionModal(session) {
               $("div.register button").text(`Inschrijven nog niet mogelijk`);
               $("span.session-free-spaces").css("display", "none");
           } else {
+              $("span.session-free-spaces").css("display", "block");
+              $("div.register button").prop('disabled', false);
               $("div.register button").text("Inschrijven");
               $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
           }
