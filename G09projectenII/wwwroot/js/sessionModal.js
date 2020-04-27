@@ -51,6 +51,15 @@ function showSessionModal(session) {
   } else {
     $("div.modal-announcement").css("display", "none");
   }
+
+  $.ajax({
+    type: "GET",
+    url: "/Calendar/GetRegistrationStatus?sessionId=" + session['id'],
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: console.log,
+    error: function() { alert('Server Error'); }
+  });
   
   // available spots
   $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
