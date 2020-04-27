@@ -1,4 +1,3 @@
-using G09projectenII.Models;
 using G09projectenII.Models.Repository_Models;
 using G09projectenII.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -15,15 +14,9 @@ namespace G09projectenII.Controllers
     {
         private readonly IMemberRepository _memberRepository;
 
-        public AccountController(IMemberRepository memberRepository)
-        {
-            _memberRepository = memberRepository;
-        }
+        public AccountController(IMemberRepository memberRepository) => _memberRepository = memberRepository;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
@@ -33,32 +26,17 @@ namespace G09projectenII.Controllers
                 if (_memberRepository.GetAll().Any(m => m.Username == login.Username
                 && BCr.Verify(login.Password, m.Password)))
                 {
-                    Member user = _memberRepository.GetAll().FirstOrDefault(m => m.Username == login.Username);
-                    ClaimsIdentity identity;
-                    string role;
-                    switch(user.Membertype)
+                    var user = _memberRepository.GetAll().FirstOrDefault(m => m.Username == login.Username);
+
+                    string role = user.Membertype switch
                     {
-                        case 0:
-                            identity = new ClaimsIdentity("User Identity");
-                            role = "User";
-                            break;
+                        0 => "User",
+                        1 => "Admin",
+                        2 => "HeadAdmin",
+                        _ => "User"
+                    };
+                    ClaimsIdentity identity = new ClaimsIdentity(role + " Identity");
 
-                        case 1:
-                            identity = new ClaimsIdentity("Admin Identity");
-                            role = "Admin";
-                            break;
-
-                        case 2:
-                            identity = new ClaimsIdentity("HeadAmin Identity");
-                            role = "HeadAmin";
-                            break;
-
-                        default:
-                            identity = new ClaimsIdentity("User Identity");
-                            role = "User";
-                            break;
-                    }
-                    
                     identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
                     identity.AddClaim(new Claim(ClaimTypes.Role, role));
 
