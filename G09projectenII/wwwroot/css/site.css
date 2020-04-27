@@ -65,9 +65,15 @@ a {
     border-color: #1861ac;
 }
 
-    .btn-primary:hover {
-        background-color: var(--darker-blue);
-    }
+.btn-primary:hover:not([disabled]) {
+    background-color: var(--darker-blue);
+}
+
+.btn-primary[disabled] {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+    
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;

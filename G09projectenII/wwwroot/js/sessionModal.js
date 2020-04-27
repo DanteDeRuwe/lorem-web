@@ -91,11 +91,18 @@ function showSessionModal(session) {
         $("div.register button").text("Uitschrijven");
         // set the click behaviour to unregister here
       } else {
-        $("div.register button").text("Inschrijven");
+          if (!session["isOpen"]) {
+              $("div.register button").prop('disabled', true);
+              $("div.register button").text(`Inschrijven nog niet mogelijk`);
+              $("span.session-free-spaces").css("display", "none");
+          } else {
+              $("div.register button").text("Inschrijven");
+              $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
+          }
         // set the click behaviour to register here
       }
       
-      $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
+      
     }
   }
   // show modal
