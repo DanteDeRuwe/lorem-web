@@ -82,7 +82,7 @@ function showSessionModal(session) {
             .addClass("badge-not-attended")
             .removeClass("badge-attended");
       }
-      $("span.session-attendances").text(`# Aanwezig: ${session['numberOfAttendances']}`);
+      $("span.session-attendances").text(`# Aanwezig: ${session['numberOfAttendees']}`);
 
     } else {
       $("div.attendance").css("display", "none");

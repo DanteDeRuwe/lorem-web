@@ -16,8 +16,9 @@ namespace G09projectenII.Models.DTOs
         public MemberDTO Organiser { get; set; }
         public AnnouncementDTO MostRecentAnnouncement { get; set; }
         public int AvailableRegistrationSpots { get; set; }
-        public int numberOfAttendances { get; set; }
-        public bool hasStarted { get; set; }
+        public int NumberOfAttendees { get; set; }
+        public bool HasStarted { get; set; }
+        public bool IsOpen { get; set; }
 
         public SessionDTO(Session session)
         {
@@ -30,11 +31,12 @@ namespace G09projectenII.Models.DTOs
             Speakername = session.Speakername;
             Externallink = session.Externallink;
             Organiser = new MemberDTO(session.Member);
-            Announcement lastAnnouncement = session.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
+            var lastAnnouncement = session.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
             AvailableRegistrationSpots = (session.Capacity == null) ? 0 : (int)(session.Capacity - session.SessionRegistrees.Count);
-            numberOfAttendances = session.SessionAttendees.Count;
-            hasStarted = session.SessionState.ToInt() != 0;
+            NumberOfAttendees = session.SessionAttendees.Count;
+            HasStarted = session.SessionState.ToInt() > 1;
+            IsOpen = session.SessionState.ToInt() == 1;
         }
     }
 }
