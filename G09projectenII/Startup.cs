@@ -38,6 +38,7 @@ namespace G09projectenII
                  .AddCookie("CookieAuthentication", config =>
                  {
                      config.Cookie.Name = "UserLoginCookie";
+                     config.SlidingExpiration = true;
                      config.LoginPath = "/Account";
                  });
 
