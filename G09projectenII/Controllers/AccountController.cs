@@ -16,7 +16,11 @@ namespace G09projectenII.Controllers
 
         public AccountController(IMemberRepository memberRepository) => _memberRepository = memberRepository;
 
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Calendar");
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
