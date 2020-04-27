@@ -48,6 +48,15 @@
             
             @foreach (var s in Model)
             {
+                string eventColor = s.SessionState switch
+                {
+                    CreatedSessionState css => "#4049a9",
+                    OpenSessionState oss => "#5cb85c",
+                    ClosedSessionState css => "#f0ad4e",
+                    FinishedSessionState fss => "#d9534f",
+                    _ => "#4049a9"
+                };
+
                 <text>
                     starttime = new Date(@s.StartDateTime.Year,
                         @s.StartDateTime.Month-1, //stupid js months -_-
@@ -67,6 +76,8 @@
                         end: endtime,
                         allDay: false,
                         id: '@s.Id',
+                        backgroundColor: '@eventColor',
+                        borderColor: '@eventColor'
                     });
                 </text>
             }

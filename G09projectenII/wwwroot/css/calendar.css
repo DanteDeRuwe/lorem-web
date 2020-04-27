@@ -41,14 +41,10 @@
     white-space: normal;
 }
 
-.fc-event {
-    background-color: var(--primary-blue) !important;
-    border-color: var(--primary-blue) !important;
-}
+
 
 .fc-event:hover {
-    background-color: var(--darker-blue) !important;
-    border-color: var(--darker-blue) !important;
+    filter: brightness(.95);
     cursor: pointer;
 }
 
