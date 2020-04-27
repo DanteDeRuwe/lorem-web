@@ -227,3 +227,23 @@
     padding-left: 1rem;
     color: var(--gray)
 }
+
+.badge-attendance {
+    padding: 0.5rem;
+}
+
+.badge-attended {
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.badge-not-attended {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.session-attendances {
+    border-radius: 5px;
+    padding: 0.3rem;
+    background-color: var(--nearly-white)
+}
