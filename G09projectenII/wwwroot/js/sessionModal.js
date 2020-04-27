@@ -11,7 +11,7 @@ function showSessionModal(session) {
   $("div.modal-date>.info").text(startDateTime.format("D MMMM"));
 
   $("div.modal-time>.info").text(
-    `${startDateTime.format("h:mm")} - ${endDateTime.format("h:mm")}`
+    `${startDateTime.format("H:mm")} - ${endDateTime.format("H:mm")}`
   );
 
   $("div.modal-location>.info").text(session["location"]);
