@@ -11,7 +11,7 @@ function showSessionModal(session) {
   $("div.modal-date>.info").text(startDateTime.format("D MMMM"));
 
   $("div.modal-time>.info").text(
-    `${startDateTime.format("h:mm")} - ${endDateTime.format("h:mm")}`
+    `${startDateTime.format("H:mm")} - ${endDateTime.format("H:mm")}`
   );
 
   $("div.modal-location>.info").text(session["location"]);
@@ -71,20 +71,38 @@ function showSessionModal(session) {
   function fillFooter(info) {
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
-      $("div.attendance").css("display", "flex");
+      $("div.attendance").css("display", "block");
       console.log('hello');
       if (info['HasAttended']) {
-        $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig");
+        $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig")
+            .addClass("badge-attended")
+            .removeClass("badge-not-attended");
       } else {
-        $("span.has-user-attended").html("<i class=\"fas fa-times\"></i> Niet Aanwezig");
+        $("span.has-user-attended").html("<i class=\"fas fa-times\"></i> Niet Aanwezig")
+            .addClass("badge-not-attended")
+            .removeClass("badge-attended");
       }
-      $("span.session-attendances").text(`Aantal personen aanwezig: ${session['numberOfAttendances']}`);
+      $("span.session-attendances").text(`# Aanwezig: ${session['numberOfAttendees']}`);
 
     } else {
       $("div.attendance").css("display", "none");
       $("div.register").css("display", "flex");
-      // available spots
-      $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
+      if(info['isRegistered']) {
+        $("div.register button").text("Uitschrijven");
+        // set the click behaviour to unregister here
+      } else {
+          if (!session["isOpen"]) {
+              $("div.register button").prop('disabled', true);
+              $("div.register button").text(`Inschrijven nog niet mogelijk`);
+              $("span.session-free-spaces").css("display", "none");
+          } else {
+              $("div.register button").text("Inschrijven");
+              $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
+          }
+        // set the click behaviour to register here
+      }
+      
+      
     }
   }
   // show modal

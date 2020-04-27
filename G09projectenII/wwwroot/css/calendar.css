@@ -219,11 +219,31 @@
 }
 
 .session-free-spaces {
-    margin-left: -5px;
+    margin-left: -10px;
     display: block;
-    border-radius: 0 5px 5px 0;
+    border-radius: 5px;
     background: var(--nearly-white);
     padding: 0.5rem;
-    padding-left: 1rem;
+    padding-left: 1.2rem;
     color: var(--gray)
+}
+
+.badge-attendance {
+    padding: 0.5rem;
+}
+
+.badge-attended {
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.badge-not-attended {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.session-attendances {
+    border-radius: 5px;
+    padding: 0.3rem;
+    background-color: var(--nearly-white)
 }

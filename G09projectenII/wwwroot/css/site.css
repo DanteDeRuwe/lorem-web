@@ -24,9 +24,17 @@
 
     Adjusted for weird navbar behaviour
 */
-main {margin-left: calc(100vw - 100%);}
-nav { margin-right: calc(-100vw + 100%); }
-html {overflow-x: hidden;}
+main {
+    margin-left: calc(100vw - 100%);
+}
+
+nav {
+    margin-right: calc(-100vw + 100%);
+}
+
+html {
+    overflow-x: hidden;
+}
 
 
 nav {
@@ -57,9 +65,15 @@ a {
     border-color: #1861ac;
 }
 
-    .btn-primary:hover {
-        background-color: var(--darker-blue);
-    }
+.btn-primary:hover:not([disabled]) {
+    background-color: var(--darker-blue);
+}
+
+.btn-primary[disabled] {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+    
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
@@ -190,5 +204,16 @@ h2 {
 
 hr.solid {
     border-top: 0.1rem solid;
-    color:var(--light-gray);
+    color: var(--light-gray);
+}
+
+.badge-membertype {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 1px solid transparent;
+    border-color: var(--primary-blue);
+}
+
+.dropdown-header {
+    color: var(--primary-blue)
 }
