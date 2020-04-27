@@ -29,7 +29,7 @@
                 eventClick(info) {
                     $.ajax({
                         type: "GET",
-                        url: "/Calendar/Test?id=" + info.event.id,
+                        url: "/Calendar/GetSessionBy?id=" + info.event.id,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: showSessionModal,
