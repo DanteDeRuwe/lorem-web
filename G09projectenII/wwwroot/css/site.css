@@ -22,8 +22,11 @@
     (vw includes the scrollbar and % doesn't)
     https://aykevl.nl/2014/09/fix-jumping-scrollbar
 
+    Adjusted for weird navbar behaviour
 */
-html { margin-left: calc(100vw - 100%); }
+main {margin-left: calc(100vw - 100%);}
+nav { margin-right: calc(-100vw + 100%); }
+html {overflow-x: hidden;}
 
 
 nav {

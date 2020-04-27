@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -63,14 +63,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-    </div>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <main role="main" class="pb-3">
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+        </div>
+        <div class="container">
+
             @RenderBody()
-        </main>
-    </div>
+
+        </div>
+    </main>
+
     <footer class="border-top footer">
         <p class="text-center text-muted>">Made with ♥ by the Code Commanders</p>
     </footer>
