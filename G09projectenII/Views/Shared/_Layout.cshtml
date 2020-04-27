@@ -29,12 +29,17 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Kalender</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Sessions">Sessies beheren</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Attendances">Aanwezigheden</a>
-                            </li>
+                            @if (User.IsInRole("HeadAdmin") || User.IsInRole("Admin")) {
+                                <li class="nav-item nav-seperator">
+                                    <a class="navbar-text">|</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Sessions">Sessies Beheren</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Attendances">Aanwezigheden</a>
+                                </li>
+                            }
                         </ul>
                         <ul class="navbar-nav">
 
