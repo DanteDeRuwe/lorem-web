@@ -14,7 +14,6 @@ const loadLegend = () => {
 
 
 function showSessionModal(session) {
-  console.log(session);
   // title
   $("div.modal-header>.title").text(session.title);
 
@@ -87,7 +86,6 @@ function showSessionModal(session) {
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
       $("div.attendance").css("display", "block");
-      console.log('hello');
       if (info['HasAttended']) {
         $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig")
             .addClass("badge-attended")
