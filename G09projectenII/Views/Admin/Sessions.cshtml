@@ -11,6 +11,11 @@
 
 <section>
     <div class="panel-group sessions-panel" id="accordion" role="tablist" aria-multiselectable="true">
+        
+        @if (!Model.Any() || Model == null)
+        {
+            <p class="text-muted text-center">U heeft geen sessies om te beheren...</p>
+        }
 
         @foreach (var s in Model)
         {
