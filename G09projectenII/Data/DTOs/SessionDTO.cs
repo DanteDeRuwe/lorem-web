@@ -31,12 +31,12 @@ namespace G09projectenII.Models.DTOs
             Speakername = session.Speakername;
             Externallink = session.Externallink;
             Organiser = new MemberDTO(session.Member);
-            var lastAnnouncement = session.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
+            var lastAnnouncement = session.GetMostRecentAnnouncement();
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
-            AvailableRegistrationSpots = (session.Capacity - session.SessionRegistrees.Count);
-            NumberOfAttendees = session.SessionAttendees.Count;
-            HasStarted = session.SessionState.ToInt() > 1;
-            IsOpen = session.SessionState.ToInt() == 1;
+            AvailableRegistrationSpots = session.GetAvailableRegistrationSpots();
+            NumberOfAttendees = session.GetNumberOfAttendees();
+            HasStarted = session.hasStarted();
+            IsOpen = session.IsOpen();
         }
     }
 }

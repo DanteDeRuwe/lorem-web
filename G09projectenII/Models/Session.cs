@@ -45,5 +45,15 @@ namespace G09projectenII.Models
             int nextStateIndex = SessionState.ToInt() + 1;
             SessionState = SessionState.FromInt(nextStateIndex <= 3 ? nextStateIndex : 3);
         }
+
+        public int GetAvailableRegistrationSpots() => (this.Capacity - this.SessionRegistrees.Count);
+
+        public Announcement GetMostRecentAnnouncement() => this.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
+
+        public int GetNumberOfAttendees() => this.SessionAttendees.Count;
+        
+        public bool hasStarted() => this.SessionState.ToInt() > 1;
+        
+        public bool IsOpen() => this.SessionState.ToInt() == 1;
     }
 }

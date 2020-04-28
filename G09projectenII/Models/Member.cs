@@ -26,6 +26,8 @@ namespace G09projectenII.Models
             SessionRegistrees = new HashSet<SessionRegistrees>();
         }
 
+        public string GetFullName() => $"{this.Firstname} {this.Lastname}";
+
         public override string ToString() => string.Join(" | ", MemberId, Username, Firstname, Lastname, Memberstatus, Membertype);
     }
 }
