@@ -37,12 +37,12 @@
                     <div class="right">
 
                         @{
-                            string color = s.SessionState.ToInt() switch { 0 => "success", 1 => "warning", 2 => "danger", _ => "primary" };
-                            string text = s.SessionState.ToInt() switch { 0 => "Openen", 1 => "Sluiten", 2 => "Afsluiten", _ => "" };
+                            string sessionStateColor = s.SessionState.ToInt() switch { 0 => "success", 1 => "warning", 2 => "danger", _ => "primary" };
+                            string sessionStateVerb = s.SessionState.ToInt() switch { 0 => "Openen", 1 => "Sluiten", 2 => "Afsluiten", _ => "" };
 
                         }
                         <!--State Change Button-->
-                        <button onclick="openConfirmationModal(@s.Id)" class="session-state-change btn btn-outline-@color">@text</button>
+                        <button onclick="$('#confirmation-modal-@s.Id').modal()" class="session-state-change btn btn-outline-@sessionStateColor">@sessionStateVerb</button>
 
                         <!--Chevron-->
                         <a class="collapse-arrow collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
@@ -60,15 +60,27 @@
                             <!--Description-->
                             <div class="session-description"><b>Beschrijving:</b><p>@Html.Raw(s.Description)</p></div>
                         }
-                        <div class="session-practical-info">
-                            @if (!string.IsNullOrEmpty(s.Location))
-                            {
-                                <!--Location-->
-                                <span class="session-location"><i class="fas fa-map-marker-alt"></i>@Html.Raw(s.Location)</span>
-                            }
-                            <!--Organizer-->
-                            <span><i class="fas fa-user"></i>@Html.Raw(@s.Member.Firstname) @Html.Raw(@s.Member.Lastname)</span>
-                        </div>
+                    <div class="session-practical-info">
+                        @if (!string.IsNullOrEmpty(s.Location))
+                        {
+                            <!--Location-->
+                            <span><i class="fas fa-map-marker-alt"></i>@Html.Raw(s.Location)</span>
+                        }
+                        <!--Organizer-->
+                        <span><i class="fas fa-user"></i>@Html.Raw(s.Member.Firstname) @Html.Raw(s.Member.Lastname)</span>
+
+                        
+
+                        @{
+                            string extraInfoText = s.SessionState switch {
+                                CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
+                                OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
+                                ClosedSessionState css => $"{s.GetNumberOfAttendees()}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
+                                _ => ""
+                            };
+                        }
+                        <span> <i class="fas fa-pencil-alt"></i> @extraInfoText </span>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -84,12 +96,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Bent u zeker dat u de sessie <em>"@s.Title.Trim()"</em> wilt @text.ToLower()?</p>
+                            <p>Bent u zeker dat u de sessie <em>"@s.Title.Trim()"</em> wilt @sessionStateVerb.ToLower()?</p>
                         </div>
                         <div class="modal-footer">
                             <form asp-action="ChangeSessionState" asp-route-id="@s.Id" method="post">
                                 <!--State Change Button-->
-                                <button type="submit" class="btn btn-outline-@color">@text</button>
+                                <button type="submit" class="btn btn-outline-@sessionStateColor">@sessionStateVerb</button>
                             </form>
                             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                         </div>
@@ -100,9 +112,3 @@
         }
     </div>
 </section>
-
-
-
-
-
-<script src="~/js/manageSessions.js"></script>

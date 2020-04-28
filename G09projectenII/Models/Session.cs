@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,6 +28,7 @@ namespace G09projectenII.Models
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
         public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
         public SessionState SessionState { get; set; }
+        public int NumberOfRegistrees => SessionRegistrees.Count();
 
         public Session()
         {
