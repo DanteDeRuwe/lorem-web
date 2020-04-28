@@ -11,13 +11,22 @@
 <script src="~/lib/moment/moment-with-locales.min.js"></script>
 <script src="~/js/calendar.js"></script>
 
-<link href="~/lib/fullcalendar/core/main.css" rel="stylesheet"/>
-<link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet"/>
-<link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet"/>
+<link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
+<link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
+<link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
 <link href="~/css/calendar.css" rel="stylesheet">
+
 
 <!-- Calendar -->
 <div id="calendar"></div>
+
+<!--Legend For Mobile-->
+<div id="calendar-legend" class="d-block d-md-none text-center mt-3">
+    <span class="legend-item"><span class="text-primary">&bull;</span>Aangemaakt</span>
+    <span class="legend-item"><span class="text-success">&bull;</span>Open</span>
+    <span class="legend-item"><span class="text-warning">&bull;</span>Gesloten</span>
+    <span class="legend-item"><span class="text-danger">&bull;</span>Afgelopen</span>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="sessionModal" role="dialog">
@@ -60,23 +69,23 @@
                         <span class="icon"><i class="fas fa-user"></i></span>
                         <span class="info"></span>
                     </div>
-                    
+
                 </div>
                 <div class="modal-announcement">
                     <hr class="solid">
                     <h1>Meest recente aankondiging</h1>
                     <div class="media">
-                      <img src="" class="profile-picture" alt="">
-                      <div class="media-body">
-                          <div class="body-left">
-                              <div class="organiser"></div>
-                              <div class="organiser-subtitle">organizator</div>
-                              <div class="announcement-text"></div>
-                          </div>
-                          <div class="body-right">
-                              <div class="announcement-date"></div>
-                          </div> 
-                      </div>
+                        <img src="" class="profile-picture" alt="">
+                        <div class="media-body">
+                            <div class="body-left">
+                                <div class="organiser"></div>
+                                <div class="organiser-subtitle">organizator</div>
+                                <div class="announcement-text"></div>
+                            </div>
+                            <div class="body-right">
+                                <div class="announcement-date"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,7 +105,8 @@
 </div>
 
 <script>
-        document.addEventListener('DOMContentLoaded', function () {
+    let firstEventLoaded = false;
+    document.addEventListener('DOMContentLoaded', function () {
             let calendarEl = document.getElementById('calendar');
 
             let calendar = new FullCalendar.Calendar(calendarEl, {
@@ -113,6 +123,10 @@
                         error: function() { alert('Server Error'); }
                     });
                 },
+                datesRender(info) {
+                    console.log("renderrrr");
+                    loadLegend();
+                },
                 eventTimeFormat: {
                     hour: '2-digit',
                     minute: '2-digit',
@@ -120,9 +134,9 @@
                 },
                 defaultView: 'dayGridMonth'
             });
-            
+
             let starttime, endtime;
-            
+
             @foreach (var s in Model)
             {
                 string eventColor = s.SessionState switch
@@ -158,7 +172,7 @@
                     });
                 </text>
             }
-            
+
             calendar.render();
         });
 </script>
