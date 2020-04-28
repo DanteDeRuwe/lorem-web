@@ -55,7 +55,12 @@
     white-space: normal;
 }
 
-
+@media (max-width: 576px) {
+    .fc-day-grid-event .fc-content {
+        font-size: .5rem;
+        white-space: nowrap;
+    }
+}
 
 .fc-event:hover {
     filter: brightness(.95);
