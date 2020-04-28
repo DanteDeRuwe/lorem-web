@@ -5,20 +5,20 @@ namespace G09projectenII.Models.DTOs
 {
     public class SessionDTO
     {
-        public decimal Id { get; set; }
-        public string Description { get; set; }
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
-        public string Externallink { get; set; }
-        public string Location { get; set; }
-        public string Speakername { get; set; }
-        public string Title { get; set; }
-        public MemberDTO Organiser { get; set; }
-        public AnnouncementDTO MostRecentAnnouncement { get; set; }
-        public int AvailableRegistrationSpots { get; set; }
-        public int NumberOfAttendees { get; set; }
-        public bool HasStarted { get; set; }
-        public bool IsOpen { get; set; }
+        public decimal Id { get; }
+        public string Description { get; }
+        public DateTime StartDateTime { get; }
+        public DateTime EndDateTime { get; }
+        public string Externallink { get; }
+        public string Location { get; }
+        public string Speakername { get; }
+        public string Title { get; }
+        public MemberDTO Organiser { get; }
+        public AnnouncementDTO MostRecentAnnouncement { get; }
+        public int AvailableRegistrationSpots { get; }
+        public int NumberOfAttendees { get; }
+        public bool HasStarted { get; }
+        public bool IsOpen { get; }
 
         public SessionDTO(Session session)
         {
