@@ -9,7 +9,7 @@ namespace G09projectenII.Models
         public string Lastname { get; set; }
         public int Memberstatus { get; set; }
         public int Membertype { get; set; }
-        public string? Profilepicpath { get; set; }
+        public string Profilepicpath { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 
@@ -25,6 +25,8 @@ namespace G09projectenII.Models
             SessionAttendees = new HashSet<SessionAttendees>();
             SessionRegistrees = new HashSet<SessionRegistrees>();
         }
+
+        public string GetFullName() => $"{this.Firstname} {this.Lastname}";
 
         public override string ToString() => string.Join(" | ", MemberId, Username, Firstname, Lastname, Memberstatus, Membertype);
     }

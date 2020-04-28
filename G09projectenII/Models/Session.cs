@@ -10,16 +10,16 @@ namespace G09projectenII.Models
         //Properties
         public decimal Id { get; set; }
         public int Capacity { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
-        public string? Externallink { get; set; }
+        public string Externallink { get; set; }
         public string Location { get; set; }
-        public string? Speakername { get; set; }
+        public string Speakername { get; set; }
         public string Title { get; set; }
         public decimal CalendarId { get; set; }
         public decimal MemberId { get; set; }
-        public string? Type { get; set; }
+        public string Type { get; set; }
 
         // Nav Properties
         public SessionCalendar Calendar { get; set; }
@@ -45,5 +45,15 @@ namespace G09projectenII.Models
             int nextStateIndex = SessionState.ToInt() + 1;
             SessionState = SessionState.FromInt(nextStateIndex <= 3 ? nextStateIndex : 3);
         }
+
+        public int GetAvailableRegistrationSpots() => (this.Capacity - this.SessionRegistrees.Count);
+
+        public Announcement GetMostRecentAnnouncement() => this.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
+
+        public int GetNumberOfAttendees() => this.SessionAttendees.Count;
+        
+        public bool hasStarted() => this.SessionState.ToInt() > 1;
+        
+        public bool IsOpen() => this.SessionState.ToInt() == 1;
     }
 }
