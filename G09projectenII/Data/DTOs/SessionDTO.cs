@@ -31,12 +31,12 @@ namespace G09projectenII.Models.DTOs
             Speakername = session.Speakername;
             Externallink = session.Externallink;
             Organiser = new MemberDTO(session.Member);
-            var lastAnnouncement = session.GetMostRecentAnnouncement();
+            var lastAnnouncement = session.MostRecentAnnouncement;
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
-            AvailableRegistrationSpots = session.GetAvailableRegistrationSpots();
-            NumberOfAttendees = session.GetNumberOfAttendees();
-            HasStarted = session.hasStarted();
-            IsOpen = session.IsOpen();
+            AvailableRegistrationSpots = session.AvailableRegistrationSpots;
+            NumberOfAttendees = session.NumberOfAttendees;
+            HasStarted = session.hasStarted;
+            IsOpen = session.IsOpen;
         }
     }
 }

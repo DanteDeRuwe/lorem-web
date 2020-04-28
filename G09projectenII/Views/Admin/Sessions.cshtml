@@ -75,7 +75,7 @@
                             string extraInfoText = s.SessionState switch {
                                 CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
                                 OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
-                                ClosedSessionState css => $"{s.GetNumberOfAttendees()}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
+                                ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
                                 _ => ""
                             };
                         }

@@ -28,7 +28,18 @@ namespace G09projectenII.Models
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
         public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
         public SessionState SessionState { get; set; }
+        
+        // Calculated Properties
         public int NumberOfRegistrees => SessionRegistrees.Count();
+        public int AvailableRegistrationSpots => (this.Capacity - this.SessionRegistrees.Count);
+
+        public Announcement MostRecentAnnouncement => this.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
+
+        public int NumberOfAttendees => this.SessionAttendees.Count;
+        
+        public bool hasStarted => this.SessionState.ToInt() > 1;
+        
+        public bool IsOpen => this.SessionState.ToInt() == 1;
 
         public Session()
         {
@@ -46,15 +57,6 @@ namespace G09projectenII.Models
             int nextStateIndex = SessionState.ToInt() + 1;
             SessionState = SessionState.FromInt(nextStateIndex <= 3 ? nextStateIndex : 3);
         }
-
-        public int GetAvailableRegistrationSpots() => (this.Capacity - this.SessionRegistrees.Count);
-
-        public Announcement GetMostRecentAnnouncement() => this.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
-
-        public int GetNumberOfAttendees() => this.SessionAttendees.Count;
         
-        public bool hasStarted() => this.SessionState.ToInt() > 1;
-        
-        public bool IsOpen() => this.SessionState.ToInt() == 1;
     }
 }
