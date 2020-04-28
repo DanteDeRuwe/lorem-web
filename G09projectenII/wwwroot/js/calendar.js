@@ -52,7 +52,7 @@ function showSessionModal(session) {
     let announcementDate = moment(announcement["timestamp"]);
     
     $("img.profile-picture").attr("src", author["profilepicpath"]);
-    $("div.organiser").text(author["name"]);
+    $("div.organiser>.name").text(author["name"]);
     $("div.announcement-date").text(announcementDate.format("DD/MM/YY"));
     $("div.announcement-text").text(announcement['text']);
   } else {
