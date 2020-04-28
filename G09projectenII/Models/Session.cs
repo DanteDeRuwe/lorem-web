@@ -9,16 +9,16 @@ namespace G09projectenII.Models
 
         //Properties
         public decimal Id { get; set; }
-        public int? Capacity { get; set; }
+        public int Capacity { get; set; }
         public string? Description { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string? Externallink { get; set; }
-        public string? Location { get; set; }
+        public string Location { get; set; }
         public string? Speakername { get; set; }
-        public string? Title { get; set; }
-        public decimal? CalendarId { get; set; }
-        public decimal? MemberId { get; set; }
+        public string Title { get; set; }
+        public decimal CalendarId { get; set; }
+        public decimal MemberId { get; set; }
         public string? Type { get; set; }
 
         // Nav Properties

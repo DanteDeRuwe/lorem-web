@@ -33,7 +33,7 @@ namespace G09projectenII.Models.DTOs
             Organiser = new MemberDTO(session.Member);
             var lastAnnouncement = session.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
-            AvailableRegistrationSpots = (session.Capacity == null) ? 0 : (int)(session.Capacity - session.SessionRegistrees.Count);
+            AvailableRegistrationSpots = (session.Capacity - session.SessionRegistrees.Count);
             NumberOfAttendees = session.SessionAttendees.Count;
             HasStarted = session.SessionState.ToInt() > 1;
             IsOpen = session.SessionState.ToInt() == 1;

@@ -8,7 +8,7 @@ namespace G09projectenII.Models
         public DateTime Timestamp { get; set; }
         public string Title { get; set; }
         public decimal SessionId { get; set; }
-        public decimal? AuthorMemberId { get; set; }
+        public decimal AuthorMemberId { get; set; }
         public string Text { get; set; }
 
         public Member Author { get; set; }
