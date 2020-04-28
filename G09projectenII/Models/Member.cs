@@ -9,7 +9,7 @@ namespace G09projectenII.Models
         public string Lastname { get; set; }
         public int Memberstatus { get; set; }
         public int Membertype { get; set; }
-        public string? Profilepicpath { get; set; }
+        public string Profilepicpath { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 

@@ -6,13 +6,13 @@ namespace G09projectenII.Models.DTOs
     public class SessionDTO
     {
         public decimal Id { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
-        public string? Externallink { get; set; }
-        public string? Location { get; set; }
-        public string? Speakername { get; set; }
-        public string? Title { get; set; }
+        public string Externallink { get; set; }
+        public string Location { get; set; }
+        public string Speakername { get; set; }
+        public string Title { get; set; }
         public MemberDTO Organiser { get; set; }
         public AnnouncementDTO MostRecentAnnouncement { get; set; }
         public int AvailableRegistrationSpots { get; set; }
