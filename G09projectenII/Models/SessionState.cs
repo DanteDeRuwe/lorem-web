@@ -1,4 +1,6 @@
-﻿namespace G09projectenII.Models
+﻿using System;
+
+namespace G09projectenII.Models
 {
     public abstract class SessionState
     {
@@ -13,6 +15,8 @@
                 OpenSessionState s => 1,
                 ClosedSessionState s => 2,
                 FinishedSessionState s => 3,
+                _ => throw new ArgumentException(),
+
             };
 
         /// <summary>
@@ -24,7 +28,8 @@
                 0 => new CreatedSessionState(),
                 1 => new OpenSessionState(),
                 2 => new ClosedSessionState(),
-                3 => new FinishedSessionState()
+                3 => new FinishedSessionState(),
+                _ => throw new ArgumentException(),
             };
 
         public abstract override string ToString();
