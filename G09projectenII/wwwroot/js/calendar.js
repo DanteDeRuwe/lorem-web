@@ -1,5 +1,19 @@
+const loadLegend = () => {
+    let html = `
+            <!--Legend-->
+            <div id="calendar-legend" class="d-none d-md-block">
+                <span class="legend-item"><span class="text-primary">&bull;</span>Aangemaakt</span>
+                <span class="legend-item"><span class="text-success">&bull;</span>Open</span>
+                <span class="legend-item"><span class="text-warning">&bull;</span>Gesloten</span>
+                <span class="legend-item"><span class="text-danger">&bull;</span>Afgelopen</span>
+            </div>`;
+
+    $(".fc-center").html(html);
+}
+
+
+
 function showSessionModal(session) {
-  console.log(session);
   // title
   $("div.modal-header>.title").text(session.title);
 
@@ -72,7 +86,6 @@ function showSessionModal(session) {
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
       $("div.attendance").css("display", "block");
-      console.log('hello');
       if (info['HasAttended']) {
         $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig")
             .addClass("badge-attended")

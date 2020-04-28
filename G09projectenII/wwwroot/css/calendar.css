@@ -1,4 +1,18 @@
-﻿/* calendar */
+/*calendar legend*/
+
+#calendar-legend .legend-item {
+    font-size: 1rem;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    color: var(--text-lighter-gray);
+    margin-right: 2vw;
+}
+.legend-item > span {
+    margin-right: .2rem;
+}
+
+
+/* calendar */
 
 #calendar {
     -webkit-user-select: none; /* Safari */
@@ -41,7 +55,12 @@
     white-space: normal;
 }
 
-
+@media (max-width: 576px) {
+    .fc-day-grid-event .fc-content {
+        font-size: .5rem;
+        white-space: nowrap;
+    }
+}
 
 .fc-event:hover {
     filter: brightness(.95);
