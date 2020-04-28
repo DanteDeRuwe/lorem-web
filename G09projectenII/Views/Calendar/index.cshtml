@@ -11,81 +11,13 @@
 <script src="~/lib/moment/moment-with-locales.min.js"></script>
 <script src="~/js/sessionModal.js"></script>
 
-
 <link href="~/lib/fullcalendar/core/main.css" rel="stylesheet"/>
 <link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet"/>
 <link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet"/>
 <link href="~/css/calendar.css" rel="stylesheet">
 
-
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let calendarEl = document.getElementById('calendar');
-
-            let calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid', 'timeGrid'],
-                locale: "nl",
-                fixedWeekCount: false,
-                eventClick(info) {
-                    $.ajax({
-                        type: "GET",
-                        url: "/Calendar/GetSessionBy?id=" + info.event.id,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: showSessionModal,
-                        error: function() { alert('Server Error'); }
-                    });
-                },
-                eventTimeFormat: {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    meridiem: false
-                },
-                defaultView: 'dayGridMonth'
-            });
-            
-            let starttime, endtime;
-            
-            @foreach (var s in Model)
-            {
-                string eventColor = s.SessionState switch
-                {
-                    CreatedSessionState css => "#4049a9",
-                    OpenSessionState oss => "#5cb85c",
-                    ClosedSessionState css => "#f0ad4e",
-                    FinishedSessionState fss => "#d9534f",
-                    _ => "#4049a9"
-                };
-
-                <text>
-                    starttime = new Date(@s.StartDateTime.Year,
-                        @s.StartDateTime.Month-1, //stupid js months -_-
-                        @s.StartDateTime.Day.ToString(),
-                        @s.StartDateTime.Hour,
-                        @s.StartDateTime.Minute);
-
-                    endtime = new Date(@s.EndDateTime.Year,
-                        @s.EndDateTime.Month-1, //stupid js months -_-
-                        @s.EndDateTime.Day.ToString(),
-                        @s.EndDateTime.Hour,
-                        @s.EndDateTime.Minute);
-
-                    calendar.addEvent({
-                        title: "@Html.Raw(s.Title)",
-                        start: starttime,
-                        end: endtime,
-                        allDay: false,
-                        id: '@s.Id',
-                        backgroundColor: '@eventColor',
-                        borderColor: '@eventColor'
-                    });
-                </text>
-            }
-            
-            calendar.render();
-        });
-</script>
-
+<!-- Calendar -->
+<div id="calendar"></div>
 
 <!-- Modal -->
 <div class="modal fade" id="sessionModal" role="dialog">
@@ -163,4 +95,70 @@
     </div>
 </div>
 
-<div id="calendar"></div>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let calendarEl = document.getElementById('calendar');
+
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid', 'timeGrid'],
+                locale: "nl",
+                fixedWeekCount: false,
+                eventClick(info) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Calendar/GetSessionBy?id=" + info.event.id,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: showSessionModal,
+                        error: function() { alert('Server Error'); }
+                    });
+                },
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                },
+                defaultView: 'dayGridMonth'
+            });
+            
+            let starttime, endtime;
+            
+            @foreach (var s in Model)
+            {
+                string eventColor = s.SessionState switch
+                {
+                    CreatedSessionState css => "#4049a9",
+                    OpenSessionState oss => "#5cb85c",
+                    ClosedSessionState css => "#f0ad4e",
+                    FinishedSessionState fss => "#d9534f",
+                    _ => "#4049a9"
+                };
+
+                <text>
+                    starttime = new Date(@s.StartDateTime.Year,
+                        @s.StartDateTime.Month-1, //stupid js months -_-
+                        @s.StartDateTime.Day.ToString(),
+                        @s.StartDateTime.Hour,
+                        @s.StartDateTime.Minute);
+
+                    endtime = new Date(@s.EndDateTime.Year,
+                        @s.EndDateTime.Month-1, //stupid js months -_-
+                        @s.EndDateTime.Day.ToString(),
+                        @s.EndDateTime.Hour,
+                        @s.EndDateTime.Minute);
+
+                    calendar.addEvent({
+                        title: "@Html.Raw(s.Title)",
+                        start: starttime,
+                        end: endtime,
+                        allDay: false,
+                        id: '@s.Id',
+                        backgroundColor: '@eventColor',
+                        borderColor: '@eventColor'
+                    });
+                </text>
+            }
+            
+            calendar.render();
+        });
+</script>
