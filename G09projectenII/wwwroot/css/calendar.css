@@ -55,7 +55,12 @@
     white-space: normal;
 }
 
-
+@media (max-width: 576px) {
+    .fc-day-grid-event .fc-content {
+        font-size: .5rem;
+        white-space: nowrap;
+    }
+}
 
 .fc-event:hover {
     filter: brightness(.95);
@@ -179,10 +184,15 @@
     border-radius: 0px 30px 30px 30px;
     background: var(--nearly-white);
     padding: 1.2rem;
-    display: flex;
+    display: block;
 }
 
-.modal-announcement .organiser {
+.modal-announcement .body-top {
+        display: flex;
+    justify-content: space-between;
+}
+
+.modal-announcement .organiser .name {
     color: black;
     margin-bottom: -0.3rem;
 }

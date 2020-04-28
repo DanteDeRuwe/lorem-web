@@ -14,7 +14,6 @@ const loadLegend = () => {
 
 
 function showSessionModal(session) {
-  console.log(session);
   // title
   $("div.modal-header>.title").text(session.title);
 
@@ -67,7 +66,7 @@ function showSessionModal(session) {
     let announcementDate = moment(announcement["timestamp"]);
     
     $("img.profile-picture").attr("src", author["profilepicpath"]);
-    $("div.organiser").text(author["name"]);
+    $("div.organiser>.name").text(author["name"]);
     $("div.announcement-date").text(announcementDate.format("DD/MM/YY"));
     $("div.announcement-text").text(announcement['text']);
   } else {
@@ -87,7 +86,6 @@ function showSessionModal(session) {
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
       $("div.attendance").css("display", "block");
-      console.log('hello');
       if (info['HasAttended']) {
         $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig")
             .addClass("badge-attended")
