@@ -58,5 +58,7 @@ namespace G09projectenII.Controllers
             HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Calendar");
         }
+
+        public ActionResult AccessDenied() => View("AccessDenied");
     }
 }
