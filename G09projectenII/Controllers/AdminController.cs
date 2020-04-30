@@ -20,6 +20,7 @@ namespace G09projectenII.Controllers
             List<Session> nonFinishedSessions =
                 _sessionRepository.GetAll()
                     .Where(s => s.SessionState.ToInt() != 3)
+                    .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
                     .OrderBy(s => s.StartDateTime)
                     .ToList();
 
