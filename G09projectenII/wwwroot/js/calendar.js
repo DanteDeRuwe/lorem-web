@@ -86,7 +86,7 @@ function showSessionModal(session) {
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
       $("div.attendance").css("display", "block");
-      if (info['HasAttended']) {
+      if (info['hasAttended']) {
         $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig")
             .addClass("badge-attended")
             .removeClass("badge-not-attended");
