@@ -25,11 +25,15 @@ namespace G09projectenII.Controllers
 
             if (session == null) return NotFound();
 
-            ViewBag.MemberIsRegistered = session.SessionRegistrees
-                .Any(r => r.MemberId == member.MemberId);
+            if (member != null)
+            {
+                ViewBag.MemberIsRegistered = session.SessionRegistrees
+                    .Any(r => r.MemberId == member.MemberId);
 
-            ViewBag.MemberHasAttended = session.SessionAttendees
-                .Any(a => a.MemberId == member.MemberId);
+                ViewBag.MemberHasAttended = session.SessionAttendees
+                    .Any(a => a.MemberId == member.MemberId);
+            }
+
 
             return View(session);
         }
