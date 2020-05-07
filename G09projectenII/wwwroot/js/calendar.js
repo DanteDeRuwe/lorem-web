@@ -83,6 +83,10 @@ function showSessionModal(session) {
   });
   
   function fillFooter(info) {
+    //See more
+    $("button.see-more-btn").click(() => location.href = "/Session/" + session["id"]);
+
+    // Register
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
       $("div.attendance").css("display", "block");
