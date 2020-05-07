@@ -8,12 +8,14 @@
         public Session Session { get; set; }
         public Member Member { get; set; }
 
+        public SessionRegistrees() { }
+
         public SessionRegistrees(Session session, Member member)
         {
-            this.Session = session;
-            this.Member = member;
-            this.Id = session.Id;
-            this.MemberId = member.MemberId;
+            Session = session;
+            Member = member;
+            Id = session.Id;
+            MemberId = member.MemberId;
         }
     }
 }
