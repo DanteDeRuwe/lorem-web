@@ -91,6 +91,12 @@ namespace G09projectenII
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "SessionDetail",
+                    pattern: "Session/{id}",
+                    defaults: new { action = "Index" }
+                );
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Calendar}/{action=Index}/{id?}");
             });
