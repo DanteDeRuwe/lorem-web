@@ -22,7 +22,6 @@ namespace G09projectenII.Controllers
             _memberRepository = memberRepository;
         }
 
-        [Authorize]
         public IActionResult Index() => View(_sessionRepository.GetAll());
 
         [HttpGet]
@@ -41,7 +40,7 @@ namespace G09projectenII.Controllers
             bool hasAttended = session.SessionAttendees.Any(sa => sa.MemberId == member.MemberId);
             bool isRegistered = session.SessionRegistrees.Any(sr => sr.MemberId == member.MemberId);
 
-            return Json(new RegistrationStatusDTO() {HasAttended = hasAttended, IsRegistered = isRegistered});
+            return Json(new RegistrationStatusDTO() { HasAttended = hasAttended, IsRegistered = isRegistered });
         }
 
         [HttpPost]
