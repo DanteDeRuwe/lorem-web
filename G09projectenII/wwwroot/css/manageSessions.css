@@ -158,6 +158,20 @@
     font-weight: 600;
 }
 
+.panel-body .see-more-link {
+    color: var(--secondary);
+    font-size: .7rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.panel-body .see-more-link:hover {
+    text-decoration: none;
+    border-color: transparent;
+}
+
+
 .panel-body .session-practical-info {
     color: var(--text-lighter-gray);
 }

@@ -1,4 +1,4 @@
-﻿@using System.Diagnostics
+@using System.Diagnostics
 @using System.Globalization
 @model ICollection<Session>
 
@@ -60,6 +60,10 @@
                             <!--Description-->
                             <div class="session-description"><b>Beschrijving:</b><p>@Html.Raw(s.Description)</p></div>
                         }
+
+                        <!--See more-->
+                        <a class="see-more-link" asp-controller="Session" asp-action="Index" asp-route-id="@s.Id">Zie meer...</a>
+
                     <div class="session-practical-info">
                         @if (!string.IsNullOrEmpty(s.Location))
                         {
