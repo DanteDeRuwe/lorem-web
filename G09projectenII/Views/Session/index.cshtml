@@ -1,4 +1,4 @@
-﻿@using System.Globalization
+@using System.Globalization
 @using G09projectenII.Controllers
 @using Microsoft.AspNetCore.Http
 @model Session
@@ -83,46 +83,49 @@
             </div>
 
             <!--Buttons-->
-            <div class="session-buttons">
-                @if (s.SessionState is CreatedSessionState)
-                {
-                    <div class="register">
-                        <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
-                    </div>
-                }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="session-buttons">
+                    @if (s.SessionState is CreatedSessionState)
+                    {
+                        <div class="register">
+                            <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
+                        </div>
+                    }
 
 
-                @if (s.SessionState is OpenSessionState)
-                {
-                    <div class="register">
-                        <button type="button" class="btn btn-primary">
-                            @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
-                        </button>
-                        <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
-                    </div>
-                }
+                    @if (s.SessionState is OpenSessionState)
+                    {
+                        <div class="register">
+                            <button type="button" class="btn btn-primary">
+                                @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                            </button>
+                            <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
+                        </div>
+                    }
 
-                @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
-                {
-                    <div class="attendance">
-                        <span class="session-attendances"># Aanwezig: @s.NumberOfAttendees</span>
+                    @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+                    {
+                        <div class="attendance">
+                            <span class="session-attendances"># Aanwezig: @s.NumberOfAttendees</span>
 
-                        @if (ViewBag.MemberHasAttended)
-                        {
-                            <span class="has-user-attended badge badge-attendance badge-attended">
-                                <i class="fas fa-check"></i> Aanwezig
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="has-user-attended badge badge-attendance badge-not-attended">
-                                <i class="fas fa-times"></i> Niet Aanwezig
-                            </span>
-                        }
+                            @if (ViewBag.MemberHasAttended)
+                            {
+                                <span class="has-user-attended badge badge-attendance badge-attended">
+                                    <i class="fas fa-check"></i> Aanwezig
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="has-user-attended badge badge-attendance badge-not-attended">
+                                    <i class="fas fa-times"></i> Niet Aanwezig
+                                </span>
+                            }
 
-                    </div>
-                }
-            </div>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     </section>
 
