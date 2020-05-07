@@ -22,7 +22,7 @@ function showSessionModal(session) {
   let startDateTime = moment(session["startDateTime"]);
   let endDateTime = moment(session["endDateTime"]);
 
-  $("div.modal-date>.info").text(startDateTime.format("D MMMM"));
+  $("div.modal-date>.info").text(startDateTime.format("dd D MMMM"));
 
   $("div.modal-time>.info").text(
     `${startDateTime.format("H:mm")} - ${endDateTime.format("H:mm")}`
