@@ -37,11 +37,24 @@ namespace G09projectenII.Controllers
         {
             Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
             Session session = this._sessionRepository.GetBy(sessionId);
-            
+
             bool hasAttended = session.SessionAttendees.Any(sa => sa.MemberId == member.MemberId);
             bool isRegistered = session.SessionRegistrees.Any(sr => sr.MemberId == member.MemberId);
 
             return Json(new RegistrationStatusDTO() {HasAttended = hasAttended, IsRegistered = isRegistered});
+        }
+
+        [HttpPost]
+        // TODO: move this to sessionController + code is untested for now
+        public void RegisterUser(int sessionId)
+        {
+            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
+            Session session = this._sessionRepository.GetBy(sessionId);
+            session.registerUser(member);
+
+            // this saves changes to the entire db context, so it is unnecessary
+            // to run saveChanges on the memberRepository too
+            _sessionRepository.SaveChanges();
         }
     }
 }

@@ -57,6 +57,14 @@ namespace G09projectenII.Models
             int nextStateIndex = SessionState.ToInt() + 1;
             SessionState = SessionState.FromInt(nextStateIndex <= 3 ? nextStateIndex : 3);
         }
-        
+
+        public void registerUser(Member user)
+        {
+            {
+                SessionRegistrees registration = new SessionRegistrees(this, user);
+                SessionRegistrees.Add(registration);
+                user.SessionRegistrees.Add(registration);
+            }
+        }
     }
 }
