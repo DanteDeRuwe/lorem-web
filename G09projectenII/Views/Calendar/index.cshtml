@@ -11,9 +11,9 @@
 <script src="~/lib/moment/moment-with-locales.min.js"></script>
 <script src="~/js/calendar.js"></script>
 
-<link href="~/lib/fullcalendar/core/main.css" rel="stylesheet"/>
-<link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet"/>
-<link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet"/>
+<link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
+<link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
+<link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
 <link href="~/css/calendar.css" rel="stylesheet">
 
 
@@ -99,17 +99,22 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
-                <div class="register">
-                    <button type="button" class="btn btn-primary"></button>
-                    <span class="session-free-spaces"></span>
-                </div>
-                <div class="attendance">
-                    <span class="session-attendances"></span>
-                    <span class="has-user-attended badge badge-attendance"></span>
-                </div>
+                <!--Hide register/attendance stuff when not logged in-->
+                @if (User.Identity.IsAuthenticated) {
+                    <div class="register">
+                        <button type="button" class="btn btn-primary"></button>
+                        <span class="session-free-spaces"></span>
+                    </div>
+                    <div class="attendance">
+                        <span class="session-attendances"></span>
+                        <span class="has-user-attended badge badge-attendance"></span>
+                    </div>
+                }
                 <button type="button" class="see-more-btn btn btn-outline-secondary">Zie meer ...</button>
             </div>
+
         </div>
     </div>
 </div>
