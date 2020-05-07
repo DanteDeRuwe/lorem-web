@@ -1,8 +1,158 @@
-﻿@model Session
+﻿@using System.Globalization
+@using G09projectenII.Controllers
+@using Microsoft.AspNetCore.Http
+@model Session
 
 @{
-    ViewBag.Title= Model.Title;
+    Session s = Model; //Rename the model to just "s"
+
+    ViewBag.Title= s.Title;
+    CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 }
 
-<h1>@Model.Title</h1>
+<link href="~/css/session.css" rel="stylesheet">
 
+<div id="session-wrapper" class="row">
+
+    @{ string bsClassSections = s.Announcements.Any() ? "col-12 col-md-6" : "";}
+    <section id="session" class="@(bsClassSections)">
+        <header>@s.Title</header>
+        <div class="content">
+
+            @{ string bsClassSessionPracticalInfo = s.Announcements.Any()
+                   ? (!string.IsNullOrEmpty(s.Speakername)
+                       ? "col-12 col-sm-6"
+                       : "col-12 col-sm-4 col-md-12 col-xl-4")
+                   : "col-12 col-sm";
+            }
+
+            <!--Practical info-->
+            <div class="session-practical-info row ">
+                <div class="session-date text-center @(bsClassSessionPracticalInfo)">
+                    <span class="icon">
+                        <i class="far fa-calendar-alt"></i>
+                    </span>
+                    <span>@s.StartDateTime.ToString("ddd d MMM")</span>
+                </div>
+                <div class="session-time text-center @(bsClassSessionPracticalInfo)">
+                    <span class="icon">
+                        <i class="far fa-clock"></i>
+                    </span>
+                    <span>@s.StartDateTime.ToString("HH:mm") - @s.EndDateTime.ToString("HH:mm")</span>
+                </div>
+                <div class="session-location text-center @(bsClassSessionPracticalInfo)">
+                    <span class="icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                    <span>@Html.Raw(s.Location)</span>
+                </div>
+
+                @if (!string.IsNullOrEmpty(s.Speakername))
+                {
+                    <div class="session-speaker text-center @(bsClassSessionPracticalInfo)">
+                        <span class="icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </span>
+                        <span>@Html.Raw(s.Speakername)</span>
+                    </div>
+                }
+
+            </div>
+
+            <!--Description-->
+            <div class="session-description">
+                @if (!string.IsNullOrEmpty(s.Description))
+                {
+                    <span class="description">@s.Description</span>
+                }
+                else
+                {
+                    <span class="empty-description">Geen beschrijving beschikbaar.</span>
+                }
+
+            </div>
+
+            <!--Extra info-->
+            <div class="session-extra-info">
+                <div class="session-organiser">
+                    <span class="icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span>@Html.Raw(s.Member.GetFullName())</span>
+                </div>
+            </div>
+
+            <!--Buttons-->
+            <div class="session-buttons">
+                @if (s.SessionState is CreatedSessionState)
+                {
+                    <div class="register">
+                        <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
+                    </div>
+                }
+
+
+                @if (s.SessionState is OpenSessionState)
+                {
+                    <div class="register">
+                        <button type="button" class="btn btn-primary">
+                            @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                        </button>
+                        <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
+                    </div>
+                }
+
+                @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+                {
+                    <div class="attendance">
+                        <span class="session-attendances"># Aanwezig: @s.NumberOfAttendees</span>
+
+                        @if (ViewBag.MemberHasAttended)
+                        {
+                            <span class="has-user-attended badge badge-attendance badge-attended">
+                                <i class="fas fa-check"></i> Aanwezig
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="has-user-attended badge badge-attendance badge-not-attended">
+                                <i class="fas fa-times"></i> Niet Aanwezig
+                            </span>
+                        }
+
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @if (s.Announcements.Any())
+    {
+        <section id="annoumcements" class="@(bsClassSections)">
+            <header>Aankondigingen</header>
+            <div>
+                @foreach (var a in s.Announcements.OrderByDescending(a => a.Timestamp))
+                {
+                    <div class="announcement">
+                        <div class="media">
+                            <img src="@(a.Author.Profilepicpath)" class="profile-picture" alt="">
+                            <div class="media-body">
+                                <div class="body-top">
+                                    <div class="organiser">
+                                        <div class="name">@a.Author.GetFullName()</div>
+                                        @if (a.Author == s.Member)
+                                        {
+                                            <div class="organiser-subtitle">organizator</div>
+                                        }
+                                    </div>
+                                    <div class="announcement-date">@a.Timestamp.ToString("dd/MM/yy")</div>
+                                </div>
+                                <div class="announcement-text">@Html.Raw(a.Text)</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+</div>

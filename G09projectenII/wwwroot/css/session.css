@@ -1,0 +1,149 @@
+﻿
+#session-wrapper {
+    margin: inherit;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+section .content>div {
+    margin-bottom: 1.5rem;
+}
+
+section header {
+    font-family: var(--header-font);
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.session-practical-info > div {
+    margin-bottom: 1.5rem;
+}
+
+.session-practical-info .icon {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.session-description {
+    font-size: .9rem;
+    text-align: justify;
+}
+
+.session-description .empty-description {
+    color: var(--text-lighter-gray);
+}
+
+.session-extra-info {
+    float: left;
+    color: var(--text-lighter-gray);
+    margin: 0 !important;
+}
+
+@media (min-width: 576px) {
+    .register, .attendance {
+        float: right;
+    }
+}
+
+@media (max-width: 576px) {
+    .register, .attendance { width: 100%; margin-top: 5rem; }
+}
+
+.register, .attendance {
+    /*float: right;*/
+    display: flex;
+    flex-direction: row;
+}
+
+    .register button {
+        z-index: 99;
+    }
+
+.session-free-spaces {
+    margin-left: -10px;
+    display: block;
+    border-radius: 5px;
+    background: var(--nearly-white);
+    padding: 0.5rem;
+    padding-left: 1.2rem;
+    color: var(--gray)
+}
+
+.badge-attendance {
+    padding: 0.5rem;
+}
+
+.badge-attended {
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.badge-not-attended {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.session-attendances {
+    border-radius: 5px;
+    padding: 0.3rem;
+    background-color: var(--nearly-white)
+}
+
+
+
+/*
+    ANNOUNCEMENTS
+*/
+
+.announcement {
+    margin-bottom: 1rem;
+}
+
+.announcement img.profile-picture {
+    -webkit-object-fit: cover;
+    object-fit: cover;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.8rem;
+}
+
+.announcement .media-body {
+    -ms-border-radius: 0px 30px 30px 30px;
+    border-radius: 0px 30px 30px 30px;
+    background: var(--nearly-white);
+    padding: .5rem 1.2rem 1.2rem 1rem;
+    display: block;
+    font-size: 0.85rem;
+}
+
+.announcement .body-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.announcement .organiser .name {
+    font-weight: 500;
+    color: black;
+    margin-bottom: -0.3rem;
+}
+
+.announcement .organiser-subtitle {
+    color: var(--text-lighter-gray);
+    margin-bottom: 0.5rem;
+    size: 0.8rem;
+    font-weight: 300;
+}
+
+.announcement-text {
+    color: var(--text-gray)
+}
+
+.announcement-date {
+    margin-left: 2rem;
+    color: var(--text-lighter-gray);
+}
