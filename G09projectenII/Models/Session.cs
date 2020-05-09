@@ -66,5 +66,12 @@ namespace G09projectenII.Models
                 user.SessionRegistrees.Add(registration);
             }
         }
+
+        public void AttendUser(Member user)
+        {
+            SessionAttendees attendance = new SessionAttendees(this, user);
+            SessionAttendees.Add(attendance);
+            user.SessionAttendees.Add(attendance);
+        }
     }
 }

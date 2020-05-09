@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,6 +13,11 @@
     <link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
     <link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
     <partial name="_Favicons.cshtml" />
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
 <body>
     <header>
@@ -96,9 +101,7 @@
     <footer class="border-top footer">
         <p class="text-center">Made with <span>♥</span> by the Code Commanders</p>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -7,5 +7,15 @@
 
         public Session Session { get; set; }
         public Member Member { get; set; }
+
+        public SessionAttendees() { }
+
+        public SessionAttendees(Session session, Member member)
+        {
+            Session = session;
+            Member = member;
+            Id = session.Id;
+            MemberId = member.MemberId;
+        }
     }
 }

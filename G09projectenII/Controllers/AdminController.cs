@@ -1,4 +1,5 @@
 ﻿using G09projectenII.Models;
+using G09projectenII.Models.Repository_Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,8 +11,13 @@ namespace G09projectenII.Controllers
     public class AdminController : Controller
     {
         private readonly ISessionRepository _sessionRepository;
+        private readonly IMemberRepository _memberRepository;
 
-        public AdminController(ISessionRepository sessionRepository) => _sessionRepository = sessionRepository;
+        public AdminController(ISessionRepository sessionRepository, IMemberRepository memberRepository)
+        {
+            _sessionRepository = sessionRepository;
+            _memberRepository = memberRepository;
+        }
 
         public IActionResult Index() => RedirectToAction("Sessions");
 
@@ -27,7 +33,17 @@ namespace G09projectenII.Controllers
             return View(nonFinishedSessions);
         }
 
-        public IActionResult Attendances() => View();
+        public IActionResult Attendances()
+        {
+            List<Session> openSessions =
+                _sessionRepository.GetAll()
+                    .Where(s => s.SessionState.ToInt() == 1)
+                    .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
+                    .OrderBy(s => s.StartDateTime)
+                    .ToList();
+
+            return View(openSessions);
+        }
 
 
         [HttpPost]
@@ -41,6 +57,16 @@ namespace G09projectenII.Controllers
             return RedirectToAction("Sessions");
         }
 
+        [HttpPost]
+        public void AttendUser(int sessionId, int memberId)
+        {
+            Session session = _sessionRepository.GetBy(sessionId);
+            Member member = _memberRepository.GetBy(memberId);
+            session.AttendUser(member);
+
+            _memberRepository.SaveChanges();
+            _sessionRepository.SaveChanges();
+        }
 
     }
 }
