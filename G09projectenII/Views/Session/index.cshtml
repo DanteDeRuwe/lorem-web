@@ -8,6 +8,8 @@
 
     ViewBag.Title = s.Title;
     CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
+
+    bool userIsOwnerOrHeadAdmin = User.IsInRole("HeadAdmin") || (User.IsInRole("Admin") && s.Member.Username.Equals(User.Identity.Name));
 }
 
 <link href="~/css/session.css" rel="stylesheet">
@@ -89,7 +91,28 @@
                     </span>
                     <span>@Html.Raw(s.Member.GetFullName())</span>
                 </div>
+
+
+
+                @{
+                    string extraInfoText = s.SessionState switch
+                    {
+                        CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
+                        OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
+                        ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
+                        _ => ""
+                    };
+                }
+
+                @if (userIsOwnerOrHeadAdmin)
+                {
+                <div>
+                    <span> <i class="fas fa-pencil-alt"></i></span>
+                    <span>@extraInfoText</span>
+                </div>
+                }
             </div>
+
 
             @if (User.Identity.IsAuthenticated)
             {
