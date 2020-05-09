@@ -16,7 +16,12 @@
 
     @{ string bsClassSections = s.Announcements.Any() ? "col-12 col-md-6" : "";}
     <section id="session" class="@(bsClassSections)">
-        <header>@s.Title</header>
+        <header>
+            @s.Title 
+
+            <!--State-->
+            <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
+        </header>
         <div class="content">
 
             @{ string bsClassSessionPracticalInfo = s.Announcements.Any()

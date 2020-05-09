@@ -101,6 +101,33 @@ section header {
 }
 
 
+.session-state {
+    color: white;
+    font-weight: 400;
+    transform: scale(.6);
+}
+
+.session-state.state0 {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.session-state.state1 {
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.session-state.state2 {
+    color: var(--warning);
+    border: 1px solid var(--warning);
+}
+
+.session-state.state3 {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+
 
 /*
     ANNOUNCEMENTS
