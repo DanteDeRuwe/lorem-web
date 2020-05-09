@@ -1,4 +1,4 @@
-﻿
+
 #session-wrapper {
     margin: inherit;
 }
@@ -128,6 +128,9 @@ section header {
 }
 
 
+.absent-icon {
+    color: var(--danger);
+}
 
 /*
     ANNOUNCEMENTS
