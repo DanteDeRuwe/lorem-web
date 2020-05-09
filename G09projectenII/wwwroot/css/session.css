@@ -43,13 +43,16 @@ section header {
 }
 
 @media (min-width: 576px) {
-    .register, .attendance {
+    .register, .attendance, .not-logged-in-register {
         float: right;
     }
 }
 
 @media (max-width: 576px) {
-    .register, .attendance { width: 100%; margin-top: 5rem; }
+    .register, .attendance, .not-logged-in-register {
+        width: 100%;
+        margin-top: 5rem;
+    }
 }
 
 .register, .attendance {
@@ -61,6 +64,11 @@ section header {
     .register button {
         z-index: 99;
     }
+
+.not-logged-in-register span{
+    display: inline-block;
+    margin-left: .2rem;
+}
 
 .session-free-spaces {
     margin-left: -10px;
@@ -90,6 +98,33 @@ section header {
     border-radius: 5px;
     padding: 0.3rem;
     background-color: var(--nearly-white)
+}
+
+
+.session-state {
+    color: white;
+    font-weight: 400;
+    transform: scale(.6);
+}
+
+.session-state.state0 {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.session-state.state1 {
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.session-state.state2 {
+    color: var(--warning);
+    border: 1px solid var(--warning);
+}
+
+.session-state.state3 {
+    color: var(--danger);
+    border: 1px solid var(--danger);
 }
 
 
