@@ -126,6 +126,12 @@
                     }
                 </div>
             }
+            else if(s.SessionState is OpenSessionState)
+            {
+                <div class="not-logged-in-register">
+                    <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven. (nog @s.AvailableRegistrationSpots vrije plaatsen)</span>
+                </div>
+            }
         </div>
     </section>
 
