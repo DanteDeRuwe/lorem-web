@@ -8,6 +8,8 @@
 
     ViewBag.Title = s.Title;
     CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
+
+    bool userIsOwnerOrHeadAdmin = User.IsInRole("HeadAdmin") || (User.IsInRole("Admin") && s.Member.Username.Equals(User.Identity.Name));
 }
 
 <link href="~/css/session.css" rel="stylesheet">
@@ -17,18 +19,22 @@
     @{ string bsClassSections = s.Announcements.Any() ? "col-12 col-md-6" : "";}
     <section id="session" class="@(bsClassSections)">
         <header>
-            @s.Title 
+            @s.Title
 
             <!--State-->
             <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
+            
+            <!--Share-->
+            <button class="share btn btn-outline-dark" data-toggle="popover" data-placement="right" data-content="URL gekopieerd!"><i class="fas fa-share-alt"></i></button>
         </header>
         <div class="content">
 
-            @{ string bsClassSessionPracticalInfo = s.Announcements.Any()
-                                                                                               ? (!string.IsNullOrEmpty(s.Speakername)
-                                                                                                   ? "col-12 col-sm-6"
-                                                                                                   : "col-12 col-sm-4 col-md-12 col-xl-4")
-                                                                                               : "col-12 col-sm";
+            @{
+                string bsClassSessionPracticalInfo = s.Announcements.Any()
+                ? (!string.IsNullOrEmpty(s.Speakername)
+                    ? "col-12 col-sm-6"
+                    : "col-12 col-sm-4 col-md-12 col-xl-4")
+                : "col-12 col-sm";
             }
 
             <!--Practical info-->
@@ -52,7 +58,8 @@
                     <span>@Html.Raw(s.Location)</span>
                 </div>
 
-                @if (!string.IsNullOrEmpty(s.Speakername)) {
+                @if (!string.IsNullOrEmpty(s.Speakername))
+                {
                     <div class="session-speaker text-center @(bsClassSessionPracticalInfo)">
                         <span class="icon">
                             <i class="fas fa-microphone-alt"></i>
@@ -65,9 +72,12 @@
 
             <!--Description-->
             <div class="session-description">
-                @if (!string.IsNullOrEmpty(s.Description)) {
+                @if (!string.IsNullOrEmpty(s.Description))
+                {
                     <span class="description">@s.Description</span>
-                } else {
+                }
+                else
+                {
                     <span class="empty-description">Geen beschrijving beschikbaar.</span>
                 }
 
@@ -81,37 +91,68 @@
                     </span>
                     <span>@Html.Raw(s.Member.GetFullName())</span>
                 </div>
+
+
+
+                @{
+                    string extraInfoText = s.SessionState switch
+                    {
+                        CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
+                        OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
+                        ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
+                        FinishedSessionState fss => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
+                        _ => ""
+                    };
+                }
+
+                @if (userIsOwnerOrHeadAdmin)
+                {
+                <div>
+                    <span> <i class="fas fa-pencil-alt"></i></span>
+                    <span>@extraInfoText</span>
+                </div>
+                }
             </div>
 
-            @if (User.Identity.IsAuthenticated) {
+
+            @if (User.Identity.IsAuthenticated)
+            {
                 <!--Buttons-->
                 <div class="session-buttons">
-                    @if (s.SessionState is CreatedSessionState) {
+                    @if (s.SessionState is CreatedSessionState)
+                    {
                         <div class="register">
                             <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
                         </div>
-                    } else {
-                        <button type="button" class="btn btn-primary" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Ingeschreven Studenten</button>
                     }
 
-                    @if (s.SessionState is OpenSessionState) {
+                    @if (s.SessionState is OpenSessionState)
+                    {
                         <div class="register">
-                            <button type="button" class="btn btn-primary">
-                                @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
-                            </button>
+                            <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
+                                <button type="submit" class="btn btn-primary">
+                                    @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                                </button>
+                            </form>
+                            
+                                
                             <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
                         </div>
                     }
 
-                    @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState) {
+                    @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+                    {
                         <div class="attendance">
                             <span class="session-attendances"># Aanwezig: @s.NumberOfAttendees</span>
 
-                            @if (ViewBag.MemberHasAttended) {
+                            @if (ViewBag.MemberHasAttended)
+                            {
                                 <span class="has-user-attended badge badge-attendance badge-attended">
                                     <i class="fas fa-check"></i> Aanwezig
                                 </span>
-                            } else {
+                            }
+                            else
+                            {
                                 <span class="has-user-attended badge badge-attendance badge-not-attended">
                                     <i class="fas fa-times"></i> Niet Aanwezig
                                 </span>
@@ -120,6 +161,13 @@
                         </div>
                     }
                 </div>
+
+                @if (userIsOwnerOrHeadAdmin)
+                {
+                    <div class="float-right">
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Ingeschreven Studenten</button>
+                    </div>
+                }
 
                 <!--Modal-->
                 <div class="modal" tabindex="-1" role="dialog" id="registree-modal">
@@ -133,14 +181,16 @@
                             </div>
                             <div class="modal-body">
                                 <ul class="list-group list-group-flush">
-                                    @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member)) {
+                                    @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member))
+                                    {
                                         <li class="list-group-item">
                                             <div>
                                                 @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
-                                                @if (!s.SessionAttendees.Select(sa => sa.Member).Contains(m)) {
-                                                    <span class="badge badge-pill badge-danger" title="Afwezig">X</span>
+                                                @if (!s.SessionAttendees.Select(sa => sa.Member).Contains(m))
+                                                {
+                                                    <i class="fas fa-times-circle pl-1 absent-icon"></i>
                                                 }
-                                                <span>@m.GetFullName()</span>
+                                                <span class="pl-1">@m.GetFullName()</span>
                                             </div>
                                         </li>
                                     }
@@ -150,7 +200,7 @@
                     </div>
                 </div>
             }
-            else if(s.SessionState is OpenSessionState)
+            else if (s.SessionState is OpenSessionState)
             {
                 <div class="not-logged-in-register">
                     <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven. (nog @s.AvailableRegistrationSpots vrije plaatsen)</span>
@@ -159,11 +209,13 @@
         </div>
     </section>
 
-    @if (s.Announcements.Any()) {
+    @if (s.Announcements.Any())
+    {
         <section id="annoumcements" class="@(bsClassSections)">
             <header>Aankondigingen</header>
             <div>
-                @foreach (var a in s.Announcements.OrderByDescending(a => a.Timestamp)) {
+                @foreach (var a in s.Announcements.OrderByDescending(a => a.Timestamp))
+                {
                     <div class="announcement">
                         <div class="media">
                             <img src="@(a.Author.Profilepicpath)" class="profile-picture" alt="">
@@ -171,7 +223,8 @@
                                 <div class="body-top">
                                     <div class="organiser">
                                         <div class="name">@a.Author.GetFullName()</div>
-                                        @if (a.Author == s.Member) {
+                                        @if (a.Author == s.Member)
+                                        {
                                             <div class="organiser-subtitle">organizator</div>
                                         }
                                     </div>
@@ -186,3 +239,21 @@
         </section>
     }
 </div>
+
+<script>
+    $(".share").on("click",
+        () => {
+            let dummy = document.createElement('input'),
+                text = window.location.href;
+
+            $("body").append(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            $(".share").popover("show");
+
+            setTimeout(() => $(".share").popover("hide"), 1000);
+        });
+</script>

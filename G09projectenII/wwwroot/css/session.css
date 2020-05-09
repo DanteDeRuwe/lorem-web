@@ -1,4 +1,4 @@
-﻿
+
 #session-wrapper {
     margin: inherit;
 }
@@ -16,6 +16,11 @@ section header {
     font-weight: bold;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
+}
+
+.share {
+    font-size: .5rem;
+    padding: .2rem .5rem;
 }
 
 .session-practical-info > div {
@@ -128,6 +133,9 @@ section header {
 }
 
 
+.absent-icon {
+    color: var(--danger);
+}
 
 /*
     ANNOUNCEMENTS

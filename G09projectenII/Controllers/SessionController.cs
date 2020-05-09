@@ -1,4 +1,5 @@
-﻿using G09projectenII.Models;
+﻿using System;
+using G09projectenII.Models;
 using G09projectenII.Models.Repository_Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -36,6 +37,25 @@ namespace G09projectenII.Controllers
 
 
             return View(session);
+        }
+        
+        [HttpPost]
+        public ActionResult ToggleRegistration(int sessionId)
+        {
+            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
+            Session session = this._sessionRepository.GetBy(sessionId);
+            if (session.SessionRegistrees.Any(r => r.MemberId == member.MemberId))
+            {
+                session.UnregisterUser(member);
+            }
+            else
+            {
+                session.RegisterUser(member);
+
+            }
+            
+            _sessionRepository.SaveChanges();
+            return RedirectToAction("Index", new {id = sessionId});
         }
     }
 }
