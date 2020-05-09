@@ -137,14 +137,7 @@
                 locale: "nl",
                 fixedWeekCount: false,
                 eventClick(info) {
-                    $.ajax({
-                        type: "GET",
-                        url: "/Calendar/GetSessionBy?id=" + info.event.id,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: showSessionModal,
-                        error: function() { alert('Server Error'); }
-                    });
+                    loadModal(info.event.id);
                 },
                 datesRender(info) {
                     loadLegend();

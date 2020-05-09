@@ -11,6 +11,19 @@ const loadLegend = () => {
     $(".fc-center").html(html);
 }
 
+function loadModal(sessionId) {
+    $.ajax({
+        type: "GET",
+        url: "/Calendar/GetSessionBy?id=" + sessionId,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: showSessionModal,
+        error: function () {
+            alert('Server Error');
+        }
+    });
+}
+
 
 function showSessionModal(session) {
     // title
@@ -118,6 +131,7 @@ function showSessionModal(session) {
             $("div.register").css("display", "flex");
             if (info['isRegistered']) {
                 $("div.register button").text("Uitschrijven");
+                $("span.session-free-spaces").css("display", "none");
             } else {
                 if (!session["isOpen"]) {
                     $("div.register button").prop('disabled', true);
