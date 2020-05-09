@@ -33,7 +33,17 @@ namespace G09projectenII.Controllers
             return View(nonFinishedSessions);
         }
 
-        public IActionResult Attendances() => View();
+        public IActionResult Attendances()
+        {
+            List<Session> openSessions =
+                _sessionRepository.GetAll()
+                    .Where(s => s.SessionState.ToInt() == 1)
+                    .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
+                    .OrderBy(s => s.StartDateTime)
+                    .ToList();
+
+            return View(openSessions);
+        }
 
 
         [HttpPost]
