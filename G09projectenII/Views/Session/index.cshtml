@@ -21,6 +21,9 @@
 
             <!--State-->
             <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
+            
+            <!--Share-->
+            <button class="share btn btn-outline-dark" data-toggle="popover" data-placement="right" data-content="URL copied!"><i class="fas fa-share-alt"></i></button>
         </header>
         <div class="content">
 
@@ -205,3 +208,21 @@
         </section>
     }
 </div>
+
+<script>
+    $(".share").on("click",
+        () => {
+            let dummy = document.createElement('input'),
+                text = window.location.href;
+
+            $("body").append(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            $(".share").popover("show");
+
+            setTimeout(() => $(".share").popover("hide"), 1000);
+        });
+</script>
