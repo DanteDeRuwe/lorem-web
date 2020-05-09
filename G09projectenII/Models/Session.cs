@@ -58,13 +58,20 @@ namespace G09projectenII.Models
             SessionState = SessionState.FromInt(nextStateIndex <= 3 ? nextStateIndex : 3);
         }
 
-        public void registerUser(Member user)
+        public void RegisterUser(Member user)
         {
             {
                 SessionRegistrees registration = new SessionRegistrees(this, user);
                 SessionRegistrees.Add(registration);
                 user.SessionRegistrees.Add(registration);
             }
+        }
+
+        public void UnregisterUser(Member user)
+        {
+            SessionRegistrees.Remove(SessionRegistrees.FirstOrDefault(r => r.MemberId == user.MemberId));
+            user.SessionRegistrees.Remove(user.SessionRegistrees.FirstOrDefault(r => r.MemberId == user.MemberId));
+            
         }
     }
 }

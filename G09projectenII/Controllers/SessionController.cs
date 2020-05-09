@@ -1,4 +1,5 @@
-﻿using G09projectenII.Models;
+﻿using System;
+using G09projectenII.Models;
 using G09projectenII.Models.Repository_Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -36,6 +37,30 @@ namespace G09projectenII.Controllers
 
 
             return View(session);
+        }
+
+        [HttpPost]
+        // TODO: move this to sessionController + code is untested for now
+        public ActionResult RegisterUser(int sessionId)
+        {
+            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
+            Session session = this._sessionRepository.GetBy(sessionId);
+            session.RegisterUser(member);
+            
+            // this saves changes to the entire db context, so it is unnecessary
+            // to run saveChanges on the memberRepository too
+            _sessionRepository.SaveChanges();
+            return RedirectToAction("Index", new {id = sessionId});
+        }
+
+        [HttpPost]
+        public ActionResult UnregisterUser(int sessionId)
+        {
+            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
+            Session session = this._sessionRepository.GetBy(sessionId);
+            session.UnregisterUser(member);
+            _sessionRepository.SaveChanges();
+            return RedirectToAction("Index", new {id = sessionId});
         }
     }
 }
