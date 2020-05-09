@@ -86,11 +86,18 @@ function showSessionModal(session) {
     //See more
     $("button.see-more-btn").click(() => location.href = "/Session/" + session["id"]);
     
-    if (!info) {
-        return;
-    }
+      if (!info) {
+          if (session['isOpen']) {
+              $(".not-logged-in-register").css("visibility", "");
+              $("span.not-logged-in-session-free-spaces").text(`(nog ${session['availableRegistrationSpots']} vrije plaatsen)`);
+          } else {
+              $(".not-logged-in-register").css("visibility", "hidden");
+          }
+          return;
+      }
 
     // Register
+    $(".not-logged-in-register").css("visibility", "hidden");
     if (session['hasStarted']) {
       $("div.register").css("display", "none");
       $("div.attendance").css("display", "block");
