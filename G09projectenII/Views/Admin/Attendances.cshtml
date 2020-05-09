@@ -1,11 +1,34 @@
-﻿
+﻿@using System.Globalization
 @model ICollection<Session>
 
 @{
     ViewBag.Title = "Attendances";
+    CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 }
 
-<h3>Aanwezigheid registreren</h3>
+<link href="~/css/attendances.css" rel="stylesheet">
+
+<section>
+    <div>
+        <div>
+            @if (!Model.Any() || Model == null)
+            {
+                <p class="text-muted text-center">U heeft geen sessies om te beheren...</p>
+            }
+
+            <tabel>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.StartDateTime.ToString("ddd d MMM")</td>
+                        <td>@s.Title</td>
+                        <td><button type="button">Kiezen</button></td>
+                    </tr>
+                }
+            </tabel>
+        </div>
+    </div>
+</section>
 
 
 
