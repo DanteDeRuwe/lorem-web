@@ -141,9 +141,9 @@ function showSessionModal(session) {
             $("#sessionModal .close").click();
     }
   }
-  // show modal
-  $("#sessionModal").modal();
 }
 
+    // show modal
+    $("#sessionModal").modal();
 
 }
