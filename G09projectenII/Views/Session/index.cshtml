@@ -165,7 +165,7 @@
                 @if (userIsOwnerOrHeadAdmin)
                 {
                     <div class="float-right">
-                        <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Ingeschreven Studenten</button>
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Inschrijvingen</button>
                     </div>
                 }
 
@@ -174,7 +174,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">@(s.SessionState is OpenSessionState ? "Ingeschrevenen" : "Aanwezigen")</h5>
+                                <h5 class="modal-title">@(s.SessionState is OpenSessionState ? "Inschrijvingen" : "Aanwezigen")</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
