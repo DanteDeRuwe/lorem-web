@@ -240,6 +240,10 @@
     z-index: 99;
 }
 
+.not-logged-in-register span, .not-logged-in-session-free-spaces {
+    margin-left: .2rem;
+}
+
 .session-free-spaces {
     margin-left: -10px;
     display: block;
