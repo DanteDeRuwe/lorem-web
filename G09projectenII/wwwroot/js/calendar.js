@@ -117,7 +117,6 @@ function showSessionModal(session) {
       $("div.register").css("display", "flex");
       if(info['isRegistered']) {
         $("div.register button").text("Uitschrijven");
-        // set the click behaviour to unregister here
       } else {
           if (!session["isOpen"]) {
               $("div.register button").prop('disabled', true);
@@ -129,12 +128,22 @@ function showSessionModal(session) {
               $("div.register button").text("Inschrijven");
               $("span.session-free-spaces").text(`Nog ${session['availableRegistrationSpots']} vrije plaatsen`);
           }
-        // set the click behaviour to register here
       }
-      
-      
+
+        $("div.register button").unbind('click');
+        $("div.register button").click(toggleRegistration)
+
+        function toggleRegistration() {
+            $.ajax({
+                type: "POST",
+                url: "/Session/ToggleRegistration?sessionId=" + session['id'],
+            });
+            $("#sessionModal .close").click();
     }
   }
   // show modal
   $("#sessionModal").modal();
+}
+
+
 }
