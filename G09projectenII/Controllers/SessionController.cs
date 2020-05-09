@@ -38,27 +38,22 @@ namespace G09projectenII.Controllers
 
             return View(session);
         }
-
+        
         [HttpPost]
-        // TODO: move this to sessionController + code is untested for now
-        public ActionResult RegisterUser(int sessionId)
+        public ActionResult ToggleRegistration(int sessionId)
         {
             Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
             Session session = this._sessionRepository.GetBy(sessionId);
-            session.RegisterUser(member);
+            if (session.SessionRegistrees.Any(r => r.MemberId == member.MemberId))
+            {
+                session.UnregisterUser(member);
+            }
+            else
+            {
+                session.RegisterUser(member);
+
+            }
             
-            // this saves changes to the entire db context, so it is unnecessary
-            // to run saveChanges on the memberRepository too
-            _sessionRepository.SaveChanges();
-            return RedirectToAction("Index", new {id = sessionId});
-        }
-
-        [HttpPost]
-        public ActionResult UnregisterUser(int sessionId)
-        {
-            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
-            Session session = this._sessionRepository.GetBy(sessionId);
-            session.UnregisterUser(member);
             _sessionRepository.SaveChanges();
             return RedirectToAction("Index", new {id = sessionId});
         }

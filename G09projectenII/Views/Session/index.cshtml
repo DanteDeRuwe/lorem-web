@@ -102,22 +102,13 @@
                     @if (s.SessionState is OpenSessionState)
                     {
                         <div class="register">
-                            @if (!ViewBag.MemberIsRegistered)
-                            {
-                                <form method="post" asp-action="RegisterUser" asp-route-sessionId="@s.Id">
-                                    <button type="submit" class="btn btn-primary">
-                                        inschrijven
-                                    </button>
-                                </form>
-                            }
-                            else
-                            {
-                                <form method="post" asp-action="UnregisterUser" asp-route-sessionId="@s.Id">
-                                    <button type="submit" class="btn btn-primary">
-                                        Uitschrijven
-                                    </button>
-                                </form>
-                            }
+                            <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
+                                <button type="submit" class="btn btn-primary">
+                                    @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                                </button>
+                            </form>
+                            
+                                
                             <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
                         </div>
                     }
