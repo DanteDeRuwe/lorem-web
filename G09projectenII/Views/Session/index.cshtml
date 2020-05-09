@@ -6,8 +6,10 @@
 @{
     Session s = Model; //Rename the model to just "s"
 
-    ViewBag.Title= s.Title;
+    ViewBag.Title = s.Title;
     CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
+
+    bool userIsOwnerOrHeadAdmin = User.IsInRole("HeadAdmin") || (User.IsInRole("Admin") && s.Member.Username.Equals(User.Identity.Name));
 }
 
 <link href="~/css/session.css" rel="stylesheet">
@@ -17,18 +19,22 @@
     @{ string bsClassSections = s.Announcements.Any() ? "col-12 col-md-6" : "";}
     <section id="session" class="@(bsClassSections)">
         <header>
-            @s.Title 
+            @s.Title
 
             <!--State-->
             <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
+            
+            <!--Share-->
+            <button class="share btn btn-outline-dark" data-toggle="popover" data-placement="right" data-content="URL gekopieerd!"><i class="fas fa-share-alt"></i></button>
         </header>
         <div class="content">
 
-            @{ string bsClassSessionPracticalInfo = s.Announcements.Any()
-                   ? (!string.IsNullOrEmpty(s.Speakername)
-                       ? "col-12 col-sm-6"
-                       : "col-12 col-sm-4 col-md-12 col-xl-4")
-                   : "col-12 col-sm";
+            @{
+                string bsClassSessionPracticalInfo = s.Announcements.Any()
+                ? (!string.IsNullOrEmpty(s.Speakername)
+                    ? "col-12 col-sm-6"
+                    : "col-12 col-sm-4 col-md-12 col-xl-4")
+                : "col-12 col-sm";
             }
 
             <!--Practical info-->
@@ -85,11 +91,32 @@
                     </span>
                     <span>@Html.Raw(s.Member.GetFullName())</span>
                 </div>
+
+
+
+                @{
+                    string extraInfoText = s.SessionState switch
+                    {
+                        CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
+                        OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
+                        ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
+                        _ => ""
+                    };
+                }
+
+                @if (userIsOwnerOrHeadAdmin)
+                {
+                <div>
+                    <span> <i class="fas fa-pencil-alt"></i></span>
+                    <span>@extraInfoText</span>
+                </div>
+                }
             </div>
 
-            <!--Buttons-->
+
             @if (User.Identity.IsAuthenticated)
             {
+                <!--Buttons-->
                 <div class="session-buttons">
                     @if (s.SessionState is CreatedSessionState)
                     {
@@ -97,7 +124,6 @@
                             <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
                         </div>
                     }
-
 
                     @if (s.SessionState is OpenSessionState)
                     {
@@ -134,8 +160,46 @@
                         </div>
                     }
                 </div>
+
+                @if (userIsOwnerOrHeadAdmin)
+                {
+                    <div class="float-right">
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Ingeschreven Studenten</button>
+                    </div>
+                }
+
+                <!--Modal-->
+                <div class="modal" tabindex="-1" role="dialog" id="registree-modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">@(s.SessionState is OpenSessionState ? "Ingeschrevenen" : "Aanwezigen")</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="list-group list-group-flush">
+                                    @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member))
+                                    {
+                                        <li class="list-group-item">
+                                            <div>
+                                                @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
+                                                @if (!s.SessionAttendees.Select(sa => sa.Member).Contains(m))
+                                                {
+                                                    <i class="fas fa-times-circle pl-1 absent-icon"></i>
+                                                }
+                                                <span class="pl-1">@m.GetFullName()</span>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-            else if(s.SessionState is OpenSessionState)
+            else if (s.SessionState is OpenSessionState)
             {
                 <div class="not-logged-in-register">
                     <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven. (nog @s.AvailableRegistrationSpots vrije plaatsen)</span>
@@ -174,3 +238,21 @@
         </section>
     }
 </div>
+
+<script>
+    $(".share").on("click",
+        () => {
+            let dummy = document.createElement('input'),
+                text = window.location.href;
+
+            $("body").append(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            $(".share").popover("show");
+
+            setTimeout(() => $(".share").popover("hide"), 1000);
+        });
+</script>

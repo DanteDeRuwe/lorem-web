@@ -71,7 +71,13 @@ namespace G09projectenII.Models
         {
             SessionRegistrees.Remove(SessionRegistrees.FirstOrDefault(r => r.MemberId == user.MemberId));
             user.SessionRegistrees.Remove(user.SessionRegistrees.FirstOrDefault(r => r.MemberId == user.MemberId));
-            
+        }
+
+        public void AttendUser(Member user)
+        {
+            SessionAttendees attendance = new SessionAttendees(this, user);
+            SessionAttendees.Add(attendance);
+            user.SessionAttendees.Add(attendance);
         }
     }
 }
