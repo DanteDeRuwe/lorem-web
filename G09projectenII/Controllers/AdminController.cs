@@ -37,7 +37,7 @@ namespace G09projectenII.Controllers
         {
             List<Session> openSessions =
                 _sessionRepository.GetAll()
-                    .Where(s => s.SessionState.ToInt() == 1)
+                    .Where(s => s.SessionState.ToInt() == 2)
                     .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
                     .OrderBy(s => s.StartDateTime)
                     .ToList();

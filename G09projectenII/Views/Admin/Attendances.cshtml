@@ -1,34 +1,47 @@
-﻿@using System.Globalization
+﻿@using System.Diagnostics
+@using System.Globalization
 @model ICollection<Session>
 
 @{
-    ViewBag.Title = "Attendances";
+    ViewBag.Title = "Sessies Beheren";
     CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 }
 
-<link href="~/css/attendances.css" rel="stylesheet">
+<link href="~/css/manageSessions.css" rel="stylesheet">
 
 <section>
-    <div>
-        <div>
-            @if (!Model.Any() || Model == null)
-            {
-                <p class="text-muted text-center">U heeft geen sessies om te beheren...</p>
-            }
+    <div class="panel-group sessions-panel" id="accordion" role="tablist" aria-multiselectable="true">
 
-            <tabel>
-                @foreach (var s in Model)
-                {
-                    <tr>
-                        <td>@s.StartDateTime.ToString("ddd d MMM")</td>
-                        <td>@s.Title</td>
-                        <td><button type="button">Kiezen</button></td>
-                    </tr>
-                }
-            </tabel>
-        </div>
+        @if (!Model.Any() || Model == null)
+        {
+            <p class="text-muted text-center">U heeft geen sessies om te beheren...</p>
+        }
+
+        @foreach (var s in Model)
+        {
+            <div class="panel panel-default">
+
+                <!--Panel Heading-->
+                <div class="panel-heading" role="tab" id="@("heading" + s.Id)">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
+                        <!--Date-->
+                        <span class="session-date">@s.StartDateTime.ToString("ddd d MMM")</span>
+                        <!--Time-->
+                        <span class="session-time">@s.StartDateTime.ToString("HH:mm")</span>
+                        <!--Title-->
+                        <span class="session-title">@s.Title</span>
+                        <!--State-->
+                        <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
+                    </a>
+
+                    <div class="right">
+
+                        <!--Manage Attendances-->
+                        <button onclick="$('#confirmation-modal-@s.Id').modal()" class="session-state-change btn btn-outline-warning">Aanwezigheden beheren</button>
+                    
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </section>
-
-
-
