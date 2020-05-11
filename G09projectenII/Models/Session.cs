@@ -60,11 +60,11 @@ namespace G09projectenII.Models
 
         public void RegisterUser(Member user)
         {
-            {
-                SessionRegistrees registration = new SessionRegistrees(this, user);
-                SessionRegistrees.Add(registration);
-                user.SessionRegistrees.Add(registration);
-            }
+            if (!IsOpen) return;
+            if (AvailableRegistrationSpots <= 0) return;
+            SessionRegistrees registration = new SessionRegistrees(this, user);
+            SessionRegistrees.Add(registration);
+            user.SessionRegistrees.Add(registration);
         }
 
         public void UnregisterUser(Member user)
