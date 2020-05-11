@@ -115,6 +115,7 @@ function showSessionModal(session) {
         if (session['hasStarted']) {
             $("div.register").css("display", "none");
             $("div.attendance").css("display", "block");
+            $("div.modal-attendances").css("display", "block");
             if (info['hasAttended']) {
                 $("span.has-user-attended").html("<i class=\"fas fa-check\"></i> Aanwezig")
                     .addClass("badge-attended")
@@ -124,10 +125,11 @@ function showSessionModal(session) {
                     .addClass("badge-not-attended")
                     .removeClass("badge-attended");
             }
-            $("span.session-attendances").text(`${session['numberOfAttendees']} aanwezig`);
+            $(".modal-attendances>.info").text(`${session['numberOfAttendees']}/${session['numberOfRegistrees']} ingeschrevenen aanwezig`);
 
         } else {
             $("div.attendance").css("display", "none");
+            $("div.modal-attendances").css("display", "none");
             $("div.register").css("display", "flex");
             if (info['isRegistered']) {
                 $("div.register button").text("Uitschrijven");
