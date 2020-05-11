@@ -92,24 +92,11 @@
                     <span>@Html.Raw(s.Member.GetFullName())</span>
                 </div>
 
-
-
-                @{
-                    string extraInfoText = s.SessionState switch
-                    {
-                        CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
-                        OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
-                        ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                        FinishedSessionState fss => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                        _ => ""
-                    };
-                }
-
                 @if (userIsOwnerOrHeadAdmin)
                 {
                 <div>
                     <span> <i class="fas fa-pencil-alt"></i></span>
-                    <span>@extraInfoText</span>
+                    <span>@ViewBag.ExtraInfoText</span>
                 </div>
                 }
             </div>
@@ -128,16 +115,12 @@
 
                     @if (s.SessionState is OpenSessionState)
                     {
-                        <div class="register">
-                            <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
-                                <button type="submit" class="btn btn-primary">
-                                    @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
-                                </button>
-                            </form>
-                            
-                                
-                            <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
-                        </div>
+                    <form class="register" method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
+                        <button type="submit" class="btn btn-primary">
+                            @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                        </button>
+                        <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
+                    </form>
                     }
 
                     @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
