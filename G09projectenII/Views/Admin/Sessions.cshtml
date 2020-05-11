@@ -1,5 +1,6 @@
 @using System.Diagnostics
 @using System.Globalization
+@using G09projectenII.Services
 @model ICollection<Session>
 
 @{
@@ -72,18 +73,9 @@
                         }
                         <!--Organizer-->
                         <span><i class="fas fa-user"></i>@Html.Raw(s.Member.Firstname) @Html.Raw(s.Member.Lastname)</span>
-
                         
-
-                        @{
-                            string extraInfoText = s.SessionState switch {
-                                CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
-                                OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
-                                ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                                _ => ""
-                            };
-                        }
-                        <span> <i class="fas fa-pencil-alt"></i> @extraInfoText </span>
+                        <!--Extra info-->
+                        <span> <i class="fas fa-pencil-alt"></i> @(Util.ExtraSessionInfo(s)) </span>
                     </div>
                     </div>
                 </div>

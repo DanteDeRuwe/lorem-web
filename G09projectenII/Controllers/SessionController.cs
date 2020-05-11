@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using G09projectenII.Models;
 using G09projectenII.Models.Repository_Models;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +35,7 @@ namespace G09projectenII.Controllers
                     .Any(a => a.MemberId == member.MemberId);
             }
 
+            ViewBag.ExtraInfoText = Util.ExtraSessionInfo(session);
 
             return View(session);
         }

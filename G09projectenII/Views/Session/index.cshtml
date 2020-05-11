@@ -92,24 +92,11 @@
                     <span>@Html.Raw(s.Member.GetFullName())</span>
                 </div>
 
-
-
-                @{
-                    string extraInfoText = s.SessionState switch
-                    {
-                        CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
-                        OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
-                        ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                        FinishedSessionState fss => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                        _ => ""
-                    };
-                }
-
                 @if (userIsOwnerOrHeadAdmin)
                 {
                 <div>
                     <span> <i class="fas fa-pencil-alt"></i></span>
-                    <span>@extraInfoText</span>
+                    <span>@ViewBag.ExtraInfoText</span>
                 </div>
                 }
             </div>
