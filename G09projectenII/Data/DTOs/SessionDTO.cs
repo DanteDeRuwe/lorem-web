@@ -16,6 +16,7 @@ namespace G09projectenII.Models.DTOs
         public AnnouncementDTO MostRecentAnnouncement { get; }
         public int AvailableRegistrationSpots { get; }
         public int NumberOfAttendees { get; }
+        public int NumberOfRegistrees { get; }
         public bool HasStarted { get; }
         public bool IsOpen { get; }
 
@@ -33,6 +34,7 @@ namespace G09projectenII.Models.DTOs
             var lastAnnouncement = session.MostRecentAnnouncement;
             MostRecentAnnouncement = lastAnnouncement != null ? new AnnouncementDTO(lastAnnouncement) : null;
             AvailableRegistrationSpots = session.AvailableRegistrationSpots;
+            NumberOfAttendees = session.NumberOfRegistrees;
             NumberOfAttendees = session.NumberOfAttendees;
             HasStarted = session.hasStarted;
             IsOpen = session.IsOpen;
