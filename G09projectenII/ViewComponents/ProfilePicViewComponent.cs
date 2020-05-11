@@ -10,10 +10,7 @@ namespace G09projectenII.ViewComponents
     {
         private readonly IMemberRepository _memberRepository;
 
-        public ProfilePicViewComponent(IMemberRepository memberRepository)
-        {
-            _memberRepository = memberRepository;
-        }
+        public ProfilePicViewComponent(IMemberRepository memberRepository) => _memberRepository = memberRepository;
 
         public IViewComponentResult Invoke(int size = 32, bool rounded = true, Member member = null)
         {

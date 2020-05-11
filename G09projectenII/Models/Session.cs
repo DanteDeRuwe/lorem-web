@@ -28,18 +28,18 @@ namespace G09projectenII.Models
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
         public ICollection<SessionRegistrees> SessionRegistrees { get; set; }
         public SessionState SessionState { get; set; }
-        
+
         // Calculated Properties
         public int NumberOfRegistrees => SessionRegistrees.Count();
-        public int AvailableRegistrationSpots => (this.Capacity - this.SessionRegistrees.Count);
+        public int AvailableRegistrationSpots => (Capacity - SessionRegistrees.Count);
 
-        public Announcement MostRecentAnnouncement => this.Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
+        public Announcement MostRecentAnnouncement => Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
 
-        public int NumberOfAttendees => this.SessionAttendees.Count;
-        
-        public bool hasStarted => this.SessionState.ToInt() > 1;
-        
-        public bool IsOpen => this.SessionState.ToInt() == 1;
+        public int NumberOfAttendees => SessionAttendees.Count;
+
+        public bool hasStarted => SessionState.ToInt() > 1;
+
+        public bool IsOpen => SessionState.ToInt() == 1;
 
         public Session()
         {

@@ -1,7 +1,4 @@
 ﻿using G09projectenII.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace G09projectenII.Tests.Models

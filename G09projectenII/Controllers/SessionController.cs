@@ -39,12 +39,12 @@ namespace G09projectenII.Controllers
 
             return View(session);
         }
-        
+
         [HttpPost]
         public ActionResult ToggleRegistration(int sessionId)
         {
-            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
-            Session session = this._sessionRepository.GetBy(sessionId);
+            var member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
+            var session = _sessionRepository.GetBy(sessionId);
             if (session.SessionRegistrees.Any(r => r.MemberId == member.MemberId))
             {
                 session.UnregisterUser(member);
@@ -54,9 +54,9 @@ namespace G09projectenII.Controllers
                 session.RegisterUser(member);
 
             }
-            
+
             _sessionRepository.SaveChanges();
-            return RedirectToAction("Index", new {id = sessionId});
+            return RedirectToAction("Index", new { id = sessionId });
         }
     }
 }

@@ -8,7 +8,7 @@ namespace G09projectenII.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<SessionRegistrees> builder)
         {
-            builder.HasKey(e => new {e.Id, e.MemberId});
+            builder.HasKey(e => new { e.Id, e.MemberId });
 
             builder.ToTable("SESSION_REGISTREES");
 

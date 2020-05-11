@@ -60,8 +60,8 @@ namespace G09projectenII.Controllers
         [HttpPost]
         public void AttendUser(int sessionId, int memberId)
         {
-            Session session = _sessionRepository.GetBy(sessionId);
-            Member member = _memberRepository.GetBy(memberId);
+            var session = _sessionRepository.GetBy(sessionId);
+            var member = _memberRepository.GetBy(memberId);
             session.AttendUser(member);
 
             _memberRepository.SaveChanges();
