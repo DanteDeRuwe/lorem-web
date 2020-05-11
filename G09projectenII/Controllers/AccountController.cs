@@ -28,6 +28,13 @@ namespace G09projectenII.Controllers
                 {
                     var user = _memberRepository.GetAll().FirstOrDefault(m => m.Username == login.Username);
 
+                    // check whether the user is blocked
+                    if (user.Memberstatus == 2)
+                    {
+                        ModelState.AddModelError("failed-login", "Geblokkeerd account");
+                        return View("index");
+                    }
+
                     string role = user.Membertype switch
                     {
                         0 => "User",
