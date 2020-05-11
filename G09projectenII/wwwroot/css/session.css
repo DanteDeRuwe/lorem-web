@@ -87,6 +87,7 @@ section header {
 
 .badge-attendance {
     padding: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .badge-attended {
@@ -99,7 +100,7 @@ section header {
     border: 1px solid var(--danger);
 }
 
-.session-attendances {
+.attendance {
     border-radius: 5px;
     padding: 0.3rem;
     background-color: var(--nearly-white)

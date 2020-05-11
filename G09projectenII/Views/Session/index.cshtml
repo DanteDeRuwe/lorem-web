@@ -143,7 +143,7 @@
                     @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
                     {
                         <div class="attendance">
-                            <span class="session-attendances"># Aanwezig: @s.NumberOfAttendees</span>
+                            <span class="session-attendances">@s.NumberOfAttendees aanwezig</span>
 
                             @if (ViewBag.MemberHasAttended)
                             {

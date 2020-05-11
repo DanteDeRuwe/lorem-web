@@ -254,6 +254,12 @@
     color: var(--gray)
 }
 
+.attendance {
+    border-radius: 5px;
+    padding: 0.3rem;
+    background-color: var(--nearly-white)
+}
+
 .badge-attendance {
     padding: 0.5rem;
 }
@@ -266,10 +272,4 @@
 .badge-not-attended {
     color: var(--danger);
     border: 1px solid var(--danger);
-}
-
-.session-attendances {
-    border-radius: 5px;
-    padding: 0.3rem;
-    background-color: var(--nearly-white)
 }
