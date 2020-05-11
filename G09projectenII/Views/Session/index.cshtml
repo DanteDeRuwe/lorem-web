@@ -174,7 +174,9 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">@(s.SessionState is OpenSessionState ? "Inschrijvingen" : "Aanwezigen")</h5>
+                                <h5 class="modal-title">
+                                    @(s.SessionState is OpenSessionState || s.SessionState is CreatedSessionState ? "Inschrijvingen" : "Aanwezigen")
+                                </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -186,7 +188,10 @@
                                         <li class="list-group-item">
                                             <div>
                                                 @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
-                                                @if (!s.SessionAttendees.Select(sa => sa.Member).Contains(m))
+                                                @if (s.SessionAttendees.Select(sa => sa.Member).Contains(m))
+                                                {
+                                                    <i class="fas fa-check-circle pl-1 attended-icon"></i>
+                                                } else
                                                 {
                                                     <i class="fas fa-times-circle pl-1 absent-icon"></i>
                                                 }
