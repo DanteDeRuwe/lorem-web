@@ -145,7 +145,7 @@
                     }
                 </div>
 
-                @if (userIsOwnerOrHeadAdmin)
+                @if (userIsOwnerOrHeadAdmin && s.SessionRegistrees.Any())
                 {
                     <div class="float-right">
                         <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Inschrijvingen</button>
