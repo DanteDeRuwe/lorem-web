@@ -158,7 +158,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">
-                                    @(s.SessionState is OpenSessionState || s.SessionState is CreatedSessionState ? "Inschrijvingen" : "Aanwezigen")
+                                    @(s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState ? "Aanwezigen" : "Inschrijvingen")
                                 </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -171,12 +171,15 @@
                                         <li class="list-group-item">
                                             <div>
                                                 @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
-                                                @if (s.SessionAttendees.Select(sa => sa.Member).Contains(m))
-                                                {
-                                                    <i class="fas fa-check-circle pl-1 attended-icon"></i>
-                                                } else
-                                                {
-                                                    <i class="fas fa-times-circle pl-1 absent-icon"></i>
+                                                @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState) {
+                                                    @if (s.SessionAttendees.Select(sa => sa.Member).Contains(m))
+                                                    {
+                                                        <i class="fas fa-check-circle pl-1 attended-icon"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-times-circle pl-1 absent-icon"></i>
+                                                    }
                                                 }
                                                 <span class="pl-1">@m.GetFullName()</span>
                                             </div>
