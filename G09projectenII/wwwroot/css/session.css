@@ -138,6 +138,10 @@ section header {
     color: var(--danger);
 }
 
+.attended-icon {
+    color: var(--success);
+}
+
 /*
     ANNOUNCEMENTS
 */

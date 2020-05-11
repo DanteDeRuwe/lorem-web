@@ -3,7 +3,6 @@ using G09projectenII.Models.Repository_Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using G09projectenII.Models.DTOs;
 
 namespace G09projectenII.Data.Repositories
 {

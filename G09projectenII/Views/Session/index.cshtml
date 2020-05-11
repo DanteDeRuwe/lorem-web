@@ -92,24 +92,11 @@
                     <span>@Html.Raw(s.Member.GetFullName())</span>
                 </div>
 
-
-
-                @{
-                    string extraInfoText = s.SessionState switch
-                    {
-                        CreatedSessionState css => $"{s.Capacity} inschrijvingsplaatsen",
-                        OpenSessionState oss => $"{s.NumberOfRegistrees}/{s.Capacity} inschrijvingen",
-                        ClosedSessionState css => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                        FinishedSessionState fss => $"{s.NumberOfAttendees}/{s.NumberOfRegistrees} ingeschrevenen aanwezig",
-                        _ => ""
-                    };
-                }
-
                 @if (userIsOwnerOrHeadAdmin)
                 {
                 <div>
                     <span> <i class="fas fa-pencil-alt"></i></span>
-                    <span>@extraInfoText</span>
+                    <span>@ViewBag.ExtraInfoText</span>
                 </div>
                 }
             </div>
@@ -162,7 +149,7 @@
                     }
                 </div>
 
-                @if (userIsOwnerOrHeadAdmin)
+                @if (userIsOwnerOrHeadAdmin && s.SessionRegistrees.Any())
                 {
                     <div class="float-right">
                         <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">Inschrijvingen</button>
@@ -174,7 +161,9 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">@(s.SessionState is OpenSessionState ? "Inschrijvingen" : "Aanwezigen")</h5>
+                                <h5 class="modal-title">
+                                    @(s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState ? "Aanwezigen" : "Inschrijvingen")
+                                </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -186,9 +175,15 @@
                                         <li class="list-group-item">
                                             <div>
                                                 @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
-                                                @if (!s.SessionAttendees.Select(sa => sa.Member).Contains(m))
-                                                {
-                                                    <i class="fas fa-times-circle pl-1 absent-icon"></i>
+                                                @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState) {
+                                                    @if (s.SessionAttendees.Select(sa => sa.Member).Contains(m))
+                                                    {
+                                                        <i class="fas fa-check-circle pl-1 attended-icon"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-times-circle pl-1 absent-icon"></i>
+                                                    }
                                                 }
                                                 <span class="pl-1">@m.GetFullName()</span>
                                             </div>

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
-using G09projectenII.Models;
+﻿using G09projectenII.Models;
 using G09projectenII.Models.DTOs;
 using G09projectenII.Models.Repository_Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Linq;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace G09projectenII.Controllers
@@ -27,20 +23,20 @@ namespace G09projectenII.Controllers
         [HttpGet]
         public JsonResult GetSessionBy(int id)
         {
-            Session session = this._sessionRepository.GetBy(id);
+            var session = _sessionRepository.GetBy(id);
             return session != null ? Json(new SessionDTO(session)) : null;
         }
 
         [HttpGet]
         public JsonResult GetRegistrationStatus(int sessionId)
         {
-            Member member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
+            var member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
             if (member == null)
             {
                 return Json("");
             }
-            
-            Session session = this._sessionRepository.GetBy(sessionId);
+
+            var session = _sessionRepository.GetBy(sessionId);
 
             bool hasAttended = session.SessionAttendees.Any(sa => sa.MemberId == member.MemberId);
             bool isRegistered = session.SessionRegistrees.Any(sr => sr.MemberId == member.MemberId);

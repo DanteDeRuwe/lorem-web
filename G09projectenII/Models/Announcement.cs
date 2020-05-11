@@ -14,10 +14,7 @@ namespace G09projectenII.Models
         public Member Author { get; set; }
         public Session Session { get; set; }
 
-        public override string ToString()
-        {
-            return String.Join(" | ", AnnouncementId, Timestamp.ToShortDateString(),
+        public override string ToString() => string.Join(" | ", AnnouncementId, Timestamp.ToShortDateString(),
                 Timestamp.ToShortTimeString(), Title, SessionId, AuthorMemberId, Text);
-        }
     }
 }
