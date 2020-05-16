@@ -17,4 +17,8 @@
     <ProjectReference Include="..\G09projectenII\G09projectenII.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
