@@ -58,5 +58,6 @@ namespace G09projectenII.Controllers
             _sessionRepository.SaveChanges();
             return RedirectToAction("Index", new { id = sessionId });
         }
+
     }
 }

@@ -45,6 +45,16 @@ namespace G09projectenII.Controllers
             return View(openSessions);
         }
 
+        [Route("Admin/Session/{id}/Attendances")]
+        public IActionResult SessionAttendances(int id)
+        {
+            var session = _sessionRepository.GetBy(id);
+
+            if (session == null) return NotFound();
+
+            return View(session);
+        }
+
 
         [HttpPost]
         public IActionResult ChangeSessionState(int id)
@@ -58,7 +68,7 @@ namespace G09projectenII.Controllers
         }
 
         [HttpPost]
-        public void AttendUser(int sessionId, int memberId)
+        public IActionResult AttendUser(int sessionId, int memberId)
         {
             var session = _sessionRepository.GetBy(sessionId);
             var member = _memberRepository.GetBy(memberId);
@@ -66,6 +76,8 @@ namespace G09projectenII.Controllers
 
             _memberRepository.SaveChanges();
             _sessionRepository.SaveChanges();
+
+            return RedirectToAction("Attendances", new { id = sessionId });
         }
 
     }

@@ -1,0 +1,43 @@
+﻿@using System.Diagnostics
+@using System.Globalization
+@model Session
+
+@{
+    ViewBag.Title = "Aanwezigen beheren";
+    CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
+}
+
+<link href="~/css/attendances.css" rel="stylesheet">
+
+<section>
+    <div class="panel-group sessions-panel" id="accordion" role="tablist" aria-multiselectable="true">
+        @if (!Model.SessionRegistrees.Any() || Model.SessionRegistrees == null)
+        {
+            <p class="text-muted text-center">Er is niemand ingeschreven voor deze sessie...</p>
+        }
+
+        @if (Model.SessionAttendees == Model.SessionRegistrees)
+        {
+            <p class="text-muted text-center">Iedereen is aanwezig!!</p>
+        }
+
+        <table>
+            @foreach (var m in Model.SessionRegistrees)
+            {
+                if (!Model.SessionAttendees.Where(sa => sa.MemberId == m.MemberId).Any())
+                {
+                    <tr>
+                        <td>@m.Member.GetFullName()</td>
+                        <td>
+                            <form asp-action="AttendUser" asp-route-sessionId="@Model.Id" asp-route-memberId="@m.MemberId" method="post">
+                                <button type="submit">Aanwezig</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+            }
+        </table>
+
+    </div>
+</section>

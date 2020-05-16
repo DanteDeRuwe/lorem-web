@@ -3,7 +3,7 @@
 @model ICollection<Session>
 
 @{
-    ViewBag.Title = "Sessies Beheren";
+    ViewBag.Title = "Sessie kiezen";
     CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 }
 
@@ -23,21 +23,21 @@
 
                 <!--Panel Heading-->
                 <div class="panel-heading" role="tab" id="@("heading" + s.Id)">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + s.Id)" aria-expanded="false" aria-controls="@("collapse" + s.Id)">
+                    <div>
                         <!--Date-->
                         <span class="session-date">@s.StartDateTime.ToString("ddd d MMM")</span>
                         <!--Time-->
                         <span class="session-time">@s.StartDateTime.ToString("HH:mm")</span>
                         <!--Title-->
                         <span class="session-title">@s.Title</span>
-                        <!--State-->
-                        <span class="badge badge-pill session-state @("state" + s.SessionState.ToInt())">@s.SessionState.ToString()</span>
-                    </a>
+                    </div>
 
                     <div class="right">
 
                         <!--Manage Attendances-->
-                        <button onclick="$('#confirmation-modal-@s.Id').modal()" class="session-state-change btn btn-outline-warning">Aanwezigheden beheren</button>
+                        <button class="session-state-change btn btn-outline-warning">
+                            <a asp-action="SessionAttendances" asp-route-id="@s.Id">Aanwezigheden beheren</a>
+                        </button>
                     
                     </div>
                 </div>
