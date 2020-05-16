@@ -267,3 +267,7 @@
     color: var(--danger);
     border: 1px solid var(--danger);
 }
+
+.toast {
+    margin-top: 1rem;
+}
