@@ -13,7 +13,7 @@ namespace G09projectenII.Models
 
         public SessionCalendar() => Sessions = new HashSet<Session>();
 
-        public Session getSessionBy(int Id) => Sessions.FirstOrDefault(s => s.Id == Id);
+        public Session GetSessionBy(int Id) => Sessions.FirstOrDefault(s => s.Id == Id);
 
         public override string ToString() => string.Join(" | ", Startdate, Enddate);
     }
