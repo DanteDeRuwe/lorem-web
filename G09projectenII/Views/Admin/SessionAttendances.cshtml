@@ -16,11 +16,6 @@
             <p class="text-muted text-center">Er is niemand ingeschreven voor deze sessie...</p>
         }
 
-        @if (Model.SessionAttendees == Model.SessionRegistrees)
-        {
-            <p class="text-muted text-center">Iedereen is aanwezig!!</p>
-        }
-
         <table>
             @foreach (var m in Model.SessionRegistrees)
             {

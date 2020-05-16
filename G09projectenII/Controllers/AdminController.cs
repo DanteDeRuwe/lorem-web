@@ -77,7 +77,7 @@ namespace G09projectenII.Controllers
             _memberRepository.SaveChanges();
             _sessionRepository.SaveChanges();
 
-            return RedirectToAction("Attendances", new { id = sessionId });
+            return RedirectToAction("SessionAttendances", new { id = sessionId });
         }
 
     }
