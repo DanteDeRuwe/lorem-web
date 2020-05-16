@@ -172,9 +172,15 @@ function showSessionModal(session) {
                 $.ajax({
                     type: "POST",
                     url: "/Session/ToggleRegistration?sessionId=" + session['id'],
+                    success: showToast
                 });
                 $("#sessionModal .close").click();
             }
+            function showToast() {
+                $(".toast-body").text(info['isRegistered'] ? "Succesvol uitgeschreven.": "Succesvol ingeschreven.")
+                $(".toast").toast('show');
+            }
+            
         }
     }
 
