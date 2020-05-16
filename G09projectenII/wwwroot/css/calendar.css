@@ -270,4 +270,9 @@
 
 .toast {
     margin-top: 1rem;
+    position: absolute;
+    left:  50%;
+    transform:  translate(-50%, 0);
+    top: 5rem;
+    z-index:99;
 }
