@@ -114,7 +114,7 @@ function showSessionModal(session) {
 
     function fillFooter(info) {
         //See more
-        $("button.see-more-btn").click(() => location.href = "/Session/" + session["id"]);
+        $(".see-more-btn").attr("href", "Session/" + session["id"]);
 
         if (!info) {
             if (session['isOpen']) {
