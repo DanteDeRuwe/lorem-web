@@ -105,49 +105,47 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <!--Buttons-->
-                <div class="session-buttons">
-                    @if (s.SessionState is CreatedSessionState)
-                    {
-                        <div class="register">
-                            <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
-                        </div>
-                    }
-
-                    @if (s.SessionState is OpenSessionState)
-                    {
-                        <div class="register">
-                            <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
-                                <button type="submit" class="btn btn-primary" @{if (s.AvailableRegistrationSpots <= 0 && !ViewBag.MemberIsRegistered) { <text> disabled</text> } }>
-                                    @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
-                                </button>
-                            </form>
-
-
-                            <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
-                        </div>
-                    }
-
-                    @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
-                    {
-                        <div class="attendance">
-                            <span class="session-attendances">@s.NumberOfAttendees aanwezig</span>
-
-                            @if (ViewBag.MemberHasAttended)
-                            {
-                                <span class="has-user-attended badge badge-attendance badge-attended">
-                                    <i class="fas fa-check"></i> Aanwezig
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="has-user-attended badge badge-attendance badge-not-attended">
-                                    <i class="fas fa-times"></i> Niet Aanwezig
-                                </span>
-                            }
-
-                        </div>
-                    }
+        <div class="session-buttons">
+            @if (s.SessionState is CreatedSessionState)
+            {
+                <div class="register">
+                    <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
                 </div>
+            }
+
+            @if (s.SessionState is OpenSessionState)
+            {
+                <div class="register">
+                    <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
+                        <button type="submit" class="btn btn-primary" @{if (s.AvailableRegistrationSpots <= 0 && !ViewBag.MemberIsRegistered) { <text> disabled</text> } }>
+                            @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                        </button>
+                    </form>
+
+
+                    <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
+                </div>
+            }
+
+            @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+            {
+                <div class="attendance">
+                    @if (ViewBag.MemberHasAttended)
+                    {
+                        <span class="has-user-attended badge badge-pill badge-attendance badge-attended">
+                            <i class="fas fa-check"></i> Aanwezig
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="has-user-attended badge badge-pill badge-attendance badge-not-attended">
+                            <i class="fas fa-times"></i> Niet Aanwezig
+                        </span>
+                    }
+
+                </div>
+            }
+        </div>
 
                 @if (userIsOwnerOrHeadAdmin && s.SessionRegistrees.Any())
                 {

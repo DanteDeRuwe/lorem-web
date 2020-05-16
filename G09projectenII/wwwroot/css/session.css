@@ -101,9 +101,7 @@ section header {
 }
 
 .attendance {
-    border-radius: 5px;
     padding: 0.3rem;
-    background-color: var(--nearly-white)
 }
 
 
