@@ -94,6 +94,7 @@ function showSessionModal(session) {
 
         $("img.profile-picture").attr("src", author["profilepicpath"]);
         $("div.organiser>.name").text(author["name"]);
+        $("div.announcement-title").text(announcement["title"]);
         $("div.announcement-date").text(announcementDate.format("DD/MM/YY"));
         $("div.announcement-text").text(announcement['text']);
     } else {
@@ -171,9 +172,15 @@ function showSessionModal(session) {
                 $.ajax({
                     type: "POST",
                     url: "/Session/ToggleRegistration?sessionId=" + session['id'],
+                    success: showToast
                 });
                 $("#sessionModal .close").click();
             }
+            function showToast() {
+                $(".toast-body").text(info['isRegistered'] ? "Succesvol uitgeschreven.": "Succesvol ingeschreven.")
+                $(".toast").toast('show');
+            }
+            
         }
     }
 

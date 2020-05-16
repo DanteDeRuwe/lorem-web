@@ -195,15 +195,21 @@
 
 .modal-announcement .organiser .name {
     font-weight: 500;
-    color: black;
+    color: var(--primary-blue);
     margin-bottom: -0.3rem;
 }
 
 .modal-announcement .organiser-subtitle {
     color: var(--text-lighter-gray);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     size: 0.8rem;
     font-weight: 300;
+}
+
+.announcement-title {
+    color: black;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
 }
 
 .announcement-text {
@@ -266,4 +272,13 @@
 .badge-not-attended {
     color: var(--danger);
     border: 1px solid var(--danger);
+}
+
+.toast {
+    margin-top: 1rem;
+    position: absolute;
+    left:  50%;
+    transform:  translate(-50%, 0);
+    top: 5rem;
+    z-index:99;
 }
