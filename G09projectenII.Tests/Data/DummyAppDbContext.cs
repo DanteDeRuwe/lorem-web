@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using BCr = BCrypt.Net.BCrypt;
 
 namespace G09projectenII.Tests.Data
 {
@@ -11,16 +12,36 @@ namespace G09projectenII.Tests.Data
 
         #region Properties
         public ICollection<Member> Members { get; }
+        public ICollection<Session> Sessions { get; }
         public Member LoginTest { get; }
+        public Session SessionTest { get; }
         #endregion
 
         public DummyAppDbContext()
         {
-            LoginTest = new Member();
-            LoginTest.Username = "test";
-            LoginTest.Password = "test";
+            LoginTest = new Member()
+            {
+                Firstname = "Jan",
+                Lastname = "Janssen",
+                Username = "test",
+                Password = BCr.HashPassword("test", 12),
+                Membertype = 0,
+                Memberstatus = 0
+            };
+
+            SessionTest = new Session()
+            { 
+                Title = "test session",
+                Id = 1,
+                Member = LoginTest,
+                SessionState = new CreatedSessionState()
+            };
 
             Members = new[] { LoginTest };
+            Sessions = new List<Session>
+            {
+                SessionTest
+            };
         }
 
     }
