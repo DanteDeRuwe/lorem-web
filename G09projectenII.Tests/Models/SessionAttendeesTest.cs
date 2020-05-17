@@ -3,7 +3,7 @@ using Xunit;
 
 namespace G09projectenII.Tests.Models
 {
-    public class SessionRegistreesTest
+    public class SessionAttendeesTest
     {
         [Fact]
         public void NewSessionRegistreesWithParameters_InitiatesAllPropertiesCorrectly()
