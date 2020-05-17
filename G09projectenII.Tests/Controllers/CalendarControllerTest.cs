@@ -32,7 +32,10 @@ namespace G09projectenII.Tests.Controllers
             {
                 HttpContext = _context.Object
             };
-            _calendarController = new CalendarController(_sessionRepository.Object, _memberRepository.Object);
+            _calendarController = new CalendarController(_sessionRepository.Object, _memberRepository.Object)
+            {
+                ControllerContext = _controllerContext
+            };
         }
 
         #region --Index--
@@ -54,7 +57,6 @@ namespace G09projectenII.Tests.Controllers
             _sessionRepository.Setup(sr => sr.GetBy(1)).Returns(_dummyContext.SessionTest);
             _context.SetupGet(c => c.User.Identity.Name).Returns("test");
             _memberRepository.Setup(mr => mr.GetBy("test")).Returns(_dummyContext.LoginTest);
-            _calendarController.ControllerContext = _controllerContext;
             
             var result = Assert.IsType<JsonResult>(_calendarController.GetRegistrationStatus(1));
         }
@@ -64,7 +66,6 @@ namespace G09projectenII.Tests.Controllers
         {
             _context.SetupGet(c => c.User.Identity.Name).Returns("test");
             _memberRepository.Setup(mr => mr.GetBy("test")).Returns((Member) null);
-            _calendarController.ControllerContext = _controllerContext;
 
             var result = Assert.IsType<JsonResult>(_calendarController.GetRegistrationStatus(1));
         }
