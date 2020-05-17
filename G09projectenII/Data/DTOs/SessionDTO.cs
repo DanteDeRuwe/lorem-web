@@ -36,7 +36,7 @@ namespace G09projectenII.Models.DTOs
             AvailableRegistrationSpots = session.AvailableRegistrationSpots;
             NumberOfAttendees = session.NumberOfRegistrees;
             NumberOfAttendees = session.NumberOfAttendees;
-            HasStarted = session.hasStarted;
+            HasStarted = session.HasStarted;
             IsOpen = session.IsOpen;
         }
     }

@@ -37,7 +37,7 @@ namespace G09projectenII.Models
 
         public int NumberOfAttendees => SessionAttendees.Count;
 
-        public bool hasStarted => SessionState.ToInt() > 1;
+        public bool HasStarted => SessionState.ToInt() > 1;
 
         public bool IsOpen => SessionState.ToInt() == 1;
 
