@@ -1,4 +1,7 @@
-﻿namespace G09projectenII.Models
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using System.Linq;
+
+namespace G09projectenII.Models
 {
     public class SessionRegistrees
     {
@@ -7,6 +10,8 @@
 
         public Session Session { get; set; }
         public Member Member { get; set; }
+
+        public bool IsAlsoAttendee => Session.SessionAttendees.Any(sa => sa.MemberId == MemberId);
 
         public SessionRegistrees() { }
 

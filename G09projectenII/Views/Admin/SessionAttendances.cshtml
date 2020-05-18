@@ -3,35 +3,72 @@
 @model Session
 
 @{
+    Session s = Model;
     ViewBag.Title = "Aanwezigen beheren";
+
+    var notAttended = s.SessionRegistrees.Where(sr => !sr.IsAlsoAttendee).OrderBy(sr => sr.Member.Username);
+    var attended = s.SessionRegistrees.Where(sr => sr.IsAlsoAttendee).OrderBy(sr => sr.Member.Username);
 }
 
 <link href="~/css/attendances.css" rel="stylesheet">
-
 <section>
-    <div class="panel-group sessions-panel" id="accordion" role="tablist" aria-multiselectable="true">
-        @if (!Model.SessionRegistrees.Any() || Model.SessionRegistrees == null)
-        {
-            <p class="text-muted text-center">Er is niemand ingeschreven voor deze sessie...</p>
-        }
+    @if (!s.SessionRegistrees.Any() || s.SessionRegistrees == null)
+    {
+        <p class="text-muted text-center">Er is niemand ingeschreven voor deze sessie...</p>
+    }
+    else
+    {
+        <div class="row">
 
-        <table>
-            @foreach (var m in Model.SessionRegistrees)
-            {
-                if (!Model.SessionAttendees.Where(sa => sa.MemberId == m.MemberId).Any())
+            <div id="registree-list" class="col-12 col-md-6">
+                <h3 class="d-block mb-4">Ingeschrevenen</h3>
+                @if (!notAttended.Any())
                 {
-                    <tr>
-                        <td>@m.Member.GetFullName()</td>
-                        <td>
-                            <form asp-action="AttendUser" asp-route-sessionId="@Model.Id" asp-route-memberId="@m.MemberId" method="post">
-                                <button type="submit">Aanwezig</button>
-                            </form>
-                        </td>
-                    </tr>
+                    @if (attended.Any())
+                    {
+                        <p class="text-muted text-center">Alle ingeschrevenen zijn gemarkeerd als aanwezig!</p>
+                    }
+
                 }
 
-            }
-        </table>
+                @foreach (var sr in notAttended)
+                {
+                    <div>
+                        <div class="card mb-1">
+                            <div class="card-body">
+                                <header class="card-title float-left">
+                                    <h5>@sr.Member.GetFullName()</h5>
+                                    <small class="text-secondary">@sr.Member.Username</small>
+                                </header>
 
-    </div>
-</section>
+                                <form class="float-right" asp-controller="Admin" asp-action="AttendUser" asp-route-sessionId="@Model.Id" asp-route-memberId="@sr.MemberId" method="post">
+                                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <div id="attendee-list" class="mt-5 mt-md-0 col-12 col-md-6">
+                <h3 class=" d-block mb-4">Aanwezigen</h3>
+                @foreach (var sr in attended)
+                {
+                    <div>
+                        <div class="card mb-1">
+                            <div class="card-body">
+                                <header class="card-title">
+                                    <h5>@sr.Member.GetFullName()</h5>
+                                    <small class="text-secondary">@sr.Member.Username</small>
+                                </header>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    }
+    </section>

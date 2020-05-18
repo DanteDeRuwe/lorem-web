@@ -6,29 +6,7 @@
 @{
     ViewBag.Title = "Sessie kiezen";
 }
-
-
-<style>
-    .card {
-        width: 20rem;
-    }
-
-    @@media(max-width: 768px) {
-        .card {
-            width: 100%;
-        }
-    }
-    a, a:hover {color: black; text-decoration: none;}
-
-    small {
-        display: block;
-        margin-top: -.4rem;
-    }
-
-    .card header {
-        margin-bottom: 1rem;
-    }
-</style>
+<link href="~/css/attendances.css" rel="stylesheet">
 
 <section>
     <div class="d-flex flex-wrap flex-row justify-content-center justify-content-md-start">
@@ -40,7 +18,7 @@
 
         @foreach (var s in Model)
         {
-            <div class="card mr-5 mb-5">
+            <div class="card card-width-20 mr-5 mb-5">
                 <div class="card-body">
                     <header class="card-title line">
                         <h5><a asp-controller="Session" asp-action="Index" asp-route-id="@s.Id">@s.Title</a></h5>
