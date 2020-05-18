@@ -1,4 +1,4 @@
-﻿using G09projectenII.Models;
+using G09projectenII.Models;
 using Xunit;
 
 namespace G09projectenII.Tests.Models
@@ -25,14 +25,6 @@ namespace G09projectenII.Tests.Models
             member.Lastname = "b";
 
             Assert.Equal("a b", member.GetFullName());
-        }
-
-        [Fact]
-        public void ToString_ReturnsFormattedString()
-        {
-            Member member = new Member();
-
-            Assert.Equal("0 |  |  |  | 0 | 0", member.ToString());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using G09projectenII.Models;
+using G09projectenII.Models;
 using Xunit;
 
 namespace G09projectenII.Tests.Models
@@ -78,12 +78,9 @@ namespace G09projectenII.Tests.Models
         }
 
         [Fact]
-        public void ToString_ReturnsFormattedString()
+        public void NextState_SessionStateSwitchesToTheNextState()
         {
-            Session session = new Session();
-
-            Assert.Equal("0 |  |  |  |  | 01/01/0001 | 00:00 | 01/01/0001 | 00:00", session.ToString());
-        }
+            Session session = new Session
 
         [Fact]
         public void NextState_SessionStateSwitchesToTheNextState()
