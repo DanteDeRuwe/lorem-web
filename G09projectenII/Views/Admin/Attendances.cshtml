@@ -1,44 +1,54 @@
 ﻿@using System.Diagnostics
 @using System.Globalization
+@using G09projectenII.Services
 @model ICollection<Session>
 
 @{
     ViewBag.Title = "Sessie kiezen";
 }
 
-<link href="~/css/manageSessions.css" rel="stylesheet">
+
+<style>
+    .card {
+        width: 20rem;
+    }
+
+    @@media(max-width: 768px) {
+        .card {
+            width: 100%;
+        }
+    }
+    a, a:hover {color: black; text-decoration: none;}
+
+    small {
+        display: block;
+        margin-top: -.4rem;
+    }
+
+    .card header {
+        margin-bottom: 1rem;
+    }
+</style>
 
 <section>
-    <div class="panel-group sessions-panel" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="d-flex flex-wrap flex-row justify-content-center justify-content-md-start">
 
         @if (!Model.Any() || Model == null)
         {
-            <p class="text-muted text-center">U heeft geen sessies om te beheren...</p>
+            <p class="text-muted">U heeft geen aanwezigheden te beheren. Sluit hiervoor eerst de inschrijvingen voor een sessie.</p>
         }
 
         @foreach (var s in Model)
         {
-            <div class="panel panel-default">
-
-                <!--Panel Heading-->
-                <div class="panel-heading" role="tab" id="@("heading" + s.Id)">
-                    <div>
-                        <!--Date-->
-                        <span class="session-date">@s.StartDateTime.ToString("ddd d MMM")</span>
-                        <!--Time-->
-                        <span class="session-time">@s.StartDateTime.ToString("HH:mm")</span>
-                        <!--Title-->
-                        <span class="session-title">@s.Title</span>
-                    </div>
-
-                    <div class="right">
-
-                        <!--Manage Attendances-->
-                        <button class="session-state-change btn btn-outline-warning">
-                            <a asp-action="SessionAttendances" asp-route-id="@s.Id">Aanwezigheden beheren</a>
-                        </button>
+            <div class="card mr-5 mb-5">
+                <div class="card-body">
+                    <header class="card-title line">
+                        <h5><a asp-controller="Session" asp-action="Index" asp-route-id="@s.Id">@s.Title</a></h5>
+                        <small class="text-secondary">@s.StartDateTime.ToString("ddd d MMM - HH:mm")</small>
+                    </header>
                     
-                    </div>
+                    <p class="card-text">@s.NumberOfRegistrees ingeschreven <br />@s.NumberOfAttendees aanwezig </p>
+                    <a class="btn btn-outline-warning" asp-action="SessionAttendances" asp-route-id="@s.Id">Aanwezigheden beheren</a>
                 </div>
             </div>
         }
