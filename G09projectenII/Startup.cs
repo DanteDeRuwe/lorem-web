@@ -24,7 +24,7 @@ namespace G09projectenII
         {
 
             // Set the culture
-            CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nl-BE");
 
             // NewtonsoftJson is a library which can handle reference loops (e.g. parent knows child & child knows parent)
             services.AddControllers().AddNewtonsoftJson(options =>
