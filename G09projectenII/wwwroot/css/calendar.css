@@ -274,11 +274,20 @@
     border: 1px solid var(--danger);
 }
 
+
 .toast {
-    margin-top: 1rem;
-    position: absolute;
-    left:  50%;
-    transform:  translate(-50%, 0);
-    top: 5rem;
-    z-index:99;
+    position: fixed;
+    bottom: 2rem;
+    right: 5rem;
+    z-index: 99;
+}
+
+
+@media (max-width: 576px) {
+    .toast {
+        bottom: 5rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 90vw;
+    }
 }
