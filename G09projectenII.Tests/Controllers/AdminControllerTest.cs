@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
-using System.Security.Claims;
 using Xunit;
 
 namespace G09projectenII.Tests.Controllers
@@ -92,7 +91,7 @@ namespace G09projectenII.Tests.Controllers
         [Fact]
         public void SessionAttendances_SessionDoesNotExist_ReturnsNotFoundView()
         {
-            _sessionRepository.Setup(sr => sr.GetBy(1)).Returns((Session) null);
+            _sessionRepository.Setup(sr => sr.GetBy(1)).Returns((Session)null);
 
             var result = Assert.IsType<NotFoundResult>(_adminController.SessionAttendances(1));
         }

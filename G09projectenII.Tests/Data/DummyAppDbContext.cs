@@ -1,8 +1,6 @@
 ﻿using G09projectenII.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using BCr = BCrypt.Net.BCrypt;
 
 namespace G09projectenII.Tests.Data
@@ -30,7 +28,7 @@ namespace G09projectenII.Tests.Data
             };
 
             SessionTest = new Session()
-            { 
+            {
                 Title = "test session",
                 Id = 1,
                 Member = LoginTest,

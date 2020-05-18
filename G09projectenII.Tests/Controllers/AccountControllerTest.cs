@@ -1,20 +1,16 @@
 ﻿using G09projectenII.Controllers;
 using G09projectenII.Models.Repository_Models;
+using G09projectenII.Models.ViewModels;
 using G09projectenII.Tests.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Security.Principal;
-using System.Text;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
-using Xunit;
-using Microsoft.AspNetCore.Mvc;
-using G09projectenII.Models;
-using G09projectenII.Models.ViewModels;
-using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Xunit;
 
 namespace G09projectenII.Tests.Controllers
 {
@@ -77,7 +73,7 @@ namespace G09projectenII.Tests.Controllers
         public void Login_ValidLogin_RedirectsToCalendarIndexView()
         {
             _memberRepository.Setup(m => m.GetAll()).Returns(_dummyContext.Members);
-            _aService.Setup(_ => _.SignInAsync(It.IsAny<HttpContext>(), It.IsAny<String>(), It.IsAny<ClaimsPrincipal>(), It.IsAny<AuthenticationProperties>()))
+            _aService.Setup(_ => _.SignInAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<ClaimsPrincipal>(), It.IsAny<AuthenticationProperties>()))
                      .Returns(Task.FromResult((object)null));
             _sProvider.Setup(_ => _.GetService(typeof(IAuthenticationService)))
                       .Returns(_aService.Object);
@@ -85,12 +81,12 @@ namespace G09projectenII.Tests.Controllers
             {
                 HttpContext = _defaultContext
             };
-            var loginVM = new LoginViewModel()
+            LoginViewModel loginVM = new LoginViewModel()
             {
                 Username = "test",
                 Password = "test"
             };
-            
+
             var result = Assert.IsType<RedirectToActionResult>(_accountController.Login(loginVM));
             Assert.Equal("Index", result?.ActionName);
         }
@@ -99,7 +95,7 @@ namespace G09projectenII.Tests.Controllers
         public void Login_NonValidLogin_ReturnsIndexView()
         {
             _memberRepository.Setup(m => m.GetAll()).Returns(_dummyContext.Members);
-            var loginVM = new LoginViewModel()
+            LoginViewModel loginVM = new LoginViewModel()
             {
                 Username = "arne",
                 Password = "test"
@@ -113,7 +109,7 @@ namespace G09projectenII.Tests.Controllers
         [Fact]
         public void LogOut_RedirectsToCalendarIndexView()
         {
-            _aService.Setup(_ => _.SignOutAsync(It.IsAny<HttpContext>(), It.IsAny<String>(), It.IsAny<AuthenticationProperties>())).Returns(Task.FromResult((object)null));
+            _aService.Setup(_ => _.SignOutAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<AuthenticationProperties>())).Returns(Task.FromResult((object)null));
             _sProvider.Setup(_ => _.GetService(typeof(IAuthenticationService))).Returns(_aService.Object);
             _accountController.ControllerContext = new ControllerContext()
             {

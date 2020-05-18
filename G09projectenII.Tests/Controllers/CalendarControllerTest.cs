@@ -5,10 +5,7 @@ using G09projectenII.Tests.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
 using Xunit;
 
 namespace G09projectenII.Tests.Controllers
@@ -28,7 +25,7 @@ namespace G09projectenII.Tests.Controllers
             _sessionRepository = new Mock<ISessionRepository>();
             _memberRepository = new Mock<IMemberRepository>();
             _context = new Mock<HttpContext>();
-            _controllerContext = new ControllerContext() 
+            _controllerContext = new ControllerContext()
             {
                 HttpContext = _context.Object
             };
@@ -57,7 +54,7 @@ namespace G09projectenII.Tests.Controllers
             _sessionRepository.Setup(sr => sr.GetBy(1)).Returns(_dummyContext.SessionTest);
             _context.SetupGet(c => c.User.Identity.Name).Returns("test");
             _memberRepository.Setup(mr => mr.GetBy("test")).Returns(_dummyContext.LoginTest);
-            
+
             var result = Assert.IsType<JsonResult>(_calendarController.GetRegistrationStatus(1));
         }
 
@@ -65,7 +62,7 @@ namespace G09projectenII.Tests.Controllers
         public void GetRegistrationStatus_MemberDoesNotExist_ReturnsNull()
         {
             _context.SetupGet(c => c.User.Identity.Name).Returns("test");
-            _memberRepository.Setup(mr => mr.GetBy("test")).Returns((Member) null);
+            _memberRepository.Setup(mr => mr.GetBy("test")).Returns((Member)null);
 
             var result = Assert.IsType<JsonResult>(_calendarController.GetRegistrationStatus(1));
         }
@@ -83,7 +80,7 @@ namespace G09projectenII.Tests.Controllers
         [Fact]
         public void GetSessionBy_SessionDoesNotExist_ReturnsJsonResult()
         {
-            _sessionRepository.Setup(sr => sr.GetBy(1)).Returns((Session) null);
+            _sessionRepository.Setup(sr => sr.GetBy(1)).Returns((Session)null);
 
             Assert.Null(_calendarController.GetSessionBy(1));
         }

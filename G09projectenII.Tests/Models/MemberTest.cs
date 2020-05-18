@@ -1,4 +1,4 @@
-using G09projectenII.Models;
+﻿using G09projectenII.Models;
 using Xunit;
 
 namespace G09projectenII.Tests.Models
@@ -19,10 +19,11 @@ namespace G09projectenII.Tests.Models
         [Fact]
         public void GetFullName_ReturnsFormattedString()
         {
-            Member member = new Member();
-
-            member.Firstname = "a";
-            member.Lastname = "b";
+            Member member = new Member
+            {
+                Firstname = "a",
+                Lastname = "b"
+            };
 
             Assert.Equal("a b", member.GetFullName());
         }

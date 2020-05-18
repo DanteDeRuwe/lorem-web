@@ -39,7 +39,7 @@ namespace G09projectenII.Tests.Controllers
         [Fact]
         public void Index_SessionDoesNotExist_MemberExists_ReturnsNotFoundView()
         {
-            _sessionRepository.Setup(sr => sr.GetBy(1)).Returns((Session) null);
+            _sessionRepository.Setup(sr => sr.GetBy(1)).Returns((Session)null);
             _context.SetupGet(c => c.User.Identity.Name).Returns("test");
             _memberRepository.Setup(mr => mr.GetBy("test")).Returns(_dummyContext.LoginTest);
 
@@ -51,7 +51,7 @@ namespace G09projectenII.Tests.Controllers
         {
             _sessionRepository.Setup(sr => sr.GetBy(1)).Returns(_dummyContext.SessionTest);
             _context.SetupGet(c => c.User.Identity.Name).Returns("test");
-            _memberRepository.Setup(mr => mr.GetBy("test")).Returns((Member) null);
+            _memberRepository.Setup(mr => mr.GetBy("test")).Returns((Member)null);
 
             var result = Assert.IsType<ViewResult>(_sessionController.Index(1));
             var session = Assert.IsType<Session>(result.Model);
