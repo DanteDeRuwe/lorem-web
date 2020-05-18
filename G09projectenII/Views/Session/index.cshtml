@@ -7,7 +7,6 @@
     Session s = Model; //Rename the model to just "s"
 
     ViewBag.Title = s.Title;
-    CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 
     bool userIsOwnerOrHeadAdmin = User.IsInRole("HeadAdmin") || (User.IsInRole("Admin") && s.Member.Username.Equals(User.Identity.Name));
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace G09projectenII
 {
@@ -21,6 +22,9 @@ namespace G09projectenII
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Set the culture
+            CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 
             // NewtonsoftJson is a library which can handle reference loops (e.g. parent knows child & child knows parent)
             services.AddControllers().AddNewtonsoftJson(options =>
