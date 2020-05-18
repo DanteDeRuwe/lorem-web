@@ -34,14 +34,17 @@
                 @foreach (var sr in notAttended)
                 {
                     <div>
-                        <div class="card mb-1">
+                        <div class="card mb-2">
                             <div class="card-body">
                                 <header class="card-title float-left">
-                                    <h5>@sr.Member.GetFullName()</h5>
-                                    <small class="text-secondary">@sr.Member.Username</small>
+                                    @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = sr.Member, cssClass="d-inline align-middle mr-4" })
+                                    <div class="d-inline-block align-middle">
+                                        <h5>@sr.Member.GetFullName()</h5>
+                                        <small class="text-secondary">@sr.Member.Username</small>
+                                    </div>
                                 </header>
 
-                                <form class="float-right" asp-controller="Admin" asp-action="AttendUser" asp-route-sessionId="@Model.Id" asp-route-memberId="@sr.MemberId" method="post">
+                                <form class="float-right align-middle" asp-controller="Admin" asp-action="AttendUser" asp-route-sessionId="@Model.Id" asp-route-memberId="@sr.MemberId" method="post">
                                     <button type="submit" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
                                 </form>
                             </div>
@@ -56,11 +59,14 @@
                 @foreach (var sr in attended)
                 {
                     <div>
-                        <div class="card mb-1">
+                        <div class="card mb-2">
                             <div class="card-body">
-                                <header class="card-title">
-                                    <h5>@sr.Member.GetFullName()</h5>
-                                    <small class="text-secondary">@sr.Member.Username</small>
+                                <header class="card-title float-left">
+                                    @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = sr.Member, cssClass = "d-inline align-middle mr-4" })
+                                    <div class="d-inline-block align-middle">
+                                        <h5>@sr.Member.GetFullName()</h5>
+                                        <small class="text-secondary">@sr.Member.Username</small>
+                                    </div>
                                 </header>
                             </div>
                         </div>
