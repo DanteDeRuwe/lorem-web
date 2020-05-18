@@ -1,4 +1,5 @@
 ﻿using G09projectenII.Models;
+using System.Linq;
 using Xunit;
 
 namespace G09projectenII.Tests.Models
@@ -30,14 +31,6 @@ namespace G09projectenII.Tests.Models
             Session session = new Session();
 
             Assert.Equal(0, session.NumberOfAttendees);
-        }
-
-        [Fact]
-        public void AvailableRegistrationSpots_ReturnsCapacityMinusAmountOfRegistrees()
-        {
-            Session session = new Session { Capacity = 2 };
-
-            Assert.Equal(2, session.AvailableRegistrationSpots);
         }
 
         [Fact]
@@ -78,16 +71,16 @@ namespace G09projectenII.Tests.Models
             Session session = new Session { SessionState = new CreatedSessionState() };
 
             session.NextState();
-            Assert.Equal(1, session.SessionState.ToInt());
+            Assert.IsType<OpenSessionState>(session.SessionState);
 
             session.NextState();
-            Assert.Equal(2, session.SessionState.ToInt());
+            Assert.IsType<ClosedSessionState>(session.SessionState);
 
             session.NextState();
-            Assert.Equal(3, session.SessionState.ToInt());
+            Assert.IsType<FinishedSessionState>(session.SessionState);
 
             session.NextState();
-            Assert.Equal(3, session.SessionState.ToInt());
+            Assert.IsType<FinishedSessionState>(session.SessionState); //stays finished
         }
 
         [Fact]
@@ -112,9 +105,20 @@ namespace G09projectenII.Tests.Models
         public void RegisterUser_ValidRegistration_RegistersMemberCorrectly()
         {
             Session session = new Session { SessionState = new OpenSessionState(), Capacity = 1 };
-            session.RegisterUser(new Member());
+            Member member = new Member() { MemberId = 1 };
+            session.RegisterUser(member);
 
             Assert.Equal(1, session.NumberOfRegistrees);
+            Assert.Contains(member, session.SessionRegistrees.Select(sr => sr.Member));
+        }
+
+        [Fact]
+        public void RegisterUser_ChangesAvailableRegistrationSpots()
+        {
+            Session session = new Session { Capacity = 1, SessionState = new OpenSessionState() };
+            session.RegisterUser(new Member());
+
+            Assert.Equal(0, session.AvailableRegistrationSpots);
         }
 
         [Fact]
