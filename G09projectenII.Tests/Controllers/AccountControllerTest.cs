@@ -95,11 +95,8 @@ namespace G09projectenII.Tests.Controllers
         public void Login_NonValidLogin_ReturnsIndexView()
         {
             _memberRepository.Setup(m => m.GetAll()).Returns(_dummyContext.Members);
-            LoginViewModel loginVM = new LoginViewModel()
-            {
-                Username = "arne",
-                Password = "test"
-            };
+
+            LoginViewModel loginVM = new LoginViewModel() { Username = "arne", Password = "test" };
 
             var result = Assert.IsType<ViewResult>(_accountController.Login(loginVM));
         }
@@ -111,10 +108,7 @@ namespace G09projectenII.Tests.Controllers
         {
             _aService.Setup(_ => _.SignOutAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<AuthenticationProperties>())).Returns(Task.FromResult((object)null));
             _sProvider.Setup(_ => _.GetService(typeof(IAuthenticationService))).Returns(_aService.Object);
-            _accountController.ControllerContext = new ControllerContext()
-            {
-                HttpContext = _defaultContext
-            };
+            _accountController.ControllerContext = new ControllerContext() { HttpContext = _defaultContext };
 
             var result = Assert.IsType<RedirectToActionResult>(_accountController.Logout());
         }

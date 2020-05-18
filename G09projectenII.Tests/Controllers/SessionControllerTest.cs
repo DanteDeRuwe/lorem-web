@@ -25,14 +25,8 @@ namespace G09projectenII.Tests.Controllers
             _sessionRepository = new Mock<ISessionRepository>();
             _memberRepository = new Mock<IMemberRepository>();
             _context = new Mock<HttpContext>();
-            _controllerContext = new ControllerContext()
-            {
-                HttpContext = _context.Object
-            };
-            _sessionController = new SessionController(_sessionRepository.Object, _memberRepository.Object)
-            {
-                ControllerContext = _controllerContext
-            };
+            _controllerContext = new ControllerContext() { HttpContext = _context.Object };
+            _sessionController = new SessionController(_sessionRepository.Object, _memberRepository.Object) { ControllerContext = _controllerContext };
         }
 
         #region --Index--
