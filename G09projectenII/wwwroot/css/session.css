@@ -140,10 +140,18 @@ section header {
     color: var(--success);
 }
 
+.session-extra-info-and-buttons {
+    height: 2rem;
+}
+
+.registree-modal-button-container {
+    width: 100%;
+    text-align: right;
+}
+
 /*
     ANNOUNCEMENTS
 */
-
 .announcement {
     margin-bottom: 1rem;
 }

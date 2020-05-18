@@ -8,7 +8,7 @@
 
     ViewBag.Title = s.Title;
 
-    bool userIsOwnerOrHeadAdmin = User.IsInRole("HeadAdmin") || (User.IsInRole("Admin") && s.Member.Username.Equals(User.Identity.Name));
+    bool userIsOwnerOrHeadAdmin = User.Identity.IsAuthenticated && (User.IsInRole("HeadAdmin") || (User.IsInRole("Admin") && s.Member.Username.Equals(User.Identity.Name)));
 }
 
 <link href="~/css/session.css" rel="stylesheet">
@@ -82,126 +82,134 @@
 
             </div>
 
-            <!--Extra info-->
-            <div class="session-extra-info">
-                <div class="session-organiser">
-                    <span class="icon">
-                        <i class="fas fa-user"></i>
-                    </span>
-                    <span>@Html.Raw(s.Member.GetFullName())</span>
+            <div class="session-extra-info-and-buttons">
+                <!--Extra info-->
+                <div class="session-extra-info">
+                    <div class="session-organiser">
+                        <span class="icon">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <span>@Html.Raw(s.Member.GetFullName())</span>
+                    </div>
+
+                    @if (userIsOwnerOrHeadAdmin)
+                    {
+                        <div>
+                            <span> <i class="fas fa-pencil-alt"></i></span>
+                            <span>@ViewBag.ExtraInfoText</span>
+                        </div>
+                    }
                 </div>
 
-                @if (userIsOwnerOrHeadAdmin)
+
+
+
+                @if (User.Identity.IsAuthenticated)
                 {
-                    <div>
-                        <span> <i class="fas fa-pencil-alt"></i></span>
-                        <span>@ViewBag.ExtraInfoText</span>
+                    <!--Buttons-->
+                    <div class="session-buttons">
+                        @if (s.SessionState is CreatedSessionState)
+                        {
+                            <div class="register">
+                                <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
+                            </div>
+                        }
+
+                        @if (s.SessionState is OpenSessionState)
+                        {
+                            <div class="register">
+                                <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
+                                    <button type="submit" class="btn btn-primary" @{if (s.AvailableRegistrationSpots <= 0 && !ViewBag.MemberIsRegistered) { <text> disabled</text> } }>
+                                        @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
+                                    </button>
+                                </form>
+
+                                @if (!ViewBag.MemberIsRegistered)
+                                {
+                                    <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
+                                }
+                            </div>
+                        }
+
+                        @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+                        {
+                            <div class="attendance">
+                                @if (ViewBag.MemberHasAttended)
+                                {
+                                    <span class="has-user-attended badge badge-pill badge-attendance badge-attended">
+                                        <i class="fas fa-check"></i> Aanwezig
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="has-user-attended badge badge-pill badge-attendance badge-not-attended">
+                                        <i class="fas fa-times"></i> Niet Aanwezig
+                                    </span>
+                                }
+
+                            </div>
+                        }
+                    </div>
+                }
+                else if (s.SessionState is OpenSessionState)
+                {
+                    <div class="not-logged-in-register">
+                        <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven. (nog @s.AvailableRegistrationSpots vrije plaatsen)</span>
                     </div>
                 }
             </div>
 
-
-            @if (User.Identity.IsAuthenticated)
+            @if (userIsOwnerOrHeadAdmin && s.SessionRegistrees.Any())
             {
-                <!--Buttons-->
-        <div class="session-buttons">
-            @if (s.SessionState is CreatedSessionState)
-            {
-                <div class="register">
-                    <button type="button" class="btn btn-primary" disabled>Inschrijven nog niet mogelijk</button>
-                </div>
-            }
+                string registrationsOrAttendances = s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState ? "Aanwezigen" : "Inschrijvingen";
 
-            @if (s.SessionState is OpenSessionState)
-            {
-                <div class="register">
-                    <form method="post" asp-action="ToggleRegistration" asp-route-sessionId="@s.Id">
-                        <button type="submit" class="btn btn-primary" @{if (s.AvailableRegistrationSpots <= 0 && !ViewBag.MemberIsRegistered) { <text> disabled</text> } }>
-                            @(ViewBag.MemberIsRegistered ? "Uitschrijven" : "Inschrijven")
-                        </button>
-                    </form>
+            <div class="registree-modal-button-container">
+                <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">@registrationsOrAttendances</button>
+            </div>
 
 
-                    <span class="session-free-spaces">Nog @s.AvailableRegistrationSpots vrije plaatsen</span>
-                </div>
-            }
-
-            @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
-            {
-                <div class="attendance">
-                    @if (ViewBag.MemberHasAttended)
-                    {
-                        <span class="has-user-attended badge badge-pill badge-attendance badge-attended">
-                            <i class="fas fa-check"></i> Aanwezig
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="has-user-attended badge badge-pill badge-attendance badge-not-attended">
-                            <i class="fas fa-times"></i> Niet Aanwezig
-                        </span>
-                    }
-
-                </div>
-            }
-        </div>
-
-                @if (userIsOwnerOrHeadAdmin && s.SessionRegistrees.Any())
-                {
-                    string registrationsOrAttendances = s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState ? "Aanwezigen" : "Inschrijvingen";
-                    
-                    <div class="float-right">
-                        <button type="button" class="btn btn-outline-secondary mt-2" id="registree-modal-btn" onclick="$('#registree-modal').modal();">@registrationsOrAttendances</button>
-                    </div>
-
-
-                    <!--Modal-->
-                    <div class="modal" tabindex="-1" role="dialog" id="registree-modal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">
-                                        @registrationsOrAttendances
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="list-group list-group-flush">
-                                        @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member))
-                                        {
-                                            <li class="list-group-item">
-                                                <div>
-                                                    @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
-                                                    @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+                <!--Modal-->
+                <div class="modal" tabindex="-1" role="dialog" id="registree-modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    @registrationsOrAttendances
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="list-group list-group-flush">
+                                    @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member))
+                                    {
+                                        <li class="list-group-item">
+                                            <div>
+                                                @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = m })
+                                                @if (s.SessionState is ClosedSessionState || s.SessionState is FinishedSessionState)
+                                                {
+                                                    @if (s.SessionAttendees.Select(sa => sa.Member).Contains(m))
                                                     {
-                                                        @if (s.SessionAttendees.Select(sa => sa.Member).Contains(m))
-                                                        {
-                                                            <i class="fas fa-check-circle pl-1 attended-icon"></i>
-                                                        }
-                                                        else
-                                                        {
-                                                            <i class="fas fa-times-circle pl-1 absent-icon"></i>
-                                                        }
+                                                        <i class="fas fa-check-circle pl-1 attended-icon"></i>
                                                     }
-                                                    <span class="pl-1">@m.GetFullName()</span>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                                                    else
+                                                    {
+                                                        <i class="fas fa-times-circle pl-1 absent-icon"></i>
+                                                    }
+                                                }
+                                                <span class="pl-1">@m.GetFullName()</span>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
-                }
-            }
-            else if (s.SessionState is OpenSessionState)
-            {
-                <div class="not-logged-in-register">
-                    <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven. (nog @s.AvailableRegistrationSpots vrije plaatsen)</span>
                 </div>
             }
+
+
         </div>
     </section>
 
