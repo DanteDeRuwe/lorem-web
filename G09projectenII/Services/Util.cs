@@ -4,14 +4,15 @@ using System;
 
 namespace G09projectenII.Services
 {
-    public class Util
+    public static class Util
     {
-        public static ValueConverter<DateTime, string> DateConverter() =>
+
+        public static ValueConverter<DateTime, string> DateConverter =>
+            // Gives a value converter for dates to string (for use in the mappers)
             new ValueConverter<DateTime, string>(
                 v => v.ToString("O"),
                 v => DateTime.Parse(v)
             );
-
 
         public static string ExtraSessionInfo(Session session) => session.SessionState switch
         {

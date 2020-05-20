@@ -8,7 +8,7 @@ namespace G09projectenII.Models.DTOs
 
         public MemberDTO(Member member)
         {
-            Name = member.GetFullName();
+            Name = member.FullName;
             Profilepicpath = member.Profilepicpath;
             Username = member.Username;
         }

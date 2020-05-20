@@ -28,7 +28,7 @@
     <span class="legend-item"><span class="text-danger">&bull;</span>Afgelopen</span>
 </div>
 
-<!-- Modal -->
+<!-- Modal, this gets filled in by calendar.js-->
 <div class="modal fade" id="sessionModal" role="dialog">
     <div class="modal-dialog">
 
@@ -44,27 +44,19 @@
             <div class="modal-body">
                 <div class="modal-practical-info row">
                     <div class="modal-date text-center">
-                        <span class="icon">
-                            <i class="far fa-calendar-alt"></i>
-                        </span>
+                        <span class="icon"><i class="far fa-calendar-alt"></i></span>
                         <span class="info"></span>
                     </div>
                     <div class="modal-time text-center">
-                        <span class="icon">
-                            <i class="far fa-clock"></i>
-                        </span>
+                        <span class="icon"><i class="far fa-clock"></i></span>
                         <span class="info"></span>
                     </div>
                     <div class="modal-location text-center">
-                        <span class="icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </span>
+                        <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
                         <span class="info"></span>
                     </div>
                     <div class="modal-speaker text-center">
-                        <span class="icon">
-                            <i class="fas fa-microphone-alt"></i>
-                        </span>
+                        <span class="icon"><i class="fas fa-microphone-alt"></i></span>
                         <span class="info"></span>
                     </div>
                 </div>
@@ -74,9 +66,7 @@
                 </div>
                 <div class="modal-extra-info">
                     <div class="modal-organiser">
-                        <span class="icon">
-                            <i class="fas fa-user"></i>
-                        </span>
+                        <span class="icon"><i class="fas fa-user"></i></span>
                         <span class="info"></span>
                     </div>
                 </div>
@@ -114,10 +104,10 @@
                 }
                 else
                 {
-                <div class="not-logged-in-register">
-                    <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven.</span>
-                    <span class="not-logged-in-session-free-spaces"></span>
-                </div>
+                    <div class="not-logged-in-register">
+                        <a asp-controller="Account" asp-action="Index">Log in</a><span>om je in te schrijven.</span>
+                        <span class="not-logged-in-session-free-spaces"></span>
+                    </div>
                 }
                 <a class="see-more-btn btn btn-outline-secondary">Zie meer ...</a>
             </div>
@@ -125,6 +115,19 @@
         </div>
     </div>
 </div>
+
+<!-- Toast for succesful registration/unregistration -->
+<div class="toast" role="alert" data-delay="3000" style="">
+    <div class="toast-header">
+        <strong class="mr-auto">Registratie</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+    </div>
+</div>
+
 
 <script>
     let firstEventLoaded = false;
@@ -136,7 +139,8 @@
                 locale: "nl",
                 fixedWeekCount: false,
                 eventClick(info) {
-                    loadModal(info.event.id);
+                    //loads the modal on click of an event
+                    loadModal(info.event.id); 
                 },
                 datesRender(info) {
                     loadLegend();
@@ -164,17 +168,18 @@
 
                 <text>
                     starttime = new Date(@s.StartDateTime.Year,
-                        @s.StartDateTime.Month-1, //stupid js months -_-
+                        @s.StartDateTime.Month-1,
                         @s.StartDateTime.Day.ToString(),
                         @s.StartDateTime.Hour,
                         @s.StartDateTime.Minute);
 
                     endtime = new Date(@s.EndDateTime.Year,
-                        @s.EndDateTime.Month-1, //stupid js months -_-
+                        @s.EndDateTime.Month-1,
                         @s.EndDateTime.Day.ToString(),
                         @s.EndDateTime.Hour,
                         @s.EndDateTime.Minute);
 
+                    // add calendar events
                     calendar.addEvent({
                         title: "@Html.Raw(s.Title)",
                         start: starttime,
@@ -187,17 +192,10 @@
                 </text>
             }
 
+
+            //Render the calendar
             calendar.render();
         });
 </script>
 
-<div class="toast" role="alert" data-delay="3000" style="">
-    <div class="toast-header">
-        <strong class="mr-auto">Registratie</strong>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
-            <span>&times;</span>
-        </button>
-    </div>
-    <div class="toast-body">
-    </div>
-</div>
+

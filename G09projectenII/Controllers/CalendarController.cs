@@ -31,12 +31,9 @@ namespace G09projectenII.Controllers
         public JsonResult GetRegistrationStatus(int sessionId)
         {
             var member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
-            if (member == null)
-            {
-                return Json("");
-            }
-
             var session = _sessionRepository.GetBy(sessionId);
+
+            if (member == null) return Json("");
 
             bool hasAttended = session.SessionAttendees.Any(sa => sa.MemberId == member.MemberId);
             bool isRegistered = session.SessionRegistrees.Any(sr => sr.MemberId == member.MemberId);

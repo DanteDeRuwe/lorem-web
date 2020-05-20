@@ -101,7 +101,8 @@ namespace G09projectenII
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Calendar}/{action=Index}/{id?}");
+                    pattern: "{controller=Calendar}/{action=Index}/{id?}"
+                );
             });
         }
     }

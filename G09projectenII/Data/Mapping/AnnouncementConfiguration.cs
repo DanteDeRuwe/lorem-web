@@ -30,7 +30,7 @@ namespace G09projectenII.Data.Mapping
             builder.Property(e => e.Timestamp)
                 .HasColumnName("TIMESTAMP")
                 .HasMaxLength(255)
-                .HasConversion(Util.DateConverter())
+                .HasConversion(Util.DateConverter)
                 .IsUnicode(false);
 
             builder.Property(e => e.Title)

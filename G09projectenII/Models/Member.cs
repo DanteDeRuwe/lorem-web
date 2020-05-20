@@ -13,6 +13,8 @@ namespace G09projectenII.Models
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public string FullName => $"{Firstname} {Lastname}";
+
         public ICollection<Announcement> Announcements { get; set; }
         public ICollection<Session> Sessions { get; set; }
         public ICollection<SessionAttendees> SessionAttendees { get; set; }
@@ -25,8 +27,6 @@ namespace G09projectenII.Models
             SessionAttendees = new HashSet<SessionAttendees>();
             SessionRegistrees = new HashSet<SessionRegistrees>();
         }
-
-        public string GetFullName() => $"{Firstname} {Lastname}";
 
         public override string ToString() => string.Join(" | ", MemberId, Username, Firstname, Lastname, Memberstatus, Membertype);
     }

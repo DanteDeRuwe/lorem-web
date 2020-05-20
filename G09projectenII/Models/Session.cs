@@ -32,13 +32,9 @@ namespace G09projectenII.Models
         // Calculated Properties
         public int NumberOfRegistrees => SessionRegistrees.Count();
         public int AvailableRegistrationSpots => (Capacity - SessionRegistrees.Count);
-
         public Announcement MostRecentAnnouncement => Announcements.OrderBy(a => a.Timestamp).LastOrDefault();
-
         public int NumberOfAttendees => SessionAttendees.Count;
-
         public bool HasStarted => SessionState.ToInt() > 1;
-
         public bool IsOpen => SessionState.ToInt() == 1;
 
         public Session()

@@ -39,7 +39,7 @@
                                 <header class="card-title float-left">
                                     @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = sr.Member, cssClass="d-inline align-middle mr-4" })
                                     <div class="d-inline-block align-middle">
-                                        <h5>@sr.Member.GetFullName()</h5>
+                                        <h5>@sr.Member.FullName</h5>
                                         <small class="text-secondary">@sr.Member.Username</small>
                                     </div>
                                 </header>
@@ -64,7 +64,7 @@
                                 <header class="card-title float-left">
                                     @await Component.InvokeAsync("ProfilePic", new { width = 20, height = 20, rounded = true, member = sr.Member, cssClass = "d-inline align-middle mr-4" })
                                     <div class="d-inline-block align-middle">
-                                        <h5>@sr.Member.GetFullName()</h5>
+                                        <h5>@sr.Member.FullName</h5>
                                         <small class="text-secondary">@sr.Member.Username</small>
                                     </div>
                                 </header>

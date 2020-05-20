@@ -25,7 +25,7 @@ namespace G09projectenII.Tests.Models
                 Lastname = "b"
             };
 
-            Assert.Equal("a b", member.GetFullName());
+            Assert.Equal("a b", member.FullName);
         }
     }
 }

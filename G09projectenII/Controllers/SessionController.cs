@@ -28,11 +28,8 @@ namespace G09projectenII.Controllers
 
             if (member != null)
             {
-                ViewBag.MemberIsRegistered = session.SessionRegistrees
-                    .Any(r => r.MemberId == member.MemberId);
-
-                ViewBag.MemberHasAttended = session.SessionAttendees
-                    .Any(a => a.MemberId == member.MemberId);
+                ViewBag.MemberIsRegistered = session.SessionRegistrees.Any(r => r.MemberId == member.MemberId);
+                ViewBag.MemberHasAttended = session.SessionAttendees.Any(a => a.MemberId == member.MemberId);
             }
 
             ViewBag.ExtraInfoText = Util.ExtraSessionInfo(session);
@@ -45,15 +42,11 @@ namespace G09projectenII.Controllers
         {
             var member = _memberRepository.GetBy(HttpContext.User.Identity.Name);
             var session = _sessionRepository.GetBy(sessionId);
-            if (session.SessionRegistrees.Any(r => r.MemberId == member.MemberId))
-            {
-                session.UnregisterUser(member);
-            }
-            else
-            {
-                session.RegisterUser(member);
 
-            }
+            if (session.SessionRegistrees.Any(r => r.MemberId == member.MemberId))
+                session.UnregisterUser(member);
+            else
+                session.RegisterUser(member);
 
             _sessionRepository.SaveChanges();
             return RedirectToAction("Index", new { id = sessionId });

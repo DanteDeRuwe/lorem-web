@@ -25,7 +25,7 @@ namespace G09projectenII.Controllers
         {
             List<Session> nonFinishedSessions =
                 _sessionRepository.GetAll()
-                    .Where(s => s.SessionState.ToInt() != 3)
+                    .Where(s => !(s.SessionState is FinishedSessionState))
                     .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
                     .OrderBy(s => s.StartDateTime)
                     .ToList();
@@ -37,7 +37,7 @@ namespace G09projectenII.Controllers
         {
             List<Session> openSessions =
                 _sessionRepository.GetAll()
-                    .Where(s => s.SessionState.ToInt() == 2)
+                    .Where(s => s.SessionState is OpenSessionState)
                     .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
                     .OrderBy(s => s.StartDateTime)
                     .ToList();
@@ -49,10 +49,7 @@ namespace G09projectenII.Controllers
         public IActionResult SessionAttendances(int id)
         {
             var session = _sessionRepository.GetBy(id);
-
-            if (session == null) return NotFound();
-
-            return View(session);
+            return session == null ? (IActionResult)NotFound() : View(session);
         }
 
 
