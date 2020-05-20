@@ -182,7 +182,7 @@
                             </div>
                             <div class="modal-body">
                                 <ul class="list-group list-group-flush">
-                                    @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member))
+                                    @foreach (Member m in s.SessionRegistrees.Select(sr => sr.Member).OrderBy(m => m.Username))
                                     {
                                         <li class="list-group-item">
                                             <div>
@@ -199,6 +199,7 @@
                                                     }
                                                 }
                                                 <span class="pl-1">@m.GetFullName()</span>
+                                                <small class="text-muted">@m.Username</small>
                                             </div>
                                         </li>
                                     }
