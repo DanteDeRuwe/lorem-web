@@ -94,6 +94,11 @@ function showSessionModal(session) {
 
         $("img.profile-picture").attr("src", author["profilepicpath"]);
         $("div.organiser>.name").text(author["name"]);
+        if (author["name"] === session['organiser']['name']) {
+            $("div.organiser>.organiser-subtitle").css("visibility", "");
+        } else {
+            $("div.organiser>.organiser-subtitle").css("visibility", "hidden");
+        }
         $("div.announcement-title").text(announcement["title"]);
         $("div.announcement-date").text(announcementDate.format("DD/MM/YY"));
         $("div.announcement-text").text(announcement['text']);
