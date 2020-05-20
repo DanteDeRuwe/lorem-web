@@ -24,7 +24,7 @@ namespace G09projectenII.ViewComponents
                 CssClass = cssClass,
                 // Use placeholder avatar if the member doesn't have a profile picture
                 ProfilePicPath = string.IsNullOrEmpty(member?.Profilepicpath) ?
-                "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" : member.Profilepicpath
+                "/img/avatar.png" : member.Profilepicpath
             });
         }
     }
