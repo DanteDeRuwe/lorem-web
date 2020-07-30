@@ -35,14 +35,14 @@ namespace G09projectenII.Controllers
 
         public IActionResult Attendances()
         {
-            List<Session> openSessions =
+            List<Session> closedSessions =
                 _sessionRepository.GetAll()
-                    .Where(s => s.SessionState is OpenSessionState)
+                    .Where(s => s.SessionState is ClosedSessionState)
                     .Where(s => s.Member.Username.Equals(User.Identity.Name) || User.IsInRole("HeadAdmin"))
                     .OrderBy(s => s.StartDateTime)
                     .ToList();
 
-            return View(openSessions);
+            return View(closedSessions);
         }
 
         [Route("Admin/Session/{id}/Attendances")]
