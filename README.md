@@ -1,98 +1,49 @@
-# Projecten Workshops II - Dossier .NET - G09
-> 7 mei 2020 - 09:00
+# Lorem web app
+> more info on https://deruwe.me/projects/lorem
 
-## 1. Teamleden
+## About the project
 
-| Naam              | Github                                                      | Email                                                                           |
-| :---------------- | :---------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| Sam Brysbaert     | [brysbaertsam](https://github.com/brysbaertsam)             | [sam.brysbaert@student.hogent.be](mailto:sam.brysbaert@student.hogent.be)       |
-| Dante De Ruwe     | [dantederuwe-hogent](https://github.com/dantederuwe-hogent) | [dante.deruwe@student.hogent.be](mailto:dante.deruwe@student.hogent.be)         |
-| Arne De Schrijver | [ArneDeSchrijver](https://github.com/ArneDeSchrijver)       | [arne.deschrijver@student.hogent.be](mailto:arne.deschrijver@student.hogent.be) |
-| Liam Spitaels     | [liamspitaels](https://github.com/liamspitaels)             | [liam.spitaels@student.hogent.be](mailto:liam.spitaels@student.hogent.be)       |
+Lorem is an event management system for events organized by the IT Lab of Ghent University College. The events are added in a desktop application by teachers and staff, and students can register for these events in a web application. Staff can also manage attendances, as certain events reward the students with extra credits for their attendance.
+  
+This project was built for the course "Projects and workshops II" of my education in Applied Information technology. It is for educational purposes only.
 
+## Demo
 
-### 2.1 Huidige versie (demo)
-> U kunt op elke afbeelding klikken om deze in volledige grootte te zien
+[<img src="https://lh3.googleusercontent.com/proxy/baSGIcmaXtHTUo-d7iBUd61ppfnUN9nrOqVLd2MMf53-5NrqlE7JwoXRtiopSkOsJUWgo1FlPzfTLEMPqdiLxwIhxiFQteedIauHp9iokLURWk2pUPAeqn_6k2fWZrzD0pK2sho" width="200"/>](https://www.youtube.com/watch?v=FLArvyB73Ik)
 
-#### Inlogscherm
-<a target="_blank" href="https://i.imgur.com/sCHOhlF.png">
-<figure class="image">
-  <img src="https://i.imgur.com/sCHOhlF.png">
-</figure>
-</a>
+<br><br>
 
-#### Kalenderscherm
-Op het hoofdscherm krijgt u een overzicht van alle ingeplande sessies in een kalender. Aan de kleurenlegende kunt u zien welke sessies zich in welke staat bevinden. Sessies die aangemaakt zijn, zijn blauw; daarna doorlopen ze groen (open), oranje (gesloten) en rood (afgesloten).
+## Screenshots
 
-<a target="_blank" href="https://i.imgur.com/6qQgGBY.png">
-<figure class="image">
-  <img src="https://i.imgur.com/6qQgGBY.png">
-</figure>
-</a>
+### Web Application
 
-Door op een sessie te klikken kunt u een overzichtje van die sessie bekijken. 
-Alle nodige informatie is weergegeven, alsook de meest recente aankondiging (indien van toepassing)
-<a target="_blank" href="https://i.imgur.com/0in3jA4.png">
-<figure class="image">
-  <img src="https://i.imgur.com/0in3jA4.png">
-</figure>
-</a>
+.NET Core MVC application
 
-<a target="_blank" href="https://i.imgur.com/4sOLnRx.png">
-<figure class="image">
-  <img src="https://i.imgur.com/4sOLnRx.png">
-</figure>
-</a>
+<div class="site-project-single-images" style="margin-top:-1rem">
 
-Als u meer info en alle aankondigingen zou willen raadplegen, kunt u vervolgens op de `Zie meer...` knop drukken. (Deze functionaliteit is nog niet af, zie "2.2 Plannen").
+![](https://i.imgur.com/jAsqFfm.png)
+![](https://i.imgur.com/KjQqKAz.png)
+![](https://i.imgur.com/su3uba2.png)
+![](https://i.imgur.com/lTPWO9R.png)
+![](https://i.imgur.com/rfUKEBv.png)
+![](https://i.imgur.com/P20WTQr.png)
 
-Als de sessie geopend is, kan de gebruiker zich inschrijven. Na het sluiten en afsluiten van de sessie kan de gebruiker zien of hij aanwezig was op deze sessie of niet:
+</div>
 
-<a target="_blank" href="https://i.imgur.com/HLKEY8n.png">
-<figure class="image">
-  <img src="https://i.imgur.com/HLKEY8n.png">
-</figure>
-</a>
+### Desktop application
 
-#### Sessies Beheren
+Modular JavaFX desktop application
 
-Als verantwoordelijke of hoofdverantwoordelijke heeft u naast het kalenderzicht nog andere opties: de navigatiebalk toont deze opties enkel als u er toegang tot heeft.
+<div class="site-project-single-images" style="margin-top:-1rem">
 
-<a target="_blank" href="https://i.imgur.com/b0jPOhE.png">
-<figure class="image">
-  <img src="https://i.imgur.com/b0jPOhE.png">
-</figure>
-</a>
+![](https://i.imgur.com/1OkXask.png)
+![](https://i.imgur.com/l5OgMdA.png)
+![](https://i.imgur.com/bz4AF75.png)
+![](https://i.imgur.com/aCrWrzh.png)
 
-De `Sessies Beheren` pagina is enkel toegankelijk voor de (hoofd)verantwoordelijke.
+</div>
 
-De hoofdverantwoordelijke krijgt hier een overzicht van alle nog niet afgesloten sessies, gesorteerd op datum, te zien. Een gewone verantwoordelijke ziet enkel de sessies die hij/zij zelf heeft aangemaakt en die ook nog niet zijn afgesloten.
-Bij elke sessie is er rechts een knop waarop je kan klikken om de sessie van staat te veranderen. U kunt ook elke sessie openklappen om meer info te zien.
-
-<a target="_blank" href="https://i.imgur.com/P9flvbY.png">
-<figure class="image">
-  <img src="https://i.imgur.com/P9flvbY.png">
-</figure>
-</a>
-
-<a target="_blank" href="https://i.imgur.com/FyOlveF.png">
-<figure class="image">
-  <img src="https://i.imgur.com/FyOlveF.png">
-</figure>
-</a>
-
-<a target="_blank" href="https://i.imgur.com/125iUtV.png">
-<figure class="image">
-  <img src="https://i.imgur.com/125iUtV.png">
-</figure>
-</a>
-
-### 2.2 Plannen
-We zouden graag de logica voor de aanwezigheden en inschrijvingen te registreren implementeren, hierbij hoort ook een scherm waarmee we de aanwezigheden kunnen valideren en registreren. Verder zal er ook meer naar testen gekeken worden. Ook willen we nog een scherm maken om de details van een sessie te kunnen weergeven alsook alle aankondigingen van die sessie.
-
-<!-- <div style="page-break-after: always;"></div> -->
-
-## 3. Klassendiagram
+## Class diagram
 <a href="https://i.imgur.com/8b138x5.png">
 <a target="_blank" href="https://i.imgur.com/8b138x5.png">
 <figure class="image">
