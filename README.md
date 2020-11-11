@@ -31,17 +31,7 @@ This project was built for the course "Projects and workshops II" of my educatio
 </div>
 
 ### Desktop application
-
-Modular JavaFX desktop application
-
-<div class="site-project-single-images" style="margin-top:-1rem">
-
-![](https://i.imgur.com/1OkXask.png)
-![](https://i.imgur.com/l5OgMdA.png)
-![](https://i.imgur.com/bz4AF75.png)
-![](https://i.imgur.com/aCrWrzh.png)
-
-</div>
+You can find the repo for the desktop application [here](https://github.com/DanteDeRuwe/lorem-desktop)
 
 ## Class diagram
 <a href="https://i.imgur.com/8b138x5.png">
